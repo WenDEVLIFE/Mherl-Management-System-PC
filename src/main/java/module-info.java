@@ -8,8 +8,9 @@ module com.example.mherlmanagementsystem {
     requires net.synedra.validatorfx;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires firebase.admin;
     requires com.google.auth.oauth2;
+    requires firebase.admin;
+    requires java.logging;
 
     opens com.example.mherlmanagementsystem to javafx.fxml;
     exports com.example.mherlmanagementsystem;

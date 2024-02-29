@@ -23,8 +23,12 @@
             <version>9.2.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.auth/google-auth-library-oauth2-http -->
-
+        <!-- https://mvnrepository.com/artifact/com.google.auth/google-auth-library-credentials -->
+        <dependency>
+            <groupId>com.google.auth</groupId>
+            <artifactId>google-auth-library-credentials</artifactId>
+            <version>1.23.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.jfoenix</groupId>

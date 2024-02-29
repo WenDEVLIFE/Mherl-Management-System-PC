@@ -11,10 +11,9 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.textfield.CustomPasswordField?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="751.0" styleClass="anchorpane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.LoginController">
    <children>
-      <Pane layoutX="347.0" prefHeight="670.0" prefWidth="404.0" styleClass="pane" stylesheets="@style.css">
+      <Pane layoutX="347.0" prefHeight="670.0" prefWidth="404.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXButton layoutX="132.0" layoutY="526.0" onAction="#Login" prefHeight="54.0" prefWidth="169.0" styleClass="buttons" text="Login" textFill="#fffafa">
                <font>
