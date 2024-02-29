@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.0</junit.version>
     </properties>
+
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
@@ -21,6 +22,9 @@
             <artifactId>firebase-admin</artifactId>
             <version>9.2.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.auth/google-auth-library-oauth2-http -->
+
 
         <dependency>
             <groupId>com.jfoenix</groupId>
@@ -34,31 +38,37 @@
             <artifactId>javafx-controls</artifactId>
             <version>17.0.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>17.0.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
             <version>17.0.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
             <version>17.0.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
             <version>17.0.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>11.1.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
