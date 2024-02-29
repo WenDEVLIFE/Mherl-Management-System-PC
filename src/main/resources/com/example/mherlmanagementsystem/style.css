@@ -30,8 +30,15 @@
     -fx-background-color: #F39B6D;
     -fx-border-width: 2;
 }
+
+.panels {
+    -fx-background-color: #FFFF;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+}
 .shadowpanel{
    -fx-background-color: #EEEDEB;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
 }

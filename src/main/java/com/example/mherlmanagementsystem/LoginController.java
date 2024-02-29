@@ -55,8 +55,13 @@ public class LoginController {
     }
 
     public void initialize() {
+
+        // This how you initialize Firebase
         FirebaseConfig.getInstance().initFirebase();
     }
+
+    // This is the login method
+    // Don't forget to add the FirebaseConfig class to the project and also use platform.runLater to update the UI
 
     protected void LoginFireBase(String username, String password) {
         // Get the DatabaseReference
@@ -97,6 +102,7 @@ public class LoginController {
 
                                 DashboardController controller = fxmlLoader.getController();
                                 controller.setStage(stagedash);
+                                controller.setUsernameInfo(username, userRole);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
