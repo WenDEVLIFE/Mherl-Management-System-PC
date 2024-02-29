@@ -22,11 +22,16 @@
     -fx-background-color: #F39B6D;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
-    -fx-border-color: white;
+    -fx-border-color: linear-gradient(to bottom, #FFFF, #FFFF);
     -fx-border-width: 2;
 }
 
 .background {
     -fx-background-color: #F39B6D;
     -fx-border-width: 2;
+}
+.shadowpanel{
+   -fx-background-color: #EEEDEB;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
