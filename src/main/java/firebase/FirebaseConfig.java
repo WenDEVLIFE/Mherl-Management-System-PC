@@ -11,11 +11,20 @@ import java.util.logging.Logger;
 
 public class FirebaseConfig {
 
+    private static FirebaseConfig instance;
+
+    public static FirebaseConfig getInstance() {
+        if (instance == null) {
+            instance = new FirebaseConfig();
+        }
+        return instance;
+    }
+
     public void initFirebase() {
         FileInputStream serviceAccount = null;
         try {
-            serviceAccount = new FileInputStream("service_key.json");
-
+            String filePath = "src/main/resources/service_key.json";
+            serviceAccount = new FileInputStream(filePath);
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://mherlmanagementsystem-default-rtdb.asia-southeast1.firebasedatabase.app")
@@ -26,6 +35,7 @@ public class FirebaseConfig {
             Logger.getLogger(FirebaseConfig.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
+                assert serviceAccount != null;
                 serviceAccount.close();
             } catch (IOException ex) {
                 Logger.getLogger(FirebaseConfig.class.getName()).log(Level.SEVERE, null, ex);

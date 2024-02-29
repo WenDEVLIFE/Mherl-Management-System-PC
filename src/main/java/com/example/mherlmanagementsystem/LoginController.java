@@ -1,8 +1,5 @@
 package com.example.mherlmanagementsystem;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import firebase.FirebaseConfig;
@@ -10,9 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class LoginController {
 
@@ -40,7 +34,7 @@ public class LoginController {
 
 
         // Initialize Firebase
-        FirebaseConfig firebaseConfig = new FirebaseConfig();
+        FirebaseConfig firebaseConfig = FirebaseConfig.getInstance();
         firebaseConfig.initFirebase();
 
         // This is the constructor
