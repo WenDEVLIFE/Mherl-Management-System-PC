@@ -1,0 +1,19 @@
+.anchorpane{
+    -fx-background-image: url("background/resize.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+.pane {
+    -fx-background-color: rgba(229,61,0, 0.8);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+}
+.buttons {
+    -fx-background-color: #4056F4;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+}
