@@ -54,6 +54,10 @@ public class LoginController {
         }
     }
 
+    public void initialize() {
+        FirebaseConfig.getInstance().initFirebase();
+    }
+
     protected void LoginFireBase(String username, String password) {
         // Get the DatabaseReference
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();

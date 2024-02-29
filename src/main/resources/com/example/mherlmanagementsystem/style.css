@@ -17,3 +17,16 @@
     -fx-border-color: white;
     -fx-border-width: 2;
 }
+
+.navbar {
+    -fx-background-color: #F39B6D;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+}
+
+.background {
+    -fx-background-color: #F39B6D;
+    -fx-border-width: 2;
+}
