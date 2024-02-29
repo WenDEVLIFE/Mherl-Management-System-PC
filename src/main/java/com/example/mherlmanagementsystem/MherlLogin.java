@@ -1,5 +1,6 @@
 package com.example.mherlmanagementsystem;
 
+import firebase.FirebaseConfig;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,8 @@ import java.util.Objects;
 public class MherlLogin extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
+        FirebaseConfig.getInstance().initFirebase();
         FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin .class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="438.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.DashboardController">
+   <children>
+      <Text layoutX="140.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HEHEHE" wrappingWidth="361.13671875" />
+   </children>
+</AnchorPane>
