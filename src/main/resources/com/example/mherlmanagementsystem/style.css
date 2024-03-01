@@ -16,6 +16,7 @@
     -fx-border-radius: 10;
     -fx-border-color: white;
     -fx-border-width: 2;
+    -fx-text-fill: white;
 }
 
 .navbar {
@@ -43,8 +44,9 @@
     -fx-border-radius: 20;
 }
 .white-image {
-    -fx-opacity: 0.2; /* Adjust opacity as needed */
-    -fx-blend-mode: difference;
+
+    /* This wil set to white */
+    -fx-blend-mode:  overlay;
     -fx-effect: innershadow(gaussian, #FFFFFF, 100, 0, 0, 0);
 }
 .buttons1:hover {
@@ -63,58 +65,51 @@
     -fx-border-radius: 20;
 
 }
-.table-view .column-header-background .label {
-    -fx-text-fill: #FFFFFF;
+.table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+    -fx-border-color: linear-gradient(to bottom right, #FFFFFF, #083D77);
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
 }
-.table-view .column-header {
-    -fx-background-color:  #FFFF;
-    -fx-border-color:  #FFFF;
-    -fx-border-width: 2;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
 }
+
+.table-view .column-header-background {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px 8px 0px 0px;
+    -fx-background-inset: 0 0 0 0;
+}
+
+.table-view .column-header, .filter {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
 .table-view .column-header .label {
     -fx-text-fill: black;
+    -fx-font-family: "Arial";
 }
-/* tableview */
 
-.table-view .table-row-cell {
-    -fx-background-color:  #FFFF;
-    -fx-border-color:  #FFFF;
-    -fx-border-width: 2;
+/* Customize the background color of the second column cells */
+.table-view .table-row-cell table-cell {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell .table-cell {
+    -fx-background-color: transparent/* Replace with your desired color */
 }
 .table-view .table-row-cell:odd {
-    -fx-background-color:  #FFFF;
-
+    -fx-background-color: #F39B6D;
+}
+.table-view .table-row-cell:even {
+    -fx-background-color: #F39B6D;
 }
 .table-view .table-row-cell:selected {
     -fx-background-color: #F39B6D;
-    -fx-border-color: #F39B6D;
-    -fx-border-width: 2;
 }
-.table-view .table-row-cell:selected .table-cell {
-    -fx-background-color: #F39B6D;
-    -fx-border-color: #F39B6D;
-    -fx-border-width: 2;
-}
-.table-view .table-row-cell:selected .table-cell:filled:selected {
-    -fx-background-color: #F39B6D;
-    -fx-border-color: #F39B6D;
-    -fx-border-width: 2;
-}
-.table-view .table-row-cell:filled:selected:hover {
-    -fx-background-color: #F39B6D;
-    -fx-border-color: #F39B6D;
-    -fx-border-width: 2;
-}
-.table-view .table-row-cell:filled:hover {
-    -fx-background-color: #F39B6D;
-    -fx-border-color: #F39B6D;
-    -fx-border-width: 2;
-}
-.table-view .table-row-cell:filled:hover .table-cell {
-    -fx-background-color: #F39B6D;
-    -fx-border-color: #F39B6D;
-    -fx-border-width: 2;
-}
+
+
 

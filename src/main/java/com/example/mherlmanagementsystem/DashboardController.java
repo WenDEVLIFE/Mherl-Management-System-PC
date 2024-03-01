@@ -54,11 +54,40 @@ public class DashboardController {
     @FXML
     protected void DashActions(ActionEvent event){
 
+        // This is the dashboard action
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("Dashboard");
+        alert.setContentText("You are currently in the Dashboard");
+        alert.showAndWait();
+
     }
 
     @FXML
-    protected void ProoductActions(ActionEvent event){
+    protected void ProoductActions(ActionEvent event) {
 
+
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("product.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+            Stage stage_product = new Stage();
+            stage_product.getIcons().add(icon);
+            stage_product.setTitle("Mherl Management System");
+            stage_product.setScene(scene);
+            stage_product.show();
+
+            ProductController controller = fxmlLoader.getController();
+            controller.setStage(stage_product);
+            controller.setUsernameInfo(username, userRole);
+
+            stagedash.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+
+        }
     }
 
     @FXML
