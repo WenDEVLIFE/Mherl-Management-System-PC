@@ -2,7 +2,9 @@ package com.example.mherlmanagementsystem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import firebase.FirebaseConfig;
+import firebase.FirebaseController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +32,18 @@ public class DashboardController {
     @FXML
     private Text GreetingText;
 
+    @FXML
+    private Text AdminText;
+
+    @FXML
+    private Text ProductText;
+
+    @FXML
+    private Text UserText;
+
+    @FXML
+    private Text SalesText;
+
     String username, userRole;
 
     public void setStage(Stage stagedash) {
@@ -49,6 +63,15 @@ public class DashboardController {
     public void initialize() {
         System.out.println("DashboardController initialized");
         FirebaseConfig.getInstance().initFirebase();
+
+
+        // Get the instance of the FirebaseController
+        Platform.runLater(() -> {
+
+            // Get the instance of the FirebaseController
+            FirebaseController controller = FirebaseController.getInstance();
+            controller.setDashboardController(UserText, ProductText, SalesText, AdminText);
+        });
 
     }
     @FXML

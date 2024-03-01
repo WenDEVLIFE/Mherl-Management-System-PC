@@ -95,8 +95,8 @@
                                        </graphic>
                                     </JFXButton>
                                     <JFXButton layoutX="299.0" layoutY="324.0" onAction="#GoToAddProducts" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="GO BACK TO PRODUCTS" />
-                                    <JFXTextField layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="391.0" />
-                                    <Spinner layoutX="42.0" layoutY="165.0" />
+                                    <JFXTextField layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="391.0" promptText="Price" />
+                                    <Spinner layoutX="42.0" layoutY="158.0" prefHeight="23.0" prefWidth="175.0" />
                                     <Text layoutX="42.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set your quantity" wrappingWidth="293.13671875">
                                        <font>
                                           <Font name="Gill Sans MT Condensed" size="18.0" />

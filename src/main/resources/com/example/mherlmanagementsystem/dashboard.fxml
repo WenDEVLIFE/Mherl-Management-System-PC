@@ -120,7 +120,7 @@
                         <Image url="@icons/settings_12015693.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="GreetingText11" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
+                  <Text fx:id="AdminText" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
                      <font>
                         <Font name="Gill Sans MT Condensed" size="28.0" />
                      </font>
@@ -143,7 +143,7 @@
                         <Image url="@icons/cubes_2875878.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="GreetingText111" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
+                  <Text fx:id="ProductText" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
                      <font>
                         <Font name="Gill Sans MT Condensed" size="28.0" />
                      </font>
@@ -166,7 +166,7 @@
                         <Image url="@icons/user_1077012.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="GreetingText1111" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
+                  <Text fx:id="UserText" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
                      <font>
                         <Font name="Gill Sans MT Condensed" size="28.0" />
                      </font>
@@ -189,7 +189,7 @@
                         <Image url="@icons/loan_1347097.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="GreetingText11111" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
+                  <Text fx:id="SalesText" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="110.13671875">
                      <font>
                         <Font name="Gill Sans MT Condensed" size="28.0" />
                      </font>
