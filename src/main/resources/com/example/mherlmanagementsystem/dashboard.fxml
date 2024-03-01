@@ -30,12 +30,60 @@
                         <Font name="Gill Sans MT Condensed" size="19.0" />
                      </font>
                   </Text>
-                  <JFXButton prefHeight="48.0" prefWidth="158.0" text="Dashboard" textFill="#fff9f9" />
-                  <JFXButton prefHeight="48.0" prefWidth="158.0" text="Add Products" textFill="#fff9f9" />
-                  <JFXButton prefHeight="48.0" prefWidth="158.0" text="Sales" textFill="#fff9f9" />
-                  <JFXButton prefHeight="48.0" prefWidth="158.0" text="Add User" textFill="#fff9f9" />
-                  <JFXButton prefHeight="48.0" prefWidth="158.0" text="Reports" textFill="#fff9f9" />
-                  <JFXButton prefHeight="48.0" prefWidth="158.0" text="Logout" textFill="#fff9f9" />
+                  <JFXButton onAction="#DashActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Dashboard" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#ProoductActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add Products" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#SalesAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Sales     " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/philippines-peso-currency-symbol.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#AddUserAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add User" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#ReportAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Reports  " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#LogoutAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Logout    " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/power.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
             </VBox>
          </children>

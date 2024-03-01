@@ -23,25 +23,42 @@ public class FirebaseConfig {
     }
 
     public void initFirebase() {
-        FileInputStream serviceAccount = null;
-        try {
-            String filePath = "src/main/resources/service_key.json";
-            serviceAccount = new FileInputStream(filePath);
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://mherlmanagementsystem-default-rtdb.asia-southeast1.firebasedatabase.app")
-                    .build();
 
-            FirebaseApp.initializeApp(options);
-        } catch (IOException ex) {
-            Logger.getLogger(FirebaseConfig.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        // This will check if the firebase instance is null
+        if (FirebaseApp.getApps().isEmpty()) {
+            FileInputStream serviceAccount = null;
             try {
-                assert serviceAccount != null;
-                serviceAccount.close();
+
+                 // This is the path to the service key file
+                String filePath = "src/main/resources/service_key.json";
+                serviceAccount = new FileInputStream(filePath);
+                FirebaseOptions options = new FirebaseOptions.Builder()
+                        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                        .setDatabaseUrl("https://mherlmanagementsystem-default-rtdb.asia-southeast1.firebasedatabase.app")
+                        .build();
+
+                FirebaseApp.initializeApp(options);
+
+                FirebaseApp defaultApp = FirebaseApp.getInstance();
+
+                System.out.println(defaultApp.getName());  // "[DEFAULT]"
+
+                // Retrieve services
+                FirebaseAuth defaultAuth = FirebaseAuth.getInstance(defaultApp);
+                FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance(defaultApp);
             } catch (IOException ex) {
                 Logger.getLogger(FirebaseConfig.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (serviceAccount != null) {
+                        serviceAccount.close();
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(FirebaseConfig.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } else {
+            System.out.println("Firebase already initialized.");
         }
     }
 }

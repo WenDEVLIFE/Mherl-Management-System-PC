@@ -42,3 +42,11 @@
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
+.white-image {
+    -fx-opacity: 0.2; /* Adjust opacity as needed */
+    -fx-blend-mode: difference;
+    -fx-effect: innershadow(gaussian, #FFFFFF, 100, 0, 0, 0);
+}
+.buttons1:hover {
+    -fx-background-color: #FFFFFF;
+}

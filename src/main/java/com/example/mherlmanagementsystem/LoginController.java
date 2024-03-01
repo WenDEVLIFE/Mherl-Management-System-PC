@@ -1,5 +1,7 @@
 package com.example.mherlmanagementsystem;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import firebase.FirebaseConfig;
 import javafx.application.Platform;
@@ -16,6 +18,7 @@ import org.controlsfx.control.textfield.CustomPasswordField;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LoginController {
 
@@ -55,11 +58,10 @@ public class LoginController {
     }
 
     public void initialize() {
-
-        // This how you initialize Firebase
         FirebaseConfig.getInstance().initFirebase();
+        // Debug statement
+        System.out.println("Available Firebase app names: " + FirebaseApp.getApps().stream().map(FirebaseApp::getName).collect(Collectors.toList()));
     }
-
     // This is the login method
     // Don't forget to add the FirebaseConfig class to the project and also use platform.runLater to update the UI
 
