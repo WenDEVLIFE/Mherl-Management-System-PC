@@ -18,7 +18,7 @@ public class DashboardController {
     @FXML
     private Text GreetingText;
 
-    private String username, userRole;
+    String username, userRole;
 
     public void setStage(Stage stagedash) {
         this.stagedash = stagedash;
