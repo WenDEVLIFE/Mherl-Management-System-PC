@@ -48,6 +48,7 @@ public class DashboardController {
 
     public void initialize() {
         System.out.println("DashboardController initialized");
+        FirebaseConfig.getInstance().initFirebase();
 
     }
     @FXML

@@ -15,6 +15,8 @@ public class FirebaseConfig {
 
     private static FirebaseConfig instance;
 
+
+    //  This is the singleton pattern
     public static FirebaseConfig getInstance() {
         if (instance == null) {
             instance = new FirebaseConfig();
@@ -37,6 +39,7 @@ public class FirebaseConfig {
                         .setDatabaseUrl("https://mherlmanagementsystem-default-rtdb.asia-southeast1.firebasedatabase.app")
                         .build();
 
+                // Initialize the default app
                 FirebaseApp.initializeApp(options);
 
                 FirebaseApp defaultApp = FirebaseApp.getInstance();
@@ -50,7 +53,11 @@ public class FirebaseConfig {
                 Logger.getLogger(FirebaseConfig.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
+
+                    // If  services not equal to null
                     if (serviceAccount != null) {
+
+                        // Close the service account
                         serviceAccount.close();
                     }
                 } catch (IOException ex) {
@@ -61,4 +68,5 @@ public class FirebaseConfig {
             System.out.println("Firebase already initialized.");
         }
     }
+
 }
