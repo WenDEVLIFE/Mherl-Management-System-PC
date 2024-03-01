@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="599.0" prefWidth="831.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.ProductController">
+   <children>
+      <AnchorPane prefHeight="577.0" prefWidth="175.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutX="5.0" layoutY="7.0" prefHeight="563.0" prefWidth="162.0" styleClass="navbar" stylesheets="@style.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="7.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/profile.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="UsernameText" fill="#ebdede" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="150.13671875">
+                     <font>
+                        <Font name="Gill Sans MT Condensed" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="RoleText" fill="#ebdede" strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" wrappingWidth="154.13671875">
+                     <font>
+                        <Font name="Gill Sans MT Condensed" size="19.0" />
+                     </font>
+                  </Text>
+                  <JFXButton onAction="#DashActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Dashboard" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#ProoductActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add Products" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#SalesAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Sales     " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/philippines-peso-currency-symbol.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#AddUserAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add User" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#ReportAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Reports  " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#LogoutAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Logout    " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/power.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="205.0" layoutY="14.0" prefHeight="59.0" prefWidth="444.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="29.0">
+         <children>
+            <Pane layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="427.0" styleClass="panels" stylesheets="@style.css" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0">
+               <children>
+                  <Text fx:id="GreetingText" layoutX="84.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products" wrappingWidth="293.13671875">
+                     <font>
+                        <Font name="Gill Sans MT Condensed" size="28.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="20.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/cubes_2875878.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="205.0" layoutY="98.0" prefHeight="451.0" prefWidth="597.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="98.0">
+         <children>
+            <TableView layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
