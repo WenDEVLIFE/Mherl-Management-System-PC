@@ -97,7 +97,7 @@
                         <Font name="Gill Sans MT Condensed" size="28.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="20.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="ImageViews" fitHeight="46.0" fitWidth="47.0" layoutX="20.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/sun.gif" />
                      </image>

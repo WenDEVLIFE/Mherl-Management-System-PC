@@ -174,30 +174,27 @@ public class FirebaseController {
                     product.put("price", details[2]);
 
                     // then insert the value in hashmap
-                    productsRef.child(productId).updateChildren(product, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                            if (databaseError != null) {
-                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                    productsRef.child(productId).updateChildren(product, (databaseError, databaseReference) -> {
+                        if (databaseError != null) {
+                            System.out.println("Data could not be saved " + databaseError.getMessage());
 
-                            } else {
-                                System.out.println("Data saved successfully.");
+                        } else {
+                            System.out.println("Data saved successfully.");
 
-                                Platform.runLater(() -> {
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                    alert.setTitle("Information Dialog");
-                                    alert.setHeaderText("Information");
-                                    alert.setContentText("Product has been added successfully");
-                                    alert.showAndWait();
+                            Platform.runLater(() -> {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Information Dialog");
+                                alert.setHeaderText("Information");
+                                alert.setContentText("Product has been added successfully");
+                                alert.showAndWait();
 
-                                    // This will clear the textfield
-                                    Productname.clear();
-                                    Price.clear();
-                                    quantityspiner.getValueFactory().setValue(1);
-                                });
+                                // This will clear the textfield
+                                Productname.clear();
+                                Price.clear();
+                                quantityspiner.getValueFactory().setValue(1);
+                            });
 
 
-                            }
                         }
                     });
 
@@ -219,14 +216,11 @@ public class FirebaseController {
                     report.put("Time", timeformat);
 
 
-                    reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                            if (databaseError != null) {
-                                System.out.println("Data could not be saved " + databaseError.getMessage());
-                            } else {
-                                System.out.println("Data saved successfully.");
-                            }
+                    reports.child(ReportId).updateChildren(report, (databaseError, databaseReference) -> {
+                        if (databaseError != null) {
+                            System.out.println("Data could not be saved " + databaseError.getMessage());
+                        } else {
+                            System.out.println("Data saved successfully.");
                         }
                     });
 
@@ -239,6 +233,14 @@ public class FirebaseController {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle possible errors.
+
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to add product");
+                    alert.showAndWait();
+                });
 
             }
         });

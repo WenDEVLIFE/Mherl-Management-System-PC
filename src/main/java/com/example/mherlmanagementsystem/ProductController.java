@@ -57,6 +57,18 @@ public class ProductController {
 
     ObservableList<Products> ProductList = FXCollections.observableArrayList();
 
+    @FXML
+    TableColumn<Products, Void> colBtn;
+
+    @FXML
+    TableColumn<Products, Integer> productQuantityColumn;
+
+    @FXML
+    TableColumn<Products, String> productPriceColumn;
+
+    @FXML
+    TableColumn<Products, String> productNameColumn;
+
 
     String username, userRole;
 
@@ -66,6 +78,7 @@ public class ProductController {
 
     public void setUsernameInfo(String username, String userRole) {
 
+        // Set the username and role
         this.username = username;
         this.userRole = userRole;
 
@@ -84,9 +97,11 @@ public class ProductController {
         quantityspiner.setValueFactory(valueFactory);
 
         // Set the cell value factory into the table
-        TableColumn<Products, String> productNameColumn = new TableColumn<>("Product Name");
+        productNameColumn = new TableColumn<>("Product Name");
         productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
         productNameColumn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.2)); // 20% width
+
+        // Set the cell factory for the column
         productNameColumn.setCellFactory(tc -> {
             TableCell<Products, String> cell = new TableCell<>() {
                 @Override
@@ -103,9 +118,11 @@ public class ProductController {
             return cell;
         });
 
-        TableColumn<Products, String> productPriceColumn = new TableColumn<>("Product Price");
+        productPriceColumn = new TableColumn<>("Product Price");
         productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty());
         productPriceColumn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.2)); // 20% width
+
+       // Set the cell factory for the column
         productPriceColumn.setCellFactory(tc -> {
             TableCell<Products, String> cell = new TableCell<>() {
                 @Override
@@ -121,9 +138,12 @@ public class ProductController {
             };
             return cell;
         });
-        TableColumn<Products, Integer> productQuantityColumn = new TableColumn<>("Product Quantity");
+
+        productQuantityColumn = new TableColumn<>("Product Quantity");
         productQuantityColumn.setCellValueFactory(cellData -> cellData.getValue().productQuantityProperty().asObject());
         productQuantityColumn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.2)); // 20% width
+
+        // Set the cell factory for the column
         productQuantityColumn.setCellFactory(tc -> {
             TableCell<Products, Integer> cell = new TableCell<>() {
                 @Override
@@ -140,9 +160,11 @@ public class ProductController {
             return cell;
         });
 
-        TableColumn<Products, Void> colBtn = new TableColumn("Action");
+        colBtn = new TableColumn("Action");
         colBtn.setCellFactory(param -> new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList, username));
         colBtn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.4)); // 40% width
+
+        // Set the cell factory for the column
         colBtn.setCellFactory(tc -> {
             TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList, username) {
                 @Override

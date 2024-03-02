@@ -12,10 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -44,6 +46,9 @@ public class DashboardController {
     @FXML
     private Text SalesText;
 
+    @FXML
+    private ImageView ImageViews;
+
     String username, userRole;
 
     public void setStage(Stage stagedash) {
@@ -58,7 +63,6 @@ public class DashboardController {
 
         UsernameText.setText("Username:"+username);
         RoleText.setText("Role:"+userRole);
-        GreetingText.setText("Welcome " + username + "!");
     }
 
     public void initialize() {
@@ -73,6 +77,22 @@ public class DashboardController {
             FirebaseController controller = FirebaseController.getInstance();
             controller.setDashboardController(UserText, ProductText, SalesText, AdminText);
         });
+
+        // Get the localtime
+        LocalTime time = LocalTime.now();
+
+        // Get the hour
+        int hour = time.getHour();
+        if (hour < 12) {
+            GreetingText.setText("Good Morning, " + username + "!");
+            ImageViews.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/sunrise.gif"))));
+        } else if (hour < 16) {
+            GreetingText.setText("Good Afternoon, " + username + "!");
+            ImageViews.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/field.gif"))));
+        } else {
+            GreetingText.setText("Good Evening, " + username + "!");
+            ImageViews.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/night.gif"))));
+        }
 
     }
     @FXML

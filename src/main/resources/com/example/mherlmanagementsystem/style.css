@@ -18,6 +18,10 @@
     -fx-border-width: 2;
     -fx-text-fill: white;
 }
+.buttons:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #4056F4;
+}
 
 .navbar {
     -fx-background-color: #F39B6D;
