@@ -2,6 +2,8 @@ package firebase;
 
 import com.google.firebase.database.*;
 import entities_and_functions.Products;
+import entities_and_functions.Sales;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -72,6 +74,39 @@ public class RetrieveFirebaseController {
     }
 
 
+    public ObservableList<Sales> retrieveSales() {
+        ObservableList<Sales> SalesList = FXCollections.observableArrayList();
+        myRef = database.getReference("Sales");
 
+        // This is for the event listener
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("DataSnapshot: " + dataSnapshot.toString()); // Add this line
+                SalesList.clear();
+                // This will retrieve from the database
+                for (DataSnapshot SalesSnapshot : dataSnapshot.getChildren()) {
+                    String productName = SalesSnapshot.child("productname").getValue(String.class);
+                    int productPrice = SalesSnapshot.child("totalprice").getValue(Integer.class);
+                    int productQuantity = SalesSnapshot.child("quantity").getValue(Integer.class);
+                    String date = SalesSnapshot.child("date").getValue(String.class);
 
+                    SalesList.add(new Sales(productName, productQuantity, productPrice, date));
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to retrieve data from the database");
+                    alert.showAndWait();
+                });
+            }
+        });
+        return SalesList;
+    }
 }

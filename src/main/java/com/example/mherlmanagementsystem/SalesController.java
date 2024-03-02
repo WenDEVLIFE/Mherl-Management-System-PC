@@ -1,18 +1,24 @@
 package com.example.mherlmanagementsystem;
 
+import entities_and_functions.Products;
 import entities_and_functions.Sales;
 import firebase.FirebaseConfig;
+import firebase.RetrieveFirebaseController;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tables.ButtonCellDeleteProducts;
+import tables.ButtonCellDeleteSales;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -30,7 +36,15 @@ public class SalesController {
     private Text RoleText;
 
     @FXML
+    private ComboBox <String> monthlist;
+
+    @FXML
+    private ComboBox <String> yearliist;
+
+    @FXML
     private TableView <Sales>SalesTable;
+
+    ObservableList<Sales> SalesList = FXCollections.observableArrayList();
 
     public void setStage(Stage stageSales) {
 
@@ -53,6 +67,115 @@ public class SalesController {
     public void initialize() {
         // TODO
         FirebaseConfig.getInstance().initFirebase();
+
+        ObservableList<String> month = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        monthlist.setItems(month);
+
+        ObservableList<String> year = FXCollections.observableArrayList("2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030");
+        yearliist.setItems(year);
+
+        TableColumn<Sales, String> productName = new TableColumn<>("Product Name");
+        productName.setCellValueFactory(data -> data.getValue().productNameProperty());
+        productName.prefWidthProperty().bind(SalesTable.widthProperty().multiply(0.2)); // 20% width
+
+        // Set the cell factory for the column
+        productName.setCellFactory(tc -> {
+            TableCell<Sales, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn<Sales, Integer> productQuantity = new TableColumn<>("Product Quantity");
+        productQuantity.setCellValueFactory(data -> data.getValue().productquantityProperty().asObject());
+        productQuantity.prefWidthProperty().bind(SalesTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        productQuantity.setCellFactory(tc -> {
+            TableCell<Sales, Integer> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(item));
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn<Sales, Integer> totalPrice = new TableColumn<>("Total Price");
+        totalPrice.setCellValueFactory(data -> data.getValue().totalpriceProperty().asObject());
+        totalPrice.prefWidthProperty().bind(SalesTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        totalPrice.setCellFactory(tc -> {
+            TableCell<Sales, Integer> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(item));
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn<Sales, String> date = new TableColumn<>("Date");
+        date.setCellValueFactory(data -> data.getValue().dateProperty());
+        date.prefWidthProperty().bind(SalesTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        date.setCellFactory(tc -> {
+            TableCell<Sales, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <Sales, Void> actionCol = new TableColumn<>("Action");
+        actionCol.setCellFactory(param -> new ButtonCellDeleteSales("Delete Sales", SalesTable, SalesList, username));
+        actionCol.prefWidthProperty().bind(SalesTable.widthProperty().multiply(0.2)); // 20% width
+
+        // Set the cell factory for the column
+        actionCol.setCellFactory(tc -> {
+            TableCell<Sales, Void> cell = new ButtonCellDeleteSales("Delete Sales", SalesTable, SalesList, username) {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
+        // Add the columns to the table
+        SalesTable.getColumns().addAll(productName, productQuantity, totalPrice, date, actionCol);
+
+
+        LoadSalesData();
+
     }
 
     @FXML
@@ -71,6 +194,7 @@ public class SalesController {
         controller.setStage(stagedash);
         controller.setUsernameInfo(username, userRole);
 
+        // Close the current stage
         salestage.close();
 
 
@@ -94,6 +218,7 @@ public class SalesController {
             controller.setStage(stage_product);
             controller.setUsernameInfo(username, userRole);
 
+            // Close the current stage
             salestage.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,6 +292,25 @@ public class SalesController {
         }
 
 
+    }
+
+    @FXML
+    protected void RefreshData(ActionEvent event){
+        LoadSalesData();
+    }
+
+    public void LoadSalesData(){
+        SalesList.clear();
+        try {
+            Platform.runLater(() -> {
+                SalesList = RetrieveFirebaseController.getInstance().retrieveSales();
+                SalesTable.setItems(SalesList);
+                SalesTable.refresh();
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package entities_and_functions;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 
 public class Sales {
     public SimpleStringProperty productname;
@@ -96,4 +97,7 @@ public class Sales {
     }
 
 
+    public SimpleStringProperty productNameProperty() {
+        return productname;
+    }
 }

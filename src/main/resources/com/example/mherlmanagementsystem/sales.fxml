@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="615.0" prefWidth="831.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.SalesController">
+<AnchorPane prefHeight="657.0" prefWidth="834.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.SalesController">
    <children>
       <AnchorPane prefHeight="577.0" prefWidth="175.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -108,20 +108,21 @@
             </Pane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="191.0" layoutY="120.0" prefHeight="473.0" prefWidth="626.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="120.0">
+      <AnchorPane layoutX="191.0" layoutY="120.0" prefHeight="482.0" prefWidth="629.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="120.0">
          <children>
             <TableView fx:id="SalesTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="233.0" layoutY="75.0" prefHeight="35.0" prefWidth="158.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="233.0" AnchorPane.topAnchor="75.0">
          <children>
-            <ComboBox layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <ComboBox fx:id="monthlist" layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="404.0" layoutY="75.0" prefHeight="35.0" prefWidth="158.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="75.0">
          <children>
-            <ComboBox layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <ComboBox fx:id="yearliist" layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
          </children>
       </AnchorPane>
+      <JFXButton layoutX="458.0" layoutY="608.0" onAction="#RefreshData" prefHeight="35.0" prefWidth="150.0" styleClass="buttons" text="Refresh" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="458.0" AnchorPane.rightAnchor="226.0" />
    </children>
 </AnchorPane>

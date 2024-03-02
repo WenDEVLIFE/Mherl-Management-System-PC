@@ -34,7 +34,7 @@ public class ButtonCellDeleteSales extends TableCell<Sales, Void> {
         this.button.setOnAction(event -> {
             Sales Selectedproducts = getTableRow().getItem();
             if (Selectedproducts  != null) {
-                if (buttonText.equals("Delete Product")) {
+                if (buttonText.equals("Delete Sales")) {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
@@ -82,7 +82,7 @@ public class ButtonCellDeleteSales extends TableCell<Sales, Void> {
         } else {
             // Set style class for the button based on buttonText
             String buttonText = button.getText();
-            if ("Delete Product".equals(buttonText)) {
+            if ("Delete Sales".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
             } else if ("Rent Car".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
