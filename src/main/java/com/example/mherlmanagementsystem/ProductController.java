@@ -1,17 +1,16 @@
 package com.example.mherlmanagementsystem;
 
 import firebase.FirebaseConfig;
+import firebase.FirebaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -37,6 +36,16 @@ public class ProductController {
     @FXML
     private Tab CreateProductsTab;
 
+    @FXML
+    private Spinner <Integer> quantityspiner;
+
+
+    @FXML
+    private TextField Productname;
+
+    @FXML
+    private TextField Price;
+
 
     String username, userRole;
 
@@ -59,6 +68,9 @@ public class ProductController {
         FirebaseConfig.getInstance().initFirebase();
 
         ProductionPane.getSelectionModel().select(ProductsTab);
+
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        quantityspiner.setValueFactory(valueFactory);
 
     }
 
@@ -159,6 +171,35 @@ public class ProductController {
     private void GoToAddProducts(ActionEvent event) {
         ProductionPane.getSelectionModel().select(CreateProductsTab);
     }
+
+    @FXML
+    protected void CreateProducts(ActionEvent event){
+
+        String productName = Productname.getText();
+        int price = Integer.parseInt(Price.getText());
+        int quantity = quantityspiner.getValue();
+
+        if (productName.isEmpty() || price == 0 || quantity == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please fill in all the fields");
+            alert.showAndWait();
+        } else {
+            FirebaseController add = new FirebaseController();
+            add.addProduct(productName, price, quantity);
+        }
+
+    }
+
+    @FXML
+    protected void GoBack(ActionEvent event){
+        ProductionPane.getSelectionModel().select(ProductsTab);
+
+
+
+    }
+
 
 
 

@@ -52,6 +52,7 @@ public class DashboardController {
 
     public void setUsernameInfo(String username, String userRole) {
 
+        // Set the username and user role
         this.username = username;
         this.userRole = userRole;
 

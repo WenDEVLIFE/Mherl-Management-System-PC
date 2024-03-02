@@ -126,4 +126,8 @@ public class FirebaseController {
             }
         });
     }
+
+    public void addProduct(String productName, int price, int quantity) {
+
+    }
 }
