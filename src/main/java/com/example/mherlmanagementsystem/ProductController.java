@@ -80,29 +80,83 @@ public class ProductController {
 
         ProductionPane.getSelectionModel().select(ProductsTab);
 
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
         quantityspiner.setValueFactory(valueFactory);
 
         // Set the cell value factory into the table
         TableColumn<Products, String> productNameColumn = new TableColumn<>("Product Name");
         productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
-        productNameColumn.setMinWidth(200);
+        productNameColumn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.2)); // 20% width
+        productNameColumn.setCellFactory(tc -> {
+            TableCell<Products, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
 
         TableColumn<Products, String> productPriceColumn = new TableColumn<>("Product Price");
         productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty());
-        productPriceColumn.setMinWidth(200);
-
+        productPriceColumn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.2)); // 20% width
+        productPriceColumn.setCellFactory(tc -> {
+            TableCell<Products, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
         TableColumn<Products, Integer> productQuantityColumn = new TableColumn<>("Product Quantity");
         productQuantityColumn.setCellValueFactory(cellData -> cellData.getValue().productQuantityProperty().asObject());
-        productPriceColumn.setMinWidth(200);
-
+        productQuantityColumn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.2)); // 20% width
+        productQuantityColumn.setCellFactory(tc -> {
+            TableCell<Products, Integer> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(item));
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
 
         TableColumn<Products, Void> colBtn = new TableColumn("Action");
-        colBtn.setCellFactory(param -> new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList));
-        colBtn.setMinWidth(100);
+        colBtn.setCellFactory(param -> new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList, username));
+        colBtn.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.4)); // 40% width
+        colBtn.setCellFactory(tc -> {
+            TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList, username) {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
 
+        // Add the columns to the table
         ProductTable.getColumns().addAll(productNameColumn, productPriceColumn, productQuantityColumn, colBtn);
-
+        ProductTable.setMinHeight(800); // Set minimum height
         LoadProducts();
     }
 

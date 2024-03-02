@@ -2,7 +2,7 @@ package firebase;
 
 import com.google.firebase.database.*;
 import com.google.firebase.internal.NonNull;
-import eu.hansolo.tilesfx.tools.Fire;
+import entities_and_functions.Products;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Spinner;
@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -240,6 +239,77 @@ public class FirebaseController {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle possible errors.
+
+            }
+        });
+    }
+
+    public void deleteProduct(Products selectedproducts, String username) {
+        DatabaseReference productsRef = Database.child("Products");
+
+        String productname = selectedproducts.getProductName();
+        productsRef.orderByChild("productname").equalTo(productname).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        snapshot.getRef().removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                if (databaseError != null) {
+                                    System.out.println("Data could not be saved " + databaseError.getMessage());
+                                } else {
+                                    System.out.println("Data saved successfully.");
+
+                                    Platform.runLater(() -> {
+                                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                        alert.setTitle("Information Dialog");
+                                        alert.setHeaderText("Information");
+                                        alert.setContentText("Product has been deleted successfully");
+                                        alert.showAndWait();
+                                    });
+
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference reports = database.getReference("Reports");
+                                    String ReportId = UUID.randomUUID().toString();
+                                    LocalDate date = LocalDate.now();
+                                    LocalTime time = LocalTime.now();
+                                    String dateformat = date.toString();
+                                    String timeformat = time.toString();
+
+                                    Map <String, Object> report = new HashMap<>();
+                                    report.put("username", username);
+                                    report.put("Activity", "Delete Product");
+                                    report.put("Date", dateformat);
+                                    report.put("Time", timeformat);
+                                    reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                            if (databaseError != null) {
+                                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                                            } else {
+                                                System.out.println("Data saved successfully.");
+                                            }
+                                        }
+                                    });
+
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to delete product");
+                    alert.showAndWait();
+                });
 
             }
         });
