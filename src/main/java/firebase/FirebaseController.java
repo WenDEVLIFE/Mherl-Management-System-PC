@@ -186,10 +186,7 @@ public class FirebaseController {
                                 alert.setContentText("Product added successfully");
                                 alert.showAndWait();
 
-                                // This will clear the textfield
-                                Productname.clear();
-                                Price.clear();
-                                quantityspiner.getValueFactory().setValue(0);
+
                             }
                         }
                     });
@@ -210,6 +207,11 @@ public class FirebaseController {
                     report.put("Activity", "Create Products");
                     report.put("Date", dateformat);
                     report.put("Time", timeformat);
+
+                    // This will clear the textfield
+                    Productname.clear();
+                    Price.clear();
+                    quantityspiner.getValueFactory().setValue(1);
                     reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

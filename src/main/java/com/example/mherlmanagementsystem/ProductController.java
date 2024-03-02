@@ -1,8 +1,10 @@
 package com.example.mherlmanagementsystem;
 
+import entities_and_functions.Products;
 import firebase.FirebaseConfig;
 import firebase.FirebaseController;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
+import tables.ButtonCellDeleteProducts;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -47,6 +50,11 @@ public class ProductController {
     @FXML
     private TextField Price;
 
+    @FXML
+    private TableView <Products> ProductTable;
+
+    ObservableList<Products> ProductList;
+
 
     String username, userRole;
 
@@ -72,6 +80,30 @@ public class ProductController {
 
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
         quantityspiner.setValueFactory(valueFactory);
+
+        // Set the cell value factory into the table
+        TableColumn<Products, String> productNameColumn = new TableColumn<>("Product Name");
+        productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
+        productNameColumn.setMinWidth(200);
+
+        TableColumn<Products, Integer> productPriceColumn = new TableColumn<>("Product Price");
+        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty().asObject());
+        productPriceColumn.setMinWidth(200);
+
+        TableColumn<Products, Integer> productQuantityColumn = new TableColumn<>("Product Quantity");
+        productQuantityColumn.setCellValueFactory(cellData -> cellData.getValue().productQuantityProperty().asObject());
+        productPriceColumn.setMinWidth(200);
+
+
+        TableColumn <Products, Void> colBtn = new TableColumn("Action");
+        colBtn.setCellFactory(param -> new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList));
+        colBtn.setMinWidth(100);
+
+        ProductTable.getColumns().addAll(productNameColumn, productPriceColumn, productQuantityColumn, colBtn);
+
+
+
+
 
     }
 
