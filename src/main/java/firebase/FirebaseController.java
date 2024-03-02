@@ -3,6 +3,7 @@ package firebase;
 import com.google.firebase.database.*;
 import com.google.firebase.internal.NonNull;
 import entities_and_functions.Products;
+import entities_and_functions.Sales;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Spinner;
@@ -64,6 +65,8 @@ public class FirebaseController {
 
         // get the product reference
         DatabaseReference productsRef = Database.child("Products");
+
+        // This will count the product
         productsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -215,7 +218,7 @@ public class FirebaseController {
                     report.put("Date", dateformat);
                     report.put("Time", timeformat);
 
-
+                    // This is for the completion listener
                     reports.child(ReportId).updateChildren(report, (databaseError, databaseReference) -> {
                         if (databaseError != null) {
                             System.out.println("Data could not be saved " + databaseError.getMessage());
@@ -250,52 +253,55 @@ public class FirebaseController {
         DatabaseReference productsRef = Database.child("Products");
 
         String productname = selectedproducts.getProductName();
+
+        // This is for the event listener
         productsRef.orderByChild("productname").equalTo(productname).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        snapshot.getRef().removeValue(new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                if (databaseError != null) {
-                                    System.out.println("Data could not be saved " + databaseError.getMessage());
-                                } else {
-                                    System.out.println("Data saved successfully.");
+                        snapshot.getRef().removeValue((databaseError, databaseReference) -> {
+                            if (databaseError != null) {
+                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                            } else {
+                                System.out.println("Data saved successfully.");
 
-                                    Platform.runLater(() -> {
-                                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                        alert.setTitle("Information Dialog");
-                                        alert.setHeaderText("Information");
-                                        alert.setContentText("Product has been deleted successfully");
-                                        alert.showAndWait();
-                                    });
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information Dialog");
+                                    alert.setHeaderText("Information");
+                                    alert.setContentText("Product has been deleted successfully");
+                                    alert.showAndWait();
+                                });
 
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference reports = database.getReference("Reports");
-                                    String ReportId = UUID.randomUUID().toString();
-                                    LocalDate date = LocalDate.now();
-                                    LocalTime time = LocalTime.now();
-                                    String dateformat = date.toString();
-                                    String timeformat = time.toString();
+                                // This is for the report
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference reports = database.getReference("Reports");
+                                String ReportId = UUID.randomUUID().toString();
+                                LocalDate date = LocalDate.now();
+                                LocalTime time = LocalTime.now();
+                                String dateformat = date.toString();
+                                String timeformat = time.toString();
 
-                                    Map <String, Object> report = new HashMap<>();
-                                    report.put("username", username);
-                                    report.put("Activity", "Delete Product");
-                                    report.put("Date", dateformat);
-                                    report.put("Time", timeformat);
-                                    reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
-                                        @Override
-                                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                            if (databaseError != null) {
-                                                System.out.println("Data could not be saved " + databaseError.getMessage());
-                                            } else {
-                                                System.out.println("Data saved successfully.");
-                                            }
+                                // This is for the report
+                                Map <String, Object> report = new HashMap<>();
+                                report.put("username", username);
+                                report.put("Activity", "Delete Product");
+                                report.put("Date", dateformat);
+                                report.put("Time", timeformat);
+                                reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
+                                    @Override
+
+                                    // This is for the completion listener
+                                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                        if (databaseError != null) {
+                                            System.out.println("Data could not be saved " + databaseError.getMessage());
+                                        } else {
+                                            System.out.println("Data saved successfully.");
                                         }
-                                    });
+                                    }
+                                });
 
-                                }
                             }
                         });
                     }
@@ -310,6 +316,77 @@ public class FirebaseController {
                     alert.setTitle("Error Dialog");
                     alert.setHeaderText("Error");
                     alert.setContentText("Failed to delete product");
+                    alert.showAndWait();
+                });
+
+            }
+        });
+    }
+
+    public void deleteSales(Sales selectedproducts, String username) {
+
+        String productname = selectedproducts.getProductname();
+        DatabaseReference salesRef = Database.child("Sales");
+
+        // This is for the event listener
+        salesRef.orderByChild("productname").equalTo(productname).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        snapshot.getRef().removeValue((databaseError, databaseReference) -> {
+                            if (databaseError != null) {
+                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                            } else {
+                                System.out.println("Data saved successfully.");
+
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information Dialog");
+                                    alert.setHeaderText("Information");
+                                    alert.setContentText("Sales has been deleted successfully");
+                                    alert.showAndWait();
+                                });
+
+                                // This is for the report
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference reports = database.getReference("Reports");
+                                String ReportId = UUID.randomUUID().toString();
+                                LocalDate date = LocalDate.now();
+                                LocalTime time = LocalTime.now();
+                                String dateformat = date.toString();
+                                String timeformat = time.toString();
+
+                                // This is for the report
+                                Map <String, Object> report = new HashMap<>();
+                                report.put("username", username);
+                                report.put("Activity", "Delete Sales");
+                                report.put("Date", dateformat);
+                                report.put("Time", timeformat);
+
+                                // This is for the completion listener
+                                reports.child(ReportId).updateChildren(report, (databaseError1, databaseReference1) -> {
+                                    if (databaseError1 != null) {
+                                        System.out.println("Data could not be saved " + databaseError1.getMessage());
+                                    } else {
+                                        System.out.println("Data saved successfully.");
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to delete sales");
                     alert.showAndWait();
                 });
 

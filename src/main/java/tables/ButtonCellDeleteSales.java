@@ -46,6 +46,9 @@ public class ButtonCellDeleteSales extends TableCell<Sales, Void> {
                             // Delete car from database
 
                             Platform.runLater(() -> {
+                                FirebaseController.getInstance().deleteSales(Selectedproducts, username);
+                                SalesTable.getItems().remove(Selectedproducts);
+                                Saleslist.remove(Selectedproducts);
 
                             });
 
