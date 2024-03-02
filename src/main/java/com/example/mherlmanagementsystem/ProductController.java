@@ -220,6 +220,28 @@ public class ProductController {
     @FXML
     protected void SalesAction(ActionEvent event) {
 
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+            Stage stage_sales = new Stage();
+            stage_sales.getIcons().add(icon);
+            stage_sales.setTitle("Mherl Management System");
+            stage_sales.setScene(scene);
+            stage_sales.show();
+
+            SalesController controller = fxmlLoader.getController();
+            controller.setStage(stage_sales);
+            controller.setUsernameInfo(username, userRole);
+
+            productStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+
+        }
+
     }
 
     @FXML

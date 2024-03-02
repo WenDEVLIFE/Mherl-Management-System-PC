@@ -63,20 +63,6 @@ public class DashboardController {
 
         UsernameText.setText("Username:"+username);
         RoleText.setText("Role:"+userRole);
-    }
-
-    public void initialize() {
-        System.out.println("DashboardController initialized");
-        FirebaseConfig.getInstance().initFirebase();
-
-
-        // Get the instance of the FirebaseController
-        Platform.runLater(() -> {
-
-            // Get the instance of the FirebaseController
-            FirebaseController controller = FirebaseController.getInstance();
-            controller.setDashboardController(UserText, ProductText, SalesText, AdminText);
-        });
 
         // Get the localtime
         LocalTime time = LocalTime.now();
@@ -93,6 +79,21 @@ public class DashboardController {
             GreetingText.setText("Good Evening, " + username + "!");
             ImageViews.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/night.gif"))));
         }
+    }
+
+    public void initialize() {
+        System.out.println("DashboardController initialized");
+        FirebaseConfig.getInstance().initFirebase();
+
+
+        // Get the instance of the FirebaseController
+        Platform.runLater(() -> {
+
+            // Get the instance of the FirebaseController
+            FirebaseController controller = FirebaseController.getInstance();
+            controller.setDashboardController(UserText, ProductText, SalesText, AdminText);
+        });
+
 
     }
     @FXML
@@ -136,6 +137,28 @@ public class DashboardController {
 
     @FXML
     protected void SalesAction(ActionEvent event){
+
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+            Stage stage_sales = new Stage();
+            stage_sales.getIcons().add(icon);
+            stage_sales.setTitle("Mherl Management System");
+            stage_sales.setScene(scene);
+            stage_sales.show();
+
+            SalesController controller = fxmlLoader.getController();
+            controller.setStage(stage_sales);
+            controller.setUsernameInfo(username, userRole);
+
+            stagedash.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+
+        }
 
     }
 
