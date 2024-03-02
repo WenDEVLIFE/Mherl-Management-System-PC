@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,8 @@ import tables.ButtonCellDeleteProducts;
 import tables.ButtonCellDeleteSales;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -65,6 +69,7 @@ public class SalesController {
     }
 
     public void initialize() {
+        Platform.runLater(() -> {
         // TODO
         FirebaseConfig.getInstance().initFirebase();
 
@@ -176,7 +181,12 @@ public class SalesController {
 
         LoadSalesData();
 
+
+        });
+
+
     }
+
 
     @FXML
     protected void DashActions(ActionEvent event) throws IOException {
@@ -297,6 +307,61 @@ public class SalesController {
     @FXML
     protected void RefreshData(ActionEvent event){
         LoadSalesData();
+    }
+
+    @FXML
+    protected void PressSearch(ActionEvent event){
+
+        String month = monthlist.getSelectionModel().getSelectedItem();
+        String year = yearliist.getSelectionModel().getSelectedItem();
+
+        if(month == null || year == null || month.equals("Select month") || year.equals("Select month")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Search");
+            alert.setContentText("Please select the month and year to search");
+            alert.showAndWait();
+        }
+        else {
+            Platform.runLater(() -> {
+                FilterValue(month, year);
+            });
+        }
+
+    }
+
+    private void FilterValue(String selectedMonth, String selectedYear) {
+
+        // This method filters the sales data based on the selected month and year
+        Platform.runLater(() -> {
+            Map<String, String> monthNumberToName = new HashMap<>();
+            monthNumberToName.put("01", "January");
+            monthNumberToName.put("02", "February");
+            monthNumberToName.put("03", "March");
+            monthNumberToName.put("04", "April");
+            monthNumberToName.put("05", "May");
+            monthNumberToName.put("06", "June");
+            monthNumberToName.put("07", "July");
+            monthNumberToName.put("08", "August");
+            monthNumberToName.put("09", "September");
+            monthNumberToName.put("10", "October");
+            monthNumberToName.put("11", "November");
+            monthNumberToName.put("12", "December");
+
+            FilteredList<Sales> filteredData = new FilteredList<>(SalesList, p -> true);
+            filteredData.setPredicate(sales -> {
+                String date = sales.getDate();
+                String[] dateArray = date.split("-");
+                String monthNumber = dateArray[1];
+                String year = dateArray[0];
+                String monthName = monthNumberToName.get(monthNumber);
+                return monthName.equals(selectedMonth) && year.equals(selectedYear);
+            });
+            SortedList <Sales> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(SalesTable.comparatorProperty());
+            SalesTable.setItems(sortedData);
+            SalesTable.refresh();
+        });
     }
 
     public void LoadSalesData(){

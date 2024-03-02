@@ -36,7 +36,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
-                              <Image url="@icons/add-user.png" />
+                              <Image url="@icons/home.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -124,5 +124,6 @@
          </children>
       </AnchorPane>
       <JFXButton layoutX="458.0" layoutY="608.0" onAction="#RefreshData" prefHeight="35.0" prefWidth="150.0" styleClass="buttons" text="Refresh" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="458.0" AnchorPane.rightAnchor="226.0" />
+      <JFXButton layoutX="584.0" layoutY="75.0" onAction="#PressSearch" prefHeight="35.0" prefWidth="204.0" styleClass="buttons" text="Press to search month and date" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="75.0" />
    </children>
 </AnchorPane>
