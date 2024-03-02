@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -89,7 +90,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="205.0" layoutY="14.0" prefHeight="59.0" prefWidth="444.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="29.0">
+      <AnchorPane layoutX="206.0" layoutY="7.0" prefHeight="59.0" prefWidth="444.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="28.0">
          <children>
             <Pane layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="427.0" styleClass="panels" stylesheets="@style.css" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0">
                <children>
@@ -107,9 +108,19 @@
             </Pane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="191.0" layoutY="83.0" prefHeight="473.0" prefWidth="626.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="83.0">
+      <AnchorPane layoutX="191.0" layoutY="120.0" prefHeight="473.0" prefWidth="626.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="120.0">
          <children>
             <TableView fx:id="SalesTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="233.0" layoutY="75.0" prefHeight="35.0" prefWidth="158.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="233.0" AnchorPane.topAnchor="75.0">
+         <children>
+            <ComboBox layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="404.0" layoutY="75.0" prefHeight="35.0" prefWidth="158.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="75.0">
+         <children>
+            <ComboBox layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
          </children>
       </AnchorPane>
    </children>

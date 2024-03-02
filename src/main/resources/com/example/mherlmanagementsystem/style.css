@@ -114,6 +114,30 @@
 .table-view .table-row-cell:selected {
     -fx-background-color: #F39B6D;
 }
+.combo-box {
+    -fx-background-color: #083D77;
+    -fx-border-color: #FFFF;
+    -fx-text-fill: #FFFF;
+    -fx-border-width: 2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+.combo-box .arrow-button {
+    -fx-background-color: #083D77;
+    -fx-text-fill: #FFFF;
+    -fx-border-color: #FFFF;
+    -fx-border-width: 2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+.combo-box .arrow-button:hover {
+    -fx-text-fill: #083D77;
+    -fx-background-color: #FFFF;
+    -fx-border-color: #F39B6D;
+    -fx-border-width: 2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
 
 
 
