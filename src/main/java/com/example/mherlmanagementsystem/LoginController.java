@@ -66,21 +66,22 @@ public class LoginController {
     // Don't forget to add the FirebaseConfig class to the project and also use platform.runLater to update the UI
 
     protected void LoginFireBase(String username, String password) {
-        // Get the DatabaseReference
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = database.child("Users");
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean loginSuccessful = false;
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String usernameFromDB = snapshot.child("username").getValue(String.class);
                     String passwordFromDB = snapshot.child("password").getValue(String.class);
+
                     if (usernameFromDB != null && usernameFromDB.equals(username) && passwordFromDB != null && passwordFromDB.equals(password)) {
-                        // Username and password match, login successful
+                        loginSuccessful = true;
                         String userRole = snapshot.child("role").getValue(String.class);
 
-                        // Update UI on JavaFX application thread
                         Platform.runLater(() -> {
                             try {
                                 System.out.println("Login Successful");
@@ -110,30 +111,30 @@ public class LoginController {
                             }
                         });
                         System.out.println("User Role: " + userRole);
-                        return;
-                    } else {
-                        // Username and password do not match
-                        Platform.runLater(() -> {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("Login");
-                            alert.setHeaderText("Login Failed");
-                            alert.setContentText("Invalid username or password");
-                            alert.showAndWait();
-                        });
+                        break;
                     }
-                } // End of for loop
+                }
+
+                if (!loginSuccessful) {
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Login");
+                        alert.setHeaderText("Login Failed");
+                        alert.setContentText("Invalid username or password");
+                        alert.showAndWait();
+                    });
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Error handling
-             Platform.runLater(() -> {
-                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                 alert.setTitle("Login");
-                 alert.setHeaderText("Login Failed");
-                 alert.setContentText("An error occurred while logging in");
-                 alert.showAndWait();
-             });
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Login");
+                    alert.setHeaderText("Login Failed");
+                    alert.setContentText("An error occurred while logging in");
+                    alert.showAndWait();
+                });
             }
         });
     }

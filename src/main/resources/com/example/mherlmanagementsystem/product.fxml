@@ -84,7 +84,7 @@
                            <children>
                               <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
                                  <children>
-                                    <JFXTextField fx:id="ProductTable" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="391.0" promptText="Product name" />
+                                    <JFXTextField fx:id="Productname" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="391.0" promptText="Product name" />
                                     <JFXButton layoutX="56.0" layoutY="324.0" onAction="#CreateProducts" prefHeight="48.0" prefWidth="175.0" styleClass="buttons" stylesheets="@style.css" text="CREATE PRODUCTS">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">

@@ -51,6 +51,7 @@ public class FirebaseController {
                     long count = dataSnapshot.getChildrenCount();
                     UserText.setText(String.valueOf(count));
                 }
+
             }
 
             @Override
@@ -72,6 +73,7 @@ public class FirebaseController {
                     long count = dataSnapshot.getChildrenCount();
                     ProductText.setText(String.valueOf(count));
                 }
+
             }
 
             @Override
@@ -125,6 +127,7 @@ public class FirebaseController {
                     // This will set the value of the admin
                     AdminText.setText(String.valueOf(count));
                 }
+
             }
 
             @Override
@@ -137,7 +140,7 @@ public class FirebaseController {
         });
     }
 
-    public void addProduct(String[] details, int[] values, TextField Productname, TextField Price, Spinner <Integer> quantityspiner) {
+    public void addProduct(String[] details, int quantity, TextField Productname, TextField Price, Spinner <Integer> quantityspiner) {
 
 
         // This will add the product to the database
@@ -167,8 +170,8 @@ public class FirebaseController {
                     // This is for hashmap
                     Map<String, Object> product = new HashMap<>();
                     product.put("productname", details[0]);
-                    product.put("quantity", values[0]);
-                    product.put("price", values[1]);
+                    product.put("quantity", quantity);
+                    product.put("price", details[2]);
 
                     // then insert the value in hashmap
                     productsRef.child(productId).updateChildren(product, new DatabaseReference.CompletionListener() {
@@ -225,6 +228,7 @@ public class FirebaseController {
 
 
                 }
+
             }
 
 

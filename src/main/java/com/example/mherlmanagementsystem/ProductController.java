@@ -3,7 +3,9 @@ package com.example.mherlmanagementsystem;
 import entities_and_functions.Products;
 import firebase.FirebaseConfig;
 import firebase.FirebaseController;
+import firebase.RetrieveFirebaseController;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,7 +43,7 @@ public class ProductController {
     private Tab CreateProductsTab;
 
     @FXML
-    private Spinner <Integer> quantityspiner;
+    private Spinner<Integer> quantityspiner;
 
 
     @FXML
@@ -51,9 +53,9 @@ public class ProductController {
     private TextField Price;
 
     @FXML
-    private TableView <Products> ProductTable;
+    private TableView<Products> ProductTable;
 
-    ObservableList<Products> ProductList;
+    ObservableList<Products> ProductList = FXCollections.observableArrayList();
 
 
     String username, userRole;
@@ -67,8 +69,8 @@ public class ProductController {
         this.username = username;
         this.userRole = userRole;
 
-        UsernameText.setText("Username:"+username);
-        RoleText.setText("Role:"+userRole);
+        UsernameText.setText("Username:" + username);
+        RoleText.setText("Role:" + userRole);
     }
 
 
@@ -86,8 +88,8 @@ public class ProductController {
         productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
         productNameColumn.setMinWidth(200);
 
-        TableColumn<Products, Integer> productPriceColumn = new TableColumn<>("Product Price");
-        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty().asObject());
+        TableColumn<Products, String> productPriceColumn = new TableColumn<>("Product Price");
+        productPriceColumn.setCellValueFactory(cellData -> cellData.getValue().productPriceProperty());
         productPriceColumn.setMinWidth(200);
 
         TableColumn<Products, Integer> productQuantityColumn = new TableColumn<>("Product Quantity");
@@ -95,16 +97,13 @@ public class ProductController {
         productPriceColumn.setMinWidth(200);
 
 
-        TableColumn <Products, Void> colBtn = new TableColumn("Action");
+        TableColumn<Products, Void> colBtn = new TableColumn("Action");
         colBtn.setCellFactory(param -> new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList));
         colBtn.setMinWidth(100);
 
         ProductTable.getColumns().addAll(productNameColumn, productPriceColumn, productQuantityColumn, colBtn);
 
-
-
-
-
+        LoadProducts();
     }
 
     @FXML
@@ -143,17 +142,17 @@ public class ProductController {
     }
 
     @FXML
-    protected void SalesAction(ActionEvent event){
+    protected void SalesAction(ActionEvent event) {
 
     }
 
     @FXML
-    protected void AddUserAction(ActionEvent event){
+    protected void AddUserAction(ActionEvent event) {
 
     }
 
     @FXML
-    protected void ReportAction(ActionEvent event){
+    protected void ReportAction(ActionEvent event) {
 
     }
 
@@ -178,7 +177,7 @@ public class ProductController {
             System.out.println("Logging out...");
             productStage.close();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin .class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
             Stage stage = new Stage();
@@ -206,33 +205,47 @@ public class ProductController {
     }
 
     @FXML
-    protected void CreateProducts(ActionEvent event){
+    protected void CreateProducts(ActionEvent event) {
 
         String productName = Productname.getText();
-        int price = Integer.parseInt(Price.getText());
+        String price = Price.getText();
         int quantity = quantityspiner.getValue();
 
-        if (productName.isEmpty() || price == 0 || quantity == 0) {
+        if (productName.isEmpty() || price.isEmpty()  || quantity == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Error");
             alert.setContentText("Please fill in all the fields");
             alert.showAndWait();
         } else {
-            String[] details = {productName,username};
-            int[] values = {price,quantity};
+            String[] details = {productName, username, price};
             Platform.runLater(() -> {
-                FirebaseController.getInstance().addProduct(details, values, Productname, Price, quantityspiner);
+                FirebaseController.getInstance().addProduct(details, quantity, Productname, Price, quantityspiner);
             });
         }
 
     }
 
     @FXML
-    protected void GoBack(ActionEvent event){
+    protected void GoBack(ActionEvent event) {
         ProductionPane.getSelectionModel().select(ProductsTab);
 
 
+    }
+
+    public void LoadProducts() {
+        ProductTable.getItems().clear();
+        try {
+
+            Platform.runLater(() -> {
+                ProductList = RetrieveFirebaseController.getInstance().retrieveProducts();
+                ProductTable.setItems(ProductList);
+                ProductTable.refresh();
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

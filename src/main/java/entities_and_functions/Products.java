@@ -7,13 +7,13 @@ public class Products {
 
     public SimpleStringProperty productName;
 
-    public SimpleIntegerProperty productPrice;
+    public SimpleStringProperty  productPrice;
 
     public SimpleIntegerProperty productQuantity;
 
-    public Products(String productName, int productPrice, int productQuantity) {
+    public Products(String productName, String productPrice, int productQuantity) {
         this.productName = new SimpleStringProperty(productName);
-        this.productPrice = new SimpleIntegerProperty(productPrice);
+        this.productPrice = new SimpleStringProperty (productPrice);
         this.productQuantity = new SimpleIntegerProperty(productQuantity);
     }
 
@@ -21,21 +21,18 @@ public class Products {
         return productName.get();
     }
 
-    public void setProductName(String productName) {
-        this.productName.set(productName);
-    }
-
-    public int getProductPrice() {
+    public String getProductPrice() {
         return productPrice.get();
-    }
-
-    public void setProductPrice(int productPrice) {
-        this.productPrice.set(productPrice);
     }
 
     public int getProductQuantity() {
         return productQuantity.get();
     }
+
+    public void setProductName(String productName) {
+        this.productName.set(productName);
+    }
+
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity.set(productQuantity);
@@ -45,16 +42,55 @@ public class Products {
         return productName;
     }
 
-    public SimpleIntegerProperty productPriceProperty() {
+    public SimpleStringProperty productPriceProperty() {
         return productPrice;
     }
+
 
     public SimpleIntegerProperty productQuantityProperty() {
         return productQuantity;
     }
 
-    public String toString() {
-        return "Product Name: " + productName.get() + " Product Price: " + productPrice.get() + " Product Quantity: " + productQuantity.get();
+    public void setProductQuantity(SimpleIntegerProperty productQuantity) {
+        this.productQuantity = productQuantity;
     }
-    
+
+    public void setProductPrice(SimpleStringProperty productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public void setProductName(SimpleStringProperty productName) {
+        this.productName = productName;
+    }
+
+
+
+
+    public void setProductPrice(int productPrice) {
+        this.productPrice.set(String.valueOf(productPrice));
+    }
+
+
+
+    public void setProductPrice(String productPrice) {
+        this.productPrice.set(productPrice);
+    }
+
+
+    public void setProductQuantity(String productQuantity) {
+        this.productQuantity.set(Integer.parseInt(productQuantity));
+    }
+
+    public void setProductName(int productName) {
+        this.productName.set(String.valueOf(productName));
+    }
+
+   public String toString() {
+        return "Product Name: " + productName + " Product Price: " + productPrice + " Product Quantity: " + productQuantity;
+    }
+
+
+
+
+
 }
