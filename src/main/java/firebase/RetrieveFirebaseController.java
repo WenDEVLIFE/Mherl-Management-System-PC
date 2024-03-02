@@ -42,7 +42,7 @@ public class RetrieveFirebaseController {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 System.out.println("DataSnapshot: " + dataSnapshot.toString()); // Add this line
-
+               ProductList.clear();
                 // This will retrieve from the database
                 for (DataSnapshot Productsnaphot : dataSnapshot.getChildren()) {
                     String productName = Productsnaphot.child("productname").getValue(String.class);

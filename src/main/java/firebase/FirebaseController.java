@@ -3,6 +3,7 @@ package firebase;
 import com.google.firebase.database.*;
 import com.google.firebase.internal.NonNull;
 import eu.hansolo.tilesfx.tools.Fire;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
@@ -183,11 +184,18 @@ public class FirebaseController {
                             } else {
                                 System.out.println("Data saved successfully.");
 
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Information Dialog");
-                                alert.setHeaderText("Information");
-                                alert.setContentText("Product added successfully");
-                                alert.showAndWait();
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information Dialog");
+                                    alert.setHeaderText("Information");
+                                    alert.setContentText("Product has been added successfully");
+                                    alert.showAndWait();
+
+                                    // This will clear the textfield
+                                    Productname.clear();
+                                    Price.clear();
+                                    quantityspiner.getValueFactory().setValue(1);
+                                });
 
 
                             }
@@ -211,10 +219,7 @@ public class FirebaseController {
                     report.put("Date", dateformat);
                     report.put("Time", timeformat);
 
-                    // This will clear the textfield
-                    Productname.clear();
-                    Price.clear();
-                    quantityspiner.getValueFactory().setValue(1);
+
                     reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
