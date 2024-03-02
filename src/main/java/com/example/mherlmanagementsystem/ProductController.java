@@ -2,6 +2,7 @@ package com.example.mherlmanagementsystem;
 
 import firebase.FirebaseConfig;
 import firebase.FirebaseController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -186,8 +187,11 @@ public class ProductController {
             alert.setContentText("Please fill in all the fields");
             alert.showAndWait();
         } else {
-            FirebaseController add = new FirebaseController();
-            add.addProduct(productName, price, quantity);
+            String[] details = {productName,username};
+            int[] values = {price,quantity};
+            Platform.runLater(() -> {
+                FirebaseController.getInstance().addProduct(details, values, Productname, Price, quantityspiner);
+            });
         }
 
     }
