@@ -15,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
 import tables.ButtonCellDeleteProducts;
 
 import java.io.IOException;
@@ -25,6 +24,10 @@ import java.util.Optional;
 public class ProductController {
 
      private static ProductController instance;
+
+     private static ProductController controller_products;
+
+     private FXMLLoader fxmlLoader;
 
     private Stage productStage;
 
@@ -44,10 +47,10 @@ public class ProductController {
     private Tab CreateProductsTab;
 
     @FXML
-    private Tab EditProductTab;
+    private Tab EditProductTabNigga;
 
     @FXML
-    private Tab BuyProductTab;
+    private Tab BuyProductTabNigga;
 
     @FXML
     private Spinner<Integer> quantityspiner;
@@ -88,6 +91,7 @@ public class ProductController {
 
     String username, userRole;
 
+
     public void setStage(Stage stageProduct) {
         this.productStage = stageProduct;
     }
@@ -102,6 +106,7 @@ public class ProductController {
         RoleText.setText("Role:" + userRole);
     }
 
+    // Get the instance of the ProductController
     public static ProductController getInstance() {
         if (instance == null) {
             instance = new ProductController();
@@ -109,16 +114,43 @@ public class ProductController {
         return instance;
     }
 
+
+    // Set the FXMLLoader
+    public void setFXMLLoader(FXMLLoader fxmlLoader) {
+        this.fxmlLoader = fxmlLoader;
+    }
+
+    // Get the FXMLLoader
+    public FXMLLoader getFxmlLoader() {
+        return this.fxmlLoader;
+    }
+
+    // Get the instance of the ProductController
+   public static ProductController getController_products() {
+        if (controller_products == null) {
+            controller_products = new ProductController();
+        }
+        return controller_products;
+    }
+
+    public void setController(ProductController controller) {
+        this.controller_products = controller;
+    }
+
+    // Initialize the ProductController
     public void initialize() {
         System.out.println("ProductController initialized");
         FirebaseConfig.getInstance().initFirebase();
 
+        // Set the textfields to be uneditable
         EditProductName.setEditable(false);
         EditQuantity.setEditable(false);
         EditPrice.setEditable(false);
 
+        // Get the instance of the FirebaseController
         ProductionPane.getSelectionModel().select(ProductsTab);
 
+        // Set the value factory for the spinner
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
         quantityspiner.setValueFactory(valueFactory);
 
@@ -236,7 +268,7 @@ public class ProductController {
         });
 
         // Add the columns to the table
-        ProductTable.getColumns().addAll(productNameColumn, productPriceColumn, productQuantityColumn, colBtn);
+        ProductTable.getColumns().addAll(productNameColumn, productPriceColumn, productQuantityColumn, colBtn, colBtn1, colBtn2);
         ProductTable.setMinHeight(800); // Set minimum height
         LoadProducts();
     }
@@ -439,13 +471,31 @@ public class ProductController {
         }
 
     }
-    public void GoToEditProduct() {
-        ProductionPane.getSelectionModel().select(EditProductTab);
+    public void GoToEditProduct(Products selectedproducts) {
+        if (EditProductTabNigga == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Error");
+alert.setContentText("Please select a product to edit");
+            alert.showAndWait();
+        } else {
+            ProductionPane.getSelectionModel().select(EditProductTabNigga);
+        }
     }
 
     public void GoToBuyProduct() {
-        ProductionPane.getSelectionModel().select(BuyProductTab);
+
+        if (BuyProductTabNigga == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please select a product to buy");
+            alert.showAndWait();
+        } else {
+            ProductionPane.getSelectionModel().select(BuyProductTabNigga);
+        }
     }
+
 
 
 }

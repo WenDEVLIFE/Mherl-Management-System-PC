@@ -125,6 +125,8 @@ public class DashboardController {
 
             ProductController controller = fxmlLoader.getController();
             controller.setStage(stage_product);
+            controller.setFXMLLoader(fxmlLoader);
+            controller.setController(controller);
             controller.setUsernameInfo(username, userRole);
 
             stagedash.close();

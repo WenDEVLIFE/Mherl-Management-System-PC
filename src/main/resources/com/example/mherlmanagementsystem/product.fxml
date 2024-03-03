@@ -18,7 +18,7 @@
    <children>
       <TabPane fx:id="ProductionPane" layoutX="172.0" layoutY="-33.0" prefHeight="657.0" prefWidth="656.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="-33.0">
         <tabs>
-            <Tab fx:id="EditProductTab" text="EditQuantity">
+            <Tab fx:id="EditProductTabNigga" text="EditQuantity">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -184,7 +184,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="BuyProducts">
+            <Tab fx:id="BuyProductTabNigga" text="BuyProducts">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

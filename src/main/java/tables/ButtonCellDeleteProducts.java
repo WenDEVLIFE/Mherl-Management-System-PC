@@ -62,15 +62,28 @@ public class ButtonCellDeleteProducts extends TableCell<Products, Void> {
                 // Rent Car function
                 else if (buttonText.equals("Buy")) {
 
-                  ProductController.getInstance().GoToBuyProduct();
+                    Platform.runLater(() -> {
+                        System.out.println("Buy");
+
+                        // Go to buy product and get the controller
+                        ProductController buy = ProductController.getController_products();
+                        buy.GoToBuyProduct();
+
+                    });
+
 
 
                 }
 
                 else if (buttonText.equals("Product Info")) {
 
-                    System.out.println("Product Info");
-                    ProductController.getInstance().GoToEditProduct();
+                  Platform.runLater(() -> {
+                      System.out.println("Product Info");
+
+                      // Go to edit product and get the controller
+                      ProductController edit = ProductController.getController_products();
+                      edit.GoToEditProduct(Selectedproducts);
+                  });
                 }
             }
         });
