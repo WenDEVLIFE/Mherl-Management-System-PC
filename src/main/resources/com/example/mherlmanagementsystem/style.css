@@ -139,5 +139,21 @@
     -fx-border-radius: 20;
 }
 
+.combo-box .text {
+    -fx-fill: #FFFF;
+    -fx-background-color: #083D77;
+    -fx-border-width: 2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #FFFF;
+    -fx-background-color: #083D77;
+    -fx-border-width: 2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
 
 
