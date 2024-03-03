@@ -72,6 +72,9 @@ public class ProductController {
     private TextField EditPrice;
 
     @FXML
+    private Text productnamelabel;
+
+    @FXML
     private TableView<Products> ProductTable;
 
     ObservableList<Products> ProductList = FXCollections.observableArrayList();
@@ -90,6 +93,12 @@ public class ProductController {
 
 
     String username, userRole;
+
+    public Boolean push_attempts1 = false;
+
+    public Boolean push_attempts2 = false;
+
+    public Boolean push_attempts3 = false;
 
 
     public void setStage(Stage stageProduct) {
@@ -338,6 +347,7 @@ public class ProductController {
     @FXML
     protected void AddUserAction(ActionEvent event) {
 
+
     }
 
     @FXML
@@ -441,20 +451,82 @@ public class ProductController {
     @FXML
     protected void edit_productname(ActionEvent event){
 
+        // Boolean to check if the user has attempted to edit the product name
+        push_attempts1 = !push_attempts1;
+        if (push_attempts1) {
+            EditProductName.setEditable(true);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Edit Product Name");
+            alert.setContentText("You can now edit the product name");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Edit Product Name");
+            alert.setContentText("You can no longer edit the product name");
+            alert.showAndWait();
+            EditProductName.setEditable(false);
+        }
+
     }
 
     @FXML
     protected void edit_quantity(ActionEvent event){
+
+        // Boolean to check if the user has attempted to edit the quantity
+        push_attempts2 = !push_attempts2;
+        if (push_attempts2) {
+            EditQuantity.setEditable(true);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Edit Product Quantity");
+            alert.setContentText("You can now edit the product quantity");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Edit Product Quantity");
+            alert.setContentText("You can no longer edit the product quantity");
+            alert.showAndWait();
+            EditQuantity.setEditable(false);
+        }
 
     }
 
     @FXML
     protected void EditPrice(ActionEvent event){
 
+        // Boolean to check if the user has attempted to edit the price
+        push_attempts3 = !push_attempts3;
+
+
+        if (push_attempts3) {
+            EditPrice.setEditable(true);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Edit Product Price");
+            alert.setContentText("You can now edit the product price");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Edit Product Price");
+            alert.setContentText("You can no longer edit the product price");
+            alert.showAndWait();
+            EditPrice.setEditable(false);
+        }
+
     }
 
     @FXML
     protected void ConfirmEdit(ActionEvent event){
+
+        String productName = EditProductName.getText();
+        String price = EditPrice.getText();
+        String OldProductName = productnamelabel.getText();
+        int quantity = Integer.parseInt(EditQuantity.getText());
+
         if (EditProductName.isEditable() || EditQuantity.isEditable() || EditPrice.isEditable()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
@@ -463,7 +535,11 @@ public class ProductController {
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     // Edit product in database
+
                     Platform.runLater(() -> {
+                        String [] info = {productName, price, OldProductName};
+                        FirebaseController.getInstance().editProduct(info, quantity, username, productnamelabel);
+
 
                     });
                 }
@@ -476,10 +552,14 @@ public class ProductController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Error");
-alert.setContentText("Please select a product to edit");
+            alert.setContentText("Please select a product to edit");
             alert.showAndWait();
         } else {
             ProductionPane.getSelectionModel().select(EditProductTabNigga);
+            EditProductName.setText(selectedproducts.getProductName());
+            EditQuantity.setText(String.valueOf(selectedproducts.getProductQuantity()));
+            EditPrice.setText(selectedproducts.getProductPrice());
+            productnamelabel.setText(selectedproducts.getProductName());
         }
     }
 
@@ -493,6 +573,7 @@ alert.setContentText("Please select a product to edit");
             alert.showAndWait();
         } else {
             ProductionPane.getSelectionModel().select(BuyProductTabNigga);
+
         }
     }
 

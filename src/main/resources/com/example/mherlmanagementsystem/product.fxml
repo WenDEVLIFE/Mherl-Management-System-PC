@@ -84,6 +84,11 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
+                                    <Text fx:id="productnamelabel" fill="#fffdfd" layoutX="42.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product info" wrappingWidth="293.13671875">
+                                       <font>
+                                          <Font name="Gill Sans MT Condensed" size="28.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                               </Pane>
                            </children>

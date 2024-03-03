@@ -289,16 +289,12 @@ public class FirebaseController {
                                 report.put("Activity", "Delete Product");
                                 report.put("Date", dateformat);
                                 report.put("Time", timeformat);
-                                reports.child(ReportId).updateChildren(report, new DatabaseReference.CompletionListener() {
-                                    @Override
-
-                                    // This is for the completion listener
-                                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                        if (databaseError != null) {
-                                            System.out.println("Data could not be saved " + databaseError.getMessage());
-                                        } else {
-                                            System.out.println("Data saved successfully.");
-                                        }
+                                // This is for the completion listener
+                                reports.child(ReportId).updateChildren(report, (databaseError1, databaseReference1) -> {
+                                    if (databaseError1 != null) {
+                                        System.out.println("Data could not be saved " + databaseError1.getMessage());
+                                    } else {
+                                        System.out.println("Data saved successfully.");
                                     }
                                 });
 
@@ -393,4 +389,94 @@ public class FirebaseController {
             }
         });
     }
+
+    public void editProduct(String [] info, int quantity, String username, Text productnamelabel) {
+        DatabaseReference productsRef = Database.child("Products");
+
+        String oldproductName = info[2].toString();
+        String newproductName = info[0].toString();
+        String newprice = info[1].toString();
+        int newquantity = quantity;
+
+        // This is for the event listener
+        productsRef.orderByChild("productname").equalTo(oldproductName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Map<String, Object> product = new HashMap<>();
+                        product.put("productname", newproductName);
+                        product.put("quantity", newquantity);
+                        product.put("price", newprice);
+
+                        snapshot.getRef().updateChildren(product, (databaseError, databaseReference) -> {
+                            if (databaseError != null) {
+                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Error Dialog");
+                                    alert.setHeaderText("Error");
+                                    alert.setContentText("Failed to update product");
+                                    alert.showAndWait();
+
+                                    productnamelabel.setText(newproductName);
+                                });
+                            } else {
+                                System.out.println("Data saved successfully.");
+
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information Dialog");
+                                    alert.setHeaderText("Information");
+                                    alert.setContentText("Product has been updated successfully");
+                                    alert.showAndWait();
+
+                                });
+
+                                // This is for the report
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference reports = database.getReference("Reports");
+                                String ReportId = UUID.randomUUID().toString();
+                                LocalDate date = LocalDate.now();
+                                LocalTime time = LocalTime.now();
+                                String dateformat = date.toString();
+                                String timeformat = time.toString();
+
+                                // This is for the report
+                                Map<String, Object> report = new HashMap<>();
+                                report.put("username", username);
+                                report.put("Activity", "Edit Product");
+                                report.put("Date", dateformat);
+                                report.put("Time", timeformat);
+
+                                // This is for the completion listener
+                                reports.child(ReportId).updateChildren(report, (databaseError1, databaseReference1) -> {
+                                    if (databaseError1 != null) {
+                                        System.out.println("Data could not be saved " + databaseError1.getMessage());
+                                    } else {
+                                        System.out.println("Data saved successfully.");
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to update product");
+                    alert.showAndWait();
+                });
+            }
+        });
+
+    }
+
 }
