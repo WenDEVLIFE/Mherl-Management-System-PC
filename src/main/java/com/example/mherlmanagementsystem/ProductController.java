@@ -24,6 +24,7 @@ import java.util.Optional;
 
 public class ProductController {
 
+     private static ProductController instance;
 
     private Stage productStage;
 
@@ -43,6 +44,12 @@ public class ProductController {
     private Tab CreateProductsTab;
 
     @FXML
+    private Tab EditProductTab;
+
+    @FXML
+    private Tab BuyProductTab;
+
+    @FXML
     private Spinner<Integer> quantityspiner;
 
 
@@ -51,6 +58,15 @@ public class ProductController {
 
     @FXML
     private TextField Price;
+
+    @FXML
+    private TextField EditProductName;
+
+    @FXML
+    private TextField EditQuantity;
+
+    @FXML
+    private TextField EditPrice;
 
     @FXML
     private TableView<Products> ProductTable;
@@ -86,10 +102,20 @@ public class ProductController {
         RoleText.setText("Role:" + userRole);
     }
 
+    public static ProductController getInstance() {
+        if (instance == null) {
+            instance = new ProductController();
+        }
+        return instance;
+    }
 
     public void initialize() {
         System.out.println("ProductController initialized");
         FirebaseConfig.getInstance().initFirebase();
+
+        EditProductName.setEditable(false);
+        EditQuantity.setEditable(false);
+        EditPrice.setEditable(false);
 
         ProductionPane.getSelectionModel().select(ProductsTab);
 
@@ -167,6 +193,39 @@ public class ProductController {
         // Set the cell factory for the column
         colBtn.setCellFactory(tc -> {
             TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Delete Product", ProductTable, ProductList, username) {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <Products, Void> colBtn1= new TableColumn("Action");
+        colBtn1.setCellFactory(param -> new ButtonCellDeleteProducts("Buy", ProductTable, ProductList, username));
+        colBtn1.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.4)); // 40% width
+
+        // Set the cell factory for the column
+        colBtn1.setCellFactory(tc -> {
+            TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Buy", ProductTable, ProductList, username) {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
+
+
+        TableColumn <Products, Void> colBtn2= new TableColumn("Action");
+        colBtn2.setCellFactory(param -> new ButtonCellDeleteProducts("Product Info", ProductTable, ProductList, username));
+        colBtn2.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.4)); // 40% width
+
+        // Set the cell factory for the column
+        colBtn2.setCellFactory(tc -> {
+            TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Product Info", ProductTable, ProductList, username) {
                 @Override
                 public void updateItem(Void item, boolean empty) {
                     super.updateItem(item, empty);
@@ -347,7 +406,46 @@ public class ProductController {
 
     }
 
+    @FXML
+    protected void edit_productname(ActionEvent event){
 
+    }
+
+    @FXML
+    protected void edit_quantity(ActionEvent event){
+
+    }
+
+    @FXML
+    protected void EditPrice(ActionEvent event){
+
+    }
+
+    @FXML
+    protected void ConfirmEdit(ActionEvent event){
+        if (EditProductName.isEditable() || EditQuantity.isEditable() || EditPrice.isEditable()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Edit Product");
+            alert.setContentText("Are you sure you want to edit this product?");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    // Edit product in database
+                    Platform.runLater(() -> {
+
+                    });
+                }
+            });
+        }
+
+    }
+    public void GoToEditProduct() {
+        ProductionPane.getSelectionModel().select(EditProductTab);
+    }
+
+    public void GoToBuyProduct() {
+        ProductionPane.getSelectionModel().select(BuyProductTab);
+    }
 
 
 }

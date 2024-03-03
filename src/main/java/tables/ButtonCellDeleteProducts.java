@@ -3,6 +3,7 @@ package tables;
 
 
 
+import com.example.mherlmanagementsystem.ProductController;
 import entities_and_functions.Products;
 import firebase.FirebaseController;
 import javafx.application.Platform;
@@ -59,11 +60,17 @@ public class ButtonCellDeleteProducts extends TableCell<Products, Void> {
 
                 }
                 // Rent Car function
-                else if (buttonText.equals("Rent Car")) {
+                else if (buttonText.equals("Buy")) {
 
-                    System.out.println("Rent Car");
+                  ProductController.getInstance().GoToBuyProduct();
 
 
+                }
+
+                else if (buttonText.equals("Product Info")) {
+
+                    System.out.println("Product Info");
+                    ProductController.getInstance().GoToEditProduct();
                 }
             }
         });
@@ -85,7 +92,10 @@ public class ButtonCellDeleteProducts extends TableCell<Products, Void> {
             String buttonText = button.getText();
             if ("Delete Product".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
-            } else if ("Rent Car".equals(buttonText)) {
+            } else if ("Buy".equals(buttonText)) {
+                button.getStyleClass().add("buttons");
+            }
+            else if ("Product Info".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
             }
 

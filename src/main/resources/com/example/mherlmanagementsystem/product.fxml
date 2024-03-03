@@ -18,7 +18,7 @@
    <children>
       <TabPane fx:id="ProductionPane" layoutX="172.0" layoutY="-33.0" prefHeight="657.0" prefWidth="656.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="-33.0">
         <tabs>
-            <Tab text="EditQuantity">
+            <Tab fx:id="EditProductTab" text="EditQuantity">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -44,8 +44,8 @@
                            <children>
                               <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
                                  <children>
-                                    <JFXTextField fx:id="Productname1" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" />
-                                    <JFXButton layoutX="42.0" layoutY="324.0" onAction="#CreateProducts" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Confirm edit the product">
+                                    <JFXTextField fx:id="EditProductName" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" />
+                                    <JFXButton layoutX="42.0" layoutY="324.0" onAction="#ConfirmEdit" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Confirm edit the product">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -55,11 +55,35 @@
                                        </graphic>
                                     </JFXButton>
                                     <JFXButton layoutX="299.0" layoutY="324.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="GO BACK TO PRODUCTS" />
-                                    <JFXTextField fx:id="Price1" layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" />
-                                    <JFXTextField fx:id="Productname11" layoutX="42.0" layoutY="115.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" />
-                                    <JFXButton layoutX="422.0" layoutY="221.0" onAction="#GoBack" prefHeight="48.0" prefWidth="57.0" styleClass="buttons" stylesheets="@style.css" />
-                                    <JFXButton layoutX="422.0" layoutY="131.0" onAction="#GoBack" prefHeight="48.0" prefWidth="57.0" styleClass="buttons" stylesheets="@style.css" text="Button" />
-                                    <JFXButton layoutX="422.0" layoutY="44.0" onAction="#GoBack" prefHeight="48.0" prefWidth="57.0" styleClass="buttons" stylesheets="@style.css" text="Button" />
+                                    <JFXTextField fx:id="EditPrice" layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" />
+                                    <JFXTextField fx:id="EditQuantity" layoutX="42.0" layoutY="115.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Quantity" />
+                                    <JFXButton layoutX="422.0" layoutY="221.0" onAction="#EditPrice" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/shopping_14709205.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton layoutX="422.0" layoutY="131.0" onAction="#edit_quantity" prefHeight="48.0" prefWidth="72.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/shopping_14709205.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton layoutX="422.0" layoutY="44.0" onAction="#edit_productname" prefHeight="48.0" prefWidth="69.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/shopping_14709205.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
                                  </children>
                               </Pane>
                            </children>
