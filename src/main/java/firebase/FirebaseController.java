@@ -560,11 +560,27 @@ public class FirebaseController {
 
 
                                     // This is for hashmap
+                                    DatabaseReference sales = database.getReference("Sales");
+                                    String SalesId = UUID.randomUUID().toString();
                                     Map<String, Object> sale = new HashMap<>();
                                     sale.put("productname", details[0]);
                                     sale.put("quantity", quantity);
                                     sale.put("date", dateformat);
                                     sale.put("totalprice", total_price);
+
+                                    // insert the sales
+                                    sales.child(SalesId).updateChildren(sale, (databaseError2, databaseReference2) -> {
+                                        if (databaseError2 != null) {
+                                            System.out.println("Data could not be saved " + databaseError2.getMessage());
+                                        } else {
+                                            System.out.println("Data saved successfully.");
+                                        }
+                                    });
+
+
+
+
+
 
                                 }
                             });
