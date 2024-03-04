@@ -145,6 +145,9 @@ public class ProductController {
     @FXML
     private Button Edit3;
 
+    @FXML
+    private Button RefreshButton;
+
 
     String username, userRole;
 
@@ -334,6 +337,8 @@ public class ProductController {
         // Add the columns to the table
         ProductTable.getColumns().addAll(productNameColumn, productPriceColumn, productQuantityColumn, colBtn, colBtn1, colBtn2);
         ProductTable.setMinHeight(800); // Set minimum height
+
+        // Load the products
         LoadProducts();
     }
 
@@ -479,6 +484,11 @@ public class ProductController {
     @FXML
     private void GoToAddProducts(ActionEvent event) {
         ProductionPane.getSelectionModel().select(CreateProductsTab);
+    }
+
+    @FXML
+    protected void RefreshProducts(ActionEvent event) {
+        LoadProducts();
     }
 
     @FXML
@@ -704,6 +714,7 @@ public class ProductController {
         Edit1.setOnAction(null);
         Edit2.setOnAction(null);
         Edit3.setOnAction(null);
+        RefreshButton.setOnAction(null);
 
 
     }

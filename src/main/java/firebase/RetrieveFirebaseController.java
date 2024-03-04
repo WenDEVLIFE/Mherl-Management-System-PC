@@ -33,7 +33,7 @@ public class RetrieveFirebaseController {
 
     public RetrieveFirebaseController() {
         FirebaseConfig.getInstance().initFirebase();
-         database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         productsMap = new HashMap<>();
         salesMap = new HashMap<>();
         PopulateData();
