@@ -72,6 +72,13 @@ public class ProductController {
     private TextField EditPrice;
 
     @FXML
+    private TextField BuyProductName;
+
+    @FXML
+    private TextField BuyQuantity;
+
+
+    @FXML
     private Text productnamelabel;
 
     @FXML
@@ -563,7 +570,7 @@ public class ProductController {
         }
     }
 
-    public void GoToBuyProduct() {
+    public void GoToBuyProduct(Products selectedproducts) {
 
         if (BuyProductTabNigga == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -573,8 +580,29 @@ public class ProductController {
             alert.showAndWait();
         } else {
             ProductionPane.getSelectionModel().select(BuyProductTabNigga);
+            BuyProductName.setText(selectedproducts.getProductName());
+            BuyProductName.setEditable(false);
 
         }
+    }
+
+    @FXML
+    protected void BuyTheProduct(ActionEvent event){
+        String productName = BuyProductName.getText();
+        int quantity = Integer.parseInt(BuyQuantity.getText());
+        if (productName.isEmpty() || quantity == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please fill in all the fields");
+            alert.showAndWait();
+        } else {
+            String[] details = {productName, username};
+            Platform.runLater(() -> {
+                FirebaseController.getInstance().buyProduct(details, quantity);
+            });
+        }
+
     }
 
 

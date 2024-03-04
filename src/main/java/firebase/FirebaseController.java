@@ -23,7 +23,8 @@ public class FirebaseController {
 
 
     // Database reference
-     DatabaseReference Database;
+     DatabaseReference FireBaseDatabase;
+
 
      // Singletton pattern
     public static FirebaseController getInstance() {
@@ -39,7 +40,7 @@ public class FirebaseController {
 
 
           // Our database reference
-          Database = FirebaseDatabase.getInstance().getReference();
+      FireBaseDatabase = FirebaseDatabase.getInstance().getReference();
 
 
   }
@@ -48,7 +49,7 @@ public class FirebaseController {
     public void setDashboardController(Text UserText, Text ProductText, Text SalesText, Text AdminText) {
 
         // get the user reference
-        DatabaseReference usersRef = Database.child("Users");
+        DatabaseReference usersRef = FireBaseDatabase.child("Users");
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,7 +71,7 @@ public class FirebaseController {
         });
 
         // get the product reference
-        DatabaseReference productsRef = Database.child("Products");
+        DatabaseReference productsRef = FireBaseDatabase.child("Products");
 
         // This will count the product
         productsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -94,7 +95,7 @@ public class FirebaseController {
         });
 
         //This will count the sales of the product
-        DatabaseReference salesRef = Database.child("Sales");
+        DatabaseReference salesRef = FireBaseDatabase.child("Sales");
         salesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -124,7 +125,7 @@ public class FirebaseController {
         });
 
         // Admin reference
-        DatabaseReference adminRef = Database.child("Users");
+        DatabaseReference adminRef = FireBaseDatabase.child("Users");
         adminRef.orderByChild("role").equalTo("Admin").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -155,7 +156,7 @@ public class FirebaseController {
 
 
         // This will add the product to the database
-        DatabaseReference productsRef = Database.child("Products");
+        DatabaseReference productsRef = FireBaseDatabase.child("Products");
 
         productsRef.orderByChild("productname").equalTo(details[0]).addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -260,7 +261,7 @@ public class FirebaseController {
     // This method is used to delete a product
 
     public void deleteProduct(Products selectedproducts, String username) {
-        DatabaseReference productsRef = Database.child("Products");
+        DatabaseReference productsRef = FireBaseDatabase.child("Products");
 
         String productname = selectedproducts.getProductName();
 
@@ -333,7 +334,7 @@ public class FirebaseController {
     public void deleteSales(Sales selectedproducts, String username) {
 
         String productname = selectedproducts.getProductname();
-        DatabaseReference salesRef = Database.child("Sales");
+        DatabaseReference salesRef = FireBaseDatabase.child("Sales");
 
         // This is for the event listener
         salesRef.orderByChild("productname").equalTo(productname).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -404,7 +405,7 @@ public class FirebaseController {
 
     // This method is for edit products
     public void editProduct(String [] info, int quantity, String username, Text productnamelabel) {
-        DatabaseReference productsRef = Database.child("Products");
+        DatabaseReference productsRef = FireBaseDatabase.child("Products");
 
         String oldproductName = info[2].toString();
         String newproductName = info[0].toString();
@@ -487,6 +488,119 @@ public class FirebaseController {
                     alert.setContentText("Failed to update product");
                     alert.showAndWait();
                 });
+            }
+        });
+
+    }
+
+    public void buyProduct(String[] details, int quantity) {
+
+        DatabaseReference productRef = FireBaseDatabase.child("Products");
+
+        // This is for the event listener
+        productRef.orderByChild("productname").equalTo(details[0]).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                        // This is for the old quantity and new quantity
+                        int oldquantity = snapshot.child("quantity").getValue(Integer.class);
+                        int newquantity = oldquantity - quantity;
+                        String price = snapshot.child("price").getValue(String.class);
+
+                        if(newquantity >= 0){
+
+                            // This is for the hashmap
+                            Map<String, Object> product = new HashMap<>();
+                            product.put("quantity", newquantity);
+
+                            // This is for the completion listener
+                            snapshot.getRef().updateChildren(product, (databaseError, databaseReference) -> {
+                                if (databaseError != null) {
+                                    System.out.println("Data could not be saved " + databaseError.getMessage());
+                                } else {
+                                    System.out.println("Data saved successfully.");
+
+                                    Platform.runLater(() -> {
+                                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                        alert.setTitle("Information Dialog");
+                                        alert.setHeaderText("Information");
+                                        alert.setContentText("Product has been bought successfully");
+                                        alert.showAndWait();
+                                    });
+
+                                    // This is for the report
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference reports = database.getReference("Reports");
+                                    String ReportId = UUID.randomUUID().toString();
+                                    LocalDate date = LocalDate.now();
+                                    LocalTime time = LocalTime.now();
+                                    String dateformat = date.toString();
+                                    String timeformat = time.toString();
+
+                                    // This is for the report
+                                    Map<String, Object> report = new HashMap<>();
+                                    report.put("username", details[1]);
+                                    report.put("Activity", "Buy Product");
+                                    report.put("Date", dateformat);
+                                    report.put("Time", timeformat);
+
+                                    // This is for the completion listener
+                                    reports.child(ReportId).updateChildren(report, (databaseError1, databaseReference1) -> {
+                                        if (databaseError1 != null) {
+                                            System.out.println("Data could not be saved " + databaseError1.getMessage());
+                                        } else {
+                                            System.out.println("Data saved successfully.");
+                                        }
+                                    });
+
+                                    int productprice = Integer.parseInt(price);
+                                    int total_price = productprice * quantity;
+
+
+                                    // This is for hashmap
+                                    Map<String, Object> sale = new HashMap<>();
+                                    sale.put("productname", details[0]);
+                                    sale.put("quantity", quantity);
+                                    sale.put("date", dateformat);
+                                    sale.put("totalprice", total_price);
+
+                                }
+                            });
+                        } else{
+                            Platform.runLater(() -> {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error Dialog");
+                                alert.setHeaderText("Error");
+                                alert.setContentText("Product is out of stock");
+                                alert.showAndWait();
+                            });
+                        }
+                    }
+
+                } else{
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Dialog");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Product does not exist");
+                        alert.showAndWait();
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to buy product");
+                    alert.showAndWait();
+                });
+
             }
         });
 

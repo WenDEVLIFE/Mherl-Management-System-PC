@@ -67,7 +67,7 @@ public class ButtonCellDeleteProducts extends TableCell<Products, Void> {
 
                         // Go to buy product and get the controller
                         ProductController buy = ProductController.getController_products();
-                        buy.GoToBuyProduct();
+                        buy.GoToBuyProduct(Selectedproducts);
 
                     });
 

@@ -215,8 +215,8 @@
                            <children>
                               <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
                                  <children>
-                                    <JFXTextField fx:id="EditProductName1" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" />
-                                    <JFXButton layoutX="42.0" layoutY="324.0" onAction="#ConfirmEdit" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Buy the  product">
+                                    <JFXTextField fx:id="BuyProductName" layoutX="35.0" layoutY="41.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" />
+                                    <JFXButton layoutX="42.0" layoutY="324.0" onAction="#BuyTheProduct" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Buy the  product">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -226,8 +226,7 @@
                                        </graphic>
                                     </JFXButton>
                                     <JFXButton layoutX="299.0" layoutY="324.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="GO BACK TO PRODUCTS" />
-                                    <JFXTextField fx:id="EditPrice1" layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" />
-                                    <JFXTextField fx:id="EditQuantity1" layoutX="42.0" layoutY="115.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Quantity" />
+                                    <JFXTextField fx:id="BuyQuantity" layoutX="34.0" layoutY="152.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Quantity" />
                                     <JFXButton layoutX="422.0" layoutY="221.0" onAction="#EditPrice" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
