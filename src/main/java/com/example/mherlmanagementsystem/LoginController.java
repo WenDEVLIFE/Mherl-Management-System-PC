@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
@@ -24,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class LoginController {
 
-    Stage LoginStage;
+    Stage Stages;
 
     @FXML
     private CustomPasswordField passwordfield;
@@ -35,11 +32,14 @@ public class LoginController {
     @FXML
     private CheckBox checkpassword;
 
+    @FXML
+    private Button LoginButton;
+
     // Initialize Firebase only once
 
 
     public void setStage(Stage stage) {
-        this.LoginStage = stage;
+        this.Stages = stage;
     }
 
     @FXML
@@ -97,20 +97,23 @@ public class LoginController {
                                 alert.setContentText("Welcome " + username + "!");
                                 alert.showAndWait();
 
-                                LoginStage.close();
+                                Stages.close(); // Close the current stage
 
                                 FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("dashboard.fxml"));
                                 Scene scene = new Scene(fxmlLoader.load());
                                 Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                                Stage stagedash = new Stage();
-                                stagedash.getIcons().add(icon);
-                                stagedash.setTitle("Mherl Management System");
-                                stagedash.setScene(scene);
-                                stagedash.show();
+                                Stages.getIcons().add(icon);
+                                Stages.setTitle("Mherl Management System");
+                                Stages.setScene(scene);
+                                Stages.show(); // Open the new stage
 
                                 DashboardController controller = fxmlLoader.getController();
-                                controller.setStage(stagedash);
+                                controller.setStage(Stages);
                                 controller.setUsernameInfo(username, userRole);
+
+                                LoginButton.setOnAction(null);
+                                checkpassword.setOnAction(null);
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }

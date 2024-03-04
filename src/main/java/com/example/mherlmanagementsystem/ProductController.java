@@ -98,6 +98,53 @@ public class ProductController {
     @FXML
     TableColumn<Products, String> productNameColumn;
 
+    @FXML
+    private Button DashboardButton;
+
+    @FXML
+    private Button AddProductButton;
+
+    @FXML
+    private Button SalesButton;
+
+    @FXML
+    private Button AddUserButton;
+
+    @FXML
+    private Button ReportButton;
+
+    @FXML
+    private Button LogoutButton;
+
+    @FXML
+    private Button CreateButtonsP;
+
+    @FXML
+    private Button BuyButtonCreate;
+
+    @FXML
+    private Button GoBack1;
+
+    @FXML
+    private Button BuyButton;
+    @FXML
+    private Button GoBack2;
+
+    @FXML
+    private Button Editbuttons;
+
+    @FXML
+    private Button GoBack3;
+
+    @FXML
+    private Button Edit1;
+
+    @FXML
+    private Button Edit2;
+
+    @FXML
+    private Button Edit3;
+
 
     String username, userRole;
 
@@ -305,7 +352,7 @@ public class ProductController {
         controller.setUsernameInfo(username, userRole);
 
         productStage.close();
-
+        ClearAll();
 
     }
 
@@ -342,6 +389,7 @@ public class ProductController {
             controller.setUsernameInfo(username, userRole);
 
             productStage.close();
+            ClearAll();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -615,6 +663,25 @@ public class ProductController {
 
         ProductTable.getItems().clear();
         ProductList.clear();
+
+        DashboardButton.setOnAction(null);
+        AddProductButton.setOnAction(null);
+        SalesButton.setOnAction(null);
+        AddUserButton.setOnAction(null);
+        ReportButton.setOnAction(null);
+        LogoutButton.setOnAction(null);
+        CreateButtonsP.setOnAction(null);
+        BuyButtonCreate.setOnAction(null);
+        GoBack1.setOnAction(null);
+        BuyButton.setOnAction(null);
+        GoBack2.setOnAction(null);
+        Editbuttons.setOnAction(null);
+        GoBack3.setOnAction(null);
+        Edit1.setOnAction(null);
+        Edit2.setOnAction(null);
+        Edit3.setOnAction(null);
+
+        productStage = null;
 
     }
 

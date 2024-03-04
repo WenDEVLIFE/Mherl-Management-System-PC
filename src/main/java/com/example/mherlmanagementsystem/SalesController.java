@@ -46,6 +46,31 @@ public class SalesController {
     private ComboBox <String> yearliist;
 
     @FXML
+    private Button DashboardButton;
+
+    @FXML
+    private Button AddProductButton;
+
+    @FXML
+    private Button SalesButton;
+
+    @FXML
+    private Button AddUserButton;
+
+    @FXML
+    private Button ReportButton;
+
+    @FXML
+    private Button LogoutButton;
+
+
+    @FXML
+    private Button RefreshButton;
+
+    @FXML
+    private Button SearchButton;
+
+    @FXML
     private TableView <Sales>SalesTable;
 
     ObservableList<Sales> SalesList = FXCollections.observableArrayList();
@@ -388,6 +413,16 @@ public class SalesController {
         SalesTable.refresh();
         monthlist.getSelectionModel().clearSelection();
         yearliist.getSelectionModel().clearSelection();
+
+        DashboardButton.setOnAction(null);
+        AddProductButton.setOnAction(null);
+        SalesButton.setOnAction(null);
+        AddUserButton.setOnAction(null);
+        ReportButton.setOnAction(null);
+        LogoutButton.setOnAction(null);
+        RefreshButton.setOnAction(null);
+        SearchButton.setOnAction(null);
+
     }
 
 }

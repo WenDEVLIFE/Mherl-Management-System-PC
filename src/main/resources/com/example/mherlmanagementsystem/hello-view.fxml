@@ -15,7 +15,7 @@
    <children>
       <Pane layoutX="347.0" prefHeight="670.0" prefWidth="404.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton layoutX="99.0" layoutY="504.0" onAction="#LoginACTION" prefHeight="67.0" prefWidth="207.0" styleClass="buttons" text="Login" textFill="#fffafa">
+            <JFXButton fx:id="LoginButton" layoutX="99.0" layoutY="504.0" onAction="#LoginACTION" prefHeight="67.0" prefWidth="207.0" styleClass="buttons" text="Login" textFill="#fffafa">
                <font>
                   <Font name="Gill Sans MT Condensed" size="24.0" />
                </font>

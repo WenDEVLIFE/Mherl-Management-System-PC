@@ -32,7 +32,7 @@
                         <Font name="Gill Sans MT Condensed" size="19.0" />
                      </font>
                   </Text>
-                  <JFXButton onAction="#DashActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Dashboard" textFill="#fff9f9">
+                  <JFXButton fx:id="DashboardButton" onAction="#DashActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Dashboard" textFill="#fff9f9">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
@@ -41,7 +41,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton onAction="#ProoductActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add Products" textFill="#fff9f9">
+                  <JFXButton fx:id="AddProductButton" onAction="#ProoductActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add Products" textFill="#fff9f9">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
@@ -50,7 +50,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton onAction="#SalesAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Sales     " textFill="#fff9f9">
+                  <JFXButton fx:id="SalesButton" onAction="#SalesAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Sales     " textFill="#fff9f9">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
@@ -59,7 +59,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton onAction="#AddUserAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add User" textFill="#fff9f9">
+                  <JFXButton fx:id="AddUserButton" onAction="#AddUserAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add User" textFill="#fff9f9">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
@@ -68,7 +68,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton onAction="#ReportAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Reports  " textFill="#fff9f9">
+                  <JFXButton fx:id="ReportButton" onAction="#ReportAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Reports  " textFill="#fff9f9">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
@@ -77,7 +77,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton onAction="#LogoutAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Logout    " textFill="#fff9f9">
+                  <JFXButton fx:id="LogoutButton" onAction="#LogoutAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Logout    " textFill="#fff9f9">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
@@ -123,7 +123,7 @@
             <ComboBox fx:id="yearliist" layoutX="4.0" layoutY="4.0" prefHeight="29.0" prefWidth="150.0" promptText="Select Month" styleClass="combo-box" stylesheets="@style.css" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
          </children>
       </AnchorPane>
-      <JFXButton layoutX="458.0" layoutY="608.0" onAction="#RefreshData" prefHeight="35.0" prefWidth="150.0" styleClass="buttons" text="Refresh" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="458.0" AnchorPane.rightAnchor="226.0" />
-      <JFXButton layoutX="584.0" layoutY="75.0" onAction="#PressSearch" prefHeight="35.0" prefWidth="204.0" styleClass="buttons" text="Press to search month and date" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="75.0" />
+      <JFXButton fx:id="RefreshButton" layoutX="458.0" layoutY="608.0" onAction="#RefreshData" prefHeight="35.0" prefWidth="150.0" styleClass="buttons" text="Refresh" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="458.0" AnchorPane.rightAnchor="226.0" />
+      <JFXButton fx:id="SearchButton" layoutX="584.0" layoutY="75.0" onAction="#PressSearch" prefHeight="35.0" prefWidth="204.0" styleClass="buttons" text="Press to search month and date" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="75.0" />
    </children>
 </AnchorPane>
