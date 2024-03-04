@@ -156,7 +156,6 @@ public class ProductController {
     // Initialize the ProductController
     public void initialize() {
         System.out.println("ProductController initialized");
-        FirebaseConfig.getInstance().initFirebase();
 
         // Set the textfields to be uneditable
         EditProductName.setEditable(false);
@@ -394,7 +393,7 @@ public class ProductController {
 
             LoginController controller = fxmlLoader.getController();
             controller.setStage(stage);
-
+            ClearAll();
 
         } else {
             // User chose No or closed the dialog, do nothing
@@ -604,6 +603,21 @@ public class ProductController {
         }
 
     }
+
+    public void ClearAll() {
+        Productname.clear();
+        Price.clear();
+        EditProductName.clear();
+        EditQuantity.clear();
+        EditPrice.clear();
+        BuyProductName.clear();
+        BuyQuantity.clear();
+
+        ProductTable.getItems().clear();
+        ProductList.clear();
+
+    }
+
 
 
 

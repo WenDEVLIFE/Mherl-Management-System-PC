@@ -83,7 +83,7 @@ public class DashboardController {
 
     public void initialize() {
         System.out.println("DashboardController initialized");
-        FirebaseConfig.getInstance().initFirebase();
+
 
 
         // Get the instance of the FirebaseController
@@ -105,6 +105,8 @@ public class DashboardController {
         alert.setHeaderText("Dashboard");
         alert.setContentText("You are currently in the Dashboard");
         alert.showAndWait();
+
+
 
     }
 
@@ -206,7 +208,6 @@ public class DashboardController {
 
             LoginController controller = fxmlLoader.getController();
             controller.setStage(stage);
-
 
         } else {
             // User chose No or closed the dialog, do nothing

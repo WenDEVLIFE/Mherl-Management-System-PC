@@ -72,7 +72,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
-                              <Image url="@icons/add-user.png" />
+                              <Image url="@icons/report_7973563.png" />
                            </image>
                         </ImageView>
                      </graphic>

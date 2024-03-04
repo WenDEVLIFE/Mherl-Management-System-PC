@@ -25,6 +25,10 @@ public class FirebaseController {
     // Database reference
      DatabaseReference FireBaseDatabase;
 
+     FirebaseDatabase database;
+
+
+
 
      // Singletton pattern
     public static FirebaseController getInstance() {
@@ -41,6 +45,7 @@ public class FirebaseController {
 
           // Our database reference
       FireBaseDatabase = FirebaseDatabase.getInstance().getReference();
+      database = FirebaseDatabase.getInstance();
 
 
   }
@@ -104,14 +109,18 @@ public class FirebaseController {
                     // i want to count the total price
 
                     // For data snapshot
+                    long total_price = 0;
+
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        long total_price = 0;
+
                         int price = snapshot.child("totalprice").getValue(Integer.class);
                         total_price += price;
 
-                        // This will count the price
-                        SalesText.setText(String.valueOf(total_price));
+
                     }
+
+                    // This will count the price
+                    SalesText.setText(String.valueOf(total_price));
 
                 }
             }
@@ -140,6 +149,7 @@ public class FirebaseController {
 
             }
 
+
             @Override
             public void onCancelled( DatabaseError databaseError) {
                 // Handle possible errors.
@@ -148,6 +158,7 @@ public class FirebaseController {
 
             }
         });
+
     }
 
 
@@ -215,7 +226,6 @@ public class FirebaseController {
                     LocalTime time = LocalTime.now();
 
                     // This is for the report
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference reports = database.getReference("Reports");
                     String ReportId = UUID.randomUUID().toString();
                     String dateformat = date.toString();
@@ -235,6 +245,8 @@ public class FirebaseController {
                             System.out.println("Data saved successfully.");
                         }
                     });
+
+                    closeFirebase();
 
 
                 }
@@ -286,7 +298,6 @@ public class FirebaseController {
                                 });
 
                                 // This is for the report
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference reports = database.getReference("Reports");
                                 String ReportId = UUID.randomUUID().toString();
                                 LocalDate date = LocalDate.now();
@@ -308,6 +319,8 @@ public class FirebaseController {
                                         System.out.println("Data saved successfully.");
                                     }
                                 });
+
+                                closeFirebase();
 
                             }
                         });
@@ -357,7 +370,6 @@ public class FirebaseController {
                                 });
 
                                 // This is for the report
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference reports = database.getReference("Reports");
                                 String ReportId = UUID.randomUUID().toString();
                                 LocalDate date = LocalDate.now();
@@ -380,6 +392,7 @@ public class FirebaseController {
                                         System.out.println("Data saved successfully.");
                                     }
                                 });
+                                closeFirebase();
 
                             }
                         });
@@ -448,7 +461,6 @@ public class FirebaseController {
                                 });
 
                                 // This is for the report
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference reports = database.getReference("Reports");
                                 String ReportId = UUID.randomUUID().toString();
                                 LocalDate date = LocalDate.now();
@@ -471,6 +483,8 @@ public class FirebaseController {
                                         System.out.println("Data saved successfully.");
                                     }
                                 });
+
+                                closeFirebase();
 
                             }
                         });
@@ -531,7 +545,6 @@ public class FirebaseController {
                                     });
 
                                     // This is for the report
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference reports = database.getReference("Reports");
                                     String ReportId = UUID.randomUUID().toString();
                                     LocalDate date = LocalDate.now();
@@ -580,8 +593,7 @@ public class FirebaseController {
 
 
 
-
-
+                                    closeFirebase();
                                 }
                             });
                         } else{
@@ -620,6 +632,9 @@ public class FirebaseController {
             }
         });
 
+    }
+    public void closeFirebase() {
+        database.goOffline();
     }
 
 }

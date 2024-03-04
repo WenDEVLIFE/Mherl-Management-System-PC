@@ -226,7 +226,7 @@
                                        </graphic>
                                     </JFXButton>
                                     <JFXButton layoutX="299.0" layoutY="324.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="GO BACK TO PRODUCTS" />
-                                    <JFXTextField fx:id="BuyQuantity" layoutX="34.0" layoutY="152.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Quantity" />
+                                    <JFXTextField fx:id="BuyQuantity" layoutX="34.0" layoutY="152.0" prefHeight="55.0" prefWidth="375.0" promptText="Quantity" />
                                     <JFXButton layoutX="422.0" layoutY="221.0" onAction="#EditPrice" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -327,7 +327,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
                            <image>
-                              <Image url="@icons/add-user.png" />
+                              <Image url="@icons/report_7973563.png" />
                            </image>
                         </ImageView>
                      </graphic>

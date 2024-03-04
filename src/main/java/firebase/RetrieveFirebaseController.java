@@ -109,4 +109,8 @@ public class RetrieveFirebaseController {
         });
         return SalesList;
     }
+
+    public void closeFirebase() {
+        database.goOffline();
+    }
 }

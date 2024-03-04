@@ -206,7 +206,7 @@ public class SalesController {
 
         // Close the current stage
         salestage.close();
-
+        ClearAll();
 
     }
 
@@ -233,6 +233,8 @@ public class SalesController {
 
             // Close the current stage
             salestage.close();
+
+            ClearAll();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -297,7 +299,7 @@ public class SalesController {
 
             LoginController controller = fxmlLoader.getController();
             controller.setStage(stage);
-
+            ClearAll();
 
         } else {
             // User chose No or closed the dialog, do nothing
@@ -379,6 +381,13 @@ public class SalesController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void ClearAll(){
+        SalesList.clear();
+        SalesTable.refresh();
+        monthlist.getSelectionModel().clearSelection();
+        yearliist.getSelectionModel().clearSelection();
     }
 
 }
