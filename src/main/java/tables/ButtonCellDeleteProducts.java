@@ -60,10 +60,10 @@ public class ButtonCellDeleteProducts extends TableCell<Products, Void> {
 
                 }
                 // Rent Car function
-                else if (buttonText.equals("Buy")) {
+                else if (buttonText.equals("Buy a product")) {
 
                     Platform.runLater(() -> {
-                        System.out.println("Buy");
+                        System.out.println("Buy a product");
 
                         // Go to buy product and get the controller
                         ProductController buy = ProductController.getController_products();
@@ -105,7 +105,7 @@ public class ButtonCellDeleteProducts extends TableCell<Products, Void> {
             String buttonText = button.getText();
             if ("Delete Product".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
-            } else if ("Buy".equals(buttonText)) {
+            } else if ("Buy a product".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
             }
             else if ("Product Info".equals(buttonText)) {

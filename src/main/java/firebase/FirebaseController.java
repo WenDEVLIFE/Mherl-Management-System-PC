@@ -18,9 +18,14 @@ import java.util.UUID;
 
 public class FirebaseController {
 
+    // Firebase instance variable
     private static  FirebaseController instance;
 
-    private  DatabaseReference Database;
+
+    // Database reference
+     DatabaseReference Database;
+
+     // Singletton pattern
     public static FirebaseController getInstance() {
         if (instance == null) {
             instance = new FirebaseController();
@@ -39,6 +44,7 @@ public class FirebaseController {
 
   }
 
+  // This method is used to set the stats in dashboard
     public void setDashboardController(Text UserText, Text ProductText, Text SalesText, Text AdminText) {
 
         // get the user reference
@@ -143,6 +149,8 @@ public class FirebaseController {
         });
     }
 
+
+    // This method is used to add a product
     public void addProduct(String[] details, int quantity, TextField Productname, TextField Price, Spinner <Integer> quantityspiner) {
 
 
@@ -249,6 +257,8 @@ public class FirebaseController {
         });
     }
 
+    // This method is used to delete a product
+
     public void deleteProduct(Products selectedproducts, String username) {
         DatabaseReference productsRef = Database.child("Products");
 
@@ -319,6 +329,7 @@ public class FirebaseController {
         });
     }
 
+    // This method is used to delete sales
     public void deleteSales(Sales selectedproducts, String username) {
 
         String productname = selectedproducts.getProductname();
@@ -390,6 +401,8 @@ public class FirebaseController {
         });
     }
 
+
+    // This method is for edit products
     public void editProduct(String [] info, int quantity, String username, Text productnamelabel) {
         DatabaseReference productsRef = Database.child("Products");
 

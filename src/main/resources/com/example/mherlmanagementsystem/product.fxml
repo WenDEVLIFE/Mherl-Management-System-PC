@@ -191,7 +191,80 @@
           </Tab>
             <Tab fx:id="BuyProductTabNigga" text="BuyProducts">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="26.0" layoutY="27.0" prefHeight="59.0" prefWidth="605.0" styleClass="shadowpanel" stylesheets="@style.css">
+                           <children>
+                              <Pane layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="427.0" styleClass="panels" stylesheets="@style.css" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0">
+                                 <children>
+                                    <Text layoutX="84.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Products" wrappingWidth="293.13671875">
+                                       <font>
+                                          <Font name="Gill Sans MT Condensed" size="28.0" />
+                                       </font>
+                                    </Text>
+                                    <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="20.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/cubes_2875878.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="58.0" layoutY="119.0" prefHeight="440.0" prefWidth="540.0" styleClass="shadowpanel" stylesheets="@style.css">
+                           <children>
+                              <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
+                                 <children>
+                                    <JFXTextField fx:id="EditProductName1" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" />
+                                    <JFXButton layoutX="42.0" layoutY="324.0" onAction="#ConfirmEdit" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Buy the  product">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/gift-bag_6272372.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton layoutX="299.0" layoutY="324.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="GO BACK TO PRODUCTS" />
+                                    <JFXTextField fx:id="EditPrice1" layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" />
+                                    <JFXTextField fx:id="EditQuantity1" layoutX="42.0" layoutY="115.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Quantity" />
+                                    <JFXButton layoutX="422.0" layoutY="221.0" onAction="#EditPrice" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/shopping_14709205.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton layoutX="422.0" layoutY="131.0" onAction="#edit_quantity" prefHeight="48.0" prefWidth="72.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/shopping_14709205.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton layoutX="422.0" layoutY="44.0" onAction="#edit_productname" prefHeight="48.0" prefWidth="69.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/shopping_14709205.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <Text fx:id="productnamelabel1" fill="#fffdfd" layoutX="42.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product info" wrappingWidth="293.13671875">
+                                       <font>
+                                          <Font name="Gill Sans MT Condensed" size="28.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>

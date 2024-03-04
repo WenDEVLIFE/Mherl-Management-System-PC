@@ -244,12 +244,12 @@ public class ProductController {
         });
 
         TableColumn <Products, Void> colBtn1= new TableColumn("Action");
-        colBtn1.setCellFactory(param -> new ButtonCellDeleteProducts("Buy", ProductTable, ProductList, username));
+        colBtn1.setCellFactory(param -> new ButtonCellDeleteProducts("Buy a product", ProductTable, ProductList, username));
         colBtn1.prefWidthProperty().bind(ProductTable.widthProperty().multiply(0.4)); // 40% width
 
         // Set the cell factory for the column
         colBtn1.setCellFactory(tc -> {
-            TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Buy", ProductTable, ProductList, username) {
+            TableCell<Products, Void> cell = new ButtonCellDeleteProducts("Buy a product", ProductTable, ProductList, username) {
                 @Override
                 public void updateItem(Void item, boolean empty) {
                     super.updateItem(item, empty);
