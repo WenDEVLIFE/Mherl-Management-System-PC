@@ -29,7 +29,7 @@ public class ProductController {
 
      private FXMLLoader fxmlLoader;
 
-    private Stage productStage;
+    private Stage Stage;
 
     @FXML
     private Text UsernameText;
@@ -156,7 +156,7 @@ public class ProductController {
 
 
     public void setStage(Stage stageProduct) {
-        this.productStage = stageProduct;
+        this.Stage = stageProduct;
     }
 
     public void setUsernameInfo(String username, String userRole) {
@@ -203,6 +203,8 @@ public class ProductController {
     // Initialize the ProductController
     public void initialize() {
         System.out.println("ProductController initialized");
+
+        FirebaseConfig.getInstance().initFirebase(); // Initialize Firebase
 
         // Set the textfields to be uneditable
         EditProductName.setEditable(false);
@@ -338,21 +340,29 @@ public class ProductController {
     @FXML
     protected void DashActions(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-        Stage stagedash = new Stage();
-        stagedash.getIcons().add(icon);
-        stagedash.setTitle("Mherl Management System");
-        stagedash.setScene(scene);
-        stagedash.show();
+        Platform.runLater(  () ->{
+            try {
+                Stage.close();
 
-        DashboardController controller = fxmlLoader.getController();
-        controller.setStage(stagedash);
-        controller.setUsernameInfo(username, userRole);
+                FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("dashboard.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                Stage.getIcons().add(icon);
+                Stage.setTitle("Mherl Management System");
+                Stage.setScene(scene);
+                Stage.show();
 
-        productStage.close();
-        ClearAll();
+                DashboardController controller = fxmlLoader.getController();
+                controller.setStage(Stage);
+                controller.setUsernameInfo(username, userRole);
+
+
+                ClearAll();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
 
     }
 
@@ -373,40 +383,47 @@ public class ProductController {
     @FXML
     protected void SalesAction(ActionEvent event) {
 
-        try {
+        Platform.runLater(  () ->{
+            try {
+                Stage.close();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-            Stage stage_sales = new Stage();
-            stage_sales.getIcons().add(icon);
-            stage_sales.setTitle("Mherl Management System");
-            stage_sales.setScene(scene);
-            stage_sales.show();
+                FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                Stage.getIcons().add(icon);
+                Stage.setTitle("Mherl Management System");
+                Stage.setScene(scene);
+                Stage.show();
 
-            SalesController controller = fxmlLoader.getController();
-            controller.setStage(stage_sales);
-            controller.setUsernameInfo(username, userRole);
-
-            productStage.close();
-            ClearAll();
-        } catch (IOException e) {
-            e.printStackTrace();
+                SalesController controller = fxmlLoader.getController();
+                controller.setStage(Stage);
+                controller.setUsernameInfo(username, userRole);
 
 
-        }
+                ClearAll();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+
+            }
+        });
+
 
     }
 
     @FXML
     protected void AddUserAction(ActionEvent event) {
 
+        Platform.runLater(  () ->{
 
+        });
     }
 
     @FXML
     protected void ReportAction(ActionEvent event) {
+        Platform.runLater(  () ->{
 
+        });
     }
 
     @FXML
@@ -426,22 +443,29 @@ public class ProductController {
 
         // Handle user's choice
         if (result.isPresent() && result.get() == buttonTypeYes) {
-            // User chose Yes, perform logout
-            System.out.println("Logging out...");
-            productStage.close();
+            Platform.runLater(  () ->{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-            Stage stage = new Stage();
-            stage.getIcons().add(icon);
-            stage.setTitle("Mherl Management System");
-            stage.setScene(scene);
-            stage.show();
+                try{
+                    // User chose Yes, perform logout
+                    System.out.println("Logging out...");
+                    Stage.close();
 
-            LoginController controller = fxmlLoader.getController();
-            controller.setStage(stage);
-            ClearAll();
+                    FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("hello-view.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                    Stage.getIcons().add(icon);
+                    Stage.setTitle("Mherl Management System");
+                    Stage.setScene(scene);
+                    Stage.show();
+
+                    LoginController controller = fxmlLoader.getController();
+                    controller.setStage(Stage);
+                    ClearAll();
+                }  catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
 
         } else {
             // User chose No or closed the dialog, do nothing
@@ -681,7 +705,6 @@ public class ProductController {
         Edit2.setOnAction(null);
         Edit3.setOnAction(null);
 
-        productStage = null;
 
     }
 
