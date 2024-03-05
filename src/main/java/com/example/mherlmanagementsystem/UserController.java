@@ -195,6 +195,10 @@ public class UserController {
     protected void ReportAction(ActionEvent event) {
 
     }
+    @FXML
+    protected void GoBack(ActionEvent event) {
+        UserPane.getSelectionModel().select(UserTab);
+    }
 
     @FXML
     protected void LogoutAction(ActionEvent event) throws IOException {
