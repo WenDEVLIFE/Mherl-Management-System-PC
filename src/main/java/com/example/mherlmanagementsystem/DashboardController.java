@@ -181,6 +181,8 @@ public class DashboardController {
 
                 SalesController controller = fxmlLoader.getController();
                 controller.setStage(stagedash);
+                controller.setUsernameInfo(username, userRole);
+
 
                 Clear();
             } catch (IOException e) {

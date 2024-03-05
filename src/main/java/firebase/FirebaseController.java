@@ -799,6 +799,95 @@ public class FirebaseController {
 
     }
 
-    public void editUser(String username, String password, String role) {
+    public void editUser(String [] userdetailts, Text Userlabel, String username) {
+
+        final String old_username = Userlabel.getText();
+        final  String new_username = userdetailts[0];
+        final String new_role = userdetailts[2];
+        final String new_password = userdetailts[1];
+
+        DatabaseReference usersRef = FireBaseDatabase.child("Users");
+
+        usersRef.orderByChild("username").equalTo(old_username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                        // Insert the new username
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("username", new_username);
+                        user.put("password", new_password);
+                        user.put("role", new_role);
+
+                        snapshot.getRef().updateChildren(user, (databaseError, databaseReference) -> {
+                            if (databaseError != null) {
+                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Error Dialog");
+                                    alert.setHeaderText("Error");
+                                    alert.setContentText("Failed to update user");
+                                    alert.showAndWait();
+
+                                });
+                            } else {
+                                System.out.println("Data saved successfully.");
+
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information Dialog");
+                                    alert.setHeaderText("Information");
+                                    alert.setContentText("User has been updated successfully");
+                                    alert.showAndWait();
+
+                                    // This will reset the textfield and the textbox
+                                    String currentname = username;
+                                    Userlabel.setText(new_username);
+                                    if (old_username.equals(currentname)){
+
+                                        UserController controller= UserController.getController();
+                                        controller.setUsernameInfo(new_username, new_role);
+
+                                    }
+                                    UserController controller= UserController.getController();
+                                    controller.GoToChangeUser(new_username, new_password, new_role);
+
+
+                                    currentname = null;
+                                    userdetailts[0] = null;
+                                    userdetailts[1] = null;
+                                    userdetailts[2] = null;
+
+
+                                });
+                            }
+                        });
+                    }
+                } else{
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Dialog");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("User does not exist");
+                        alert.showAndWait();
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to update user");
+                    alert.showAndWait();
+                });
+            }
+        });
+
+
     }
 }

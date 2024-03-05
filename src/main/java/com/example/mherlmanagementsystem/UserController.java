@@ -599,52 +599,88 @@ public class UserController {
     @FXML
     protected void confirm_editation(ActionEvent event ){
 
+        // Check if the fields are editable
         if(EditUsername.isEditable() || EditPassword.isEditable() || EditRole.isEditable()){
 
-            String username = EditUsername.getText();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Editation");
+        alert.setHeaderText("Editation");
+        alert.setContentText("Are you sure you want to edit the user?");
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        // Handle user's choice is yes
+        if (result.isPresent() && result.get() == buttonTypeYes) {
+
+            String username1 = EditUsername.getText();
             String password = EditPassword.getText();
             String role = EditRole.getText();
 
-            if(username.isEmpty() || password.isEmpty() || role.isEmpty()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Empty Fields");
-                alert.setContentText("Please fill in all the fields.");
-                alert.showAndWait();
+            // Check if the fields are empty
+            if(username1.isEmpty() || password.isEmpty() || role.isEmpty()){
+
+                Alert alert0 = new Alert(Alert.AlertType.ERROR);
+                alert0.setTitle("Error");
+                alert0.setHeaderText("Empty Fields");
+                alert0.setContentText("Please fill in all the fields.");
+                alert0.showAndWait();
             }
             else{
-               boolean hasSpecial = hasSpecialCharacters(password);
-               boolean hasUppercase = HasUpperCase(password);
 
+                //  Check if the password contains special characters
+                boolean hasSpecial = hasSpecialCharacters(password);
+                boolean hasUppercase = HasUpperCase(password);
+
+
+                // Check if has a special character
                 if (!hasSpecial) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Special Characters");
-                    alert.setContentText("The password should contain special characters.");
-                    alert.showAndWait();
+                    Alert alert1 = new Alert(Alert.AlertType.ERROR);
+                    alert1.setTitle("Error");
+                    alert1.setHeaderText("Special Characters");
+                    alert1.setContentText("The password should contain special characters.");
+                    alert1.showAndWait();
                 } else {
 
                     // Check if the password has an uppercase character
                     if (!hasUppercase) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText("Uppercase Characters");
-                        alert.setContentText("The password should contain uppercase characters.");
-                        alert.showAndWait();
+                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        alert2.setTitle("Error");
+                        alert2.setHeaderText("Uppercase Characters");
+                        alert2.setContentText("The password should contain uppercase characters.");
+                        alert2.showAndWait();
                     } else {
+
+                        // Check if the password length is less than 8
                         if(password.length()<=8){
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("Error");
-                            alert.setHeaderText("Password Length");
-                            alert.setContentText("The password should be more than 8 characters.");
-                            alert.showAndWait();
+                            Alert alert3 = new Alert(Alert.AlertType.ERROR);
+                            alert3.setTitle("Error");
+                            alert3.setHeaderText("Password Length");
+                            alert3.setContentText("The password should be more than 8 characters.");
+                            alert3.showAndWait();
                         }
-                         else{
-                            FirebaseController.getInstance().editUser(username, password, role);
+
+                        // If all the conditions are met, then edit the user
+                        else{
+                          Platform.runLater(() -> {
+                              try {
+                                  String [] userdetailts ={username1, password, role};
+                                  FirebaseController.getInstance().editUser(userdetailts, Userlabel, username);
+                              } catch (Exception e) {
+                                  e.printStackTrace();
+                              }
+                          });
                         }
                     }
                 }
             }
+        } else {
+            // User chose No or closed the dialog, do nothing
+            System.out.println("Editation cancelled.");
+        }
+
+
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

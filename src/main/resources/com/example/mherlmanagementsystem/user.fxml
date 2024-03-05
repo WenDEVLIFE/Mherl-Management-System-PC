@@ -141,7 +141,7 @@
                               <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
                                  <children>
                                     <JFXTextField fx:id="EditUsername" layoutX="36.0" layoutY="32.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" text="Username" />
-                                    <JFXButton fx:id="change" layoutX="42.0" layoutY="363.0" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Confirm change info">
+                                    <JFXButton fx:id="change" layoutX="42.0" layoutY="363.0" onAction="#confirm_editation" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Confirm change info">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -152,7 +152,7 @@
                                     </JFXButton>
                                     <JFXButton fx:id="back2" layoutX="308.0" layoutY="363.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="Go back" />
                                     <JFXTextField fx:id="EditRole" layoutX="36.0" layoutY="104.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" text="Role" />
-                                    <JFXButton fx:id="edit3" layoutX="420.0" layoutY="209.0" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                    <JFXButton fx:id="edit3" layoutX="420.0" layoutY="209.0" onAction="#edit_password" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -161,7 +161,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="edit2" layoutX="422.0" layoutY="131.0" prefHeight="48.0" prefWidth="72.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                    <JFXButton fx:id="edit2" layoutX="422.0" layoutY="131.0" onAction="#edit_role" prefHeight="48.0" prefWidth="72.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -170,7 +170,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="edit1" layoutX="422.0" layoutY="44.0" prefHeight="48.0" prefWidth="69.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                    <JFXButton fx:id="edit1" layoutX="422.0" layoutY="44.0" onAction="#edit_username" prefHeight="48.0" prefWidth="69.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
