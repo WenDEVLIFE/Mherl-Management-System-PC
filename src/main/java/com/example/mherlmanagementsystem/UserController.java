@@ -51,6 +51,30 @@ public class UserController {
     @FXML
     private Button LogoutButton;
 
+
+    @FXML
+    private Button edit1;
+
+
+    @FXML
+    private Button edit2;
+
+
+    @FXML
+    private Button edit3;
+
+
+    @FXML
+    private Button change;
+
+    @FXML
+    private Button add_user;
+    @FXML
+    private Button back1;
+
+    @FXML
+    private Button back2;
+
     @FXML
     private TabPane UserPane;
 
@@ -91,11 +115,18 @@ public class UserController {
     private TextField EditRole;
 
     @FXML
+    protected Text Userlabel;
+
+    @FXML
     private TableView <User> UserTable;
 
     ObservableList <User> userList;
 
     String username, userRole;
+
+    boolean push_attempt1 = false;
+    boolean push_attempt2 = false;
+    boolean push_attempt3 = false;
 
 
 
@@ -495,13 +526,147 @@ public class UserController {
         }
     }
 
+    @FXML
+    protected void edit_username(ActionEvent event ){
+
+        push_attempt1 =  ! push_attempt1;
+
+        if(push_attempt1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Editation");
+            alert.setHeaderText("Editation");
+            alert.setContentText("You can now edit the username.");
+            alert.showAndWait();
+            EditUsername.setEditable(true);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Editation");
+            alert.setHeaderText("Editation");
+            alert.setContentText("You can no longer edit the username.");
+            alert.showAndWait();
+            EditUsername.setEditable(false);
+        }
+
+
+    }
+
+    @FXML
+    protected void edit_role(ActionEvent event ){
+        push_attempt2 =  ! push_attempt2;
+
+        if(push_attempt2){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Editation");
+            alert.setHeaderText("Editation");
+            alert.setContentText("You can now edit the role.");
+            alert.showAndWait();
+            EditRole.setEditable(true);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Editation");
+            alert.setHeaderText("Editation");
+            alert.setContentText("You can no longer edit the role.");
+            alert.showAndWait();
+            EditRole.setEditable(false);
+        }
+    }
+
+    @FXML
+    protected void edit_password(ActionEvent event ){
+        push_attempt3 =  ! push_attempt3;
+
+        if(push_attempt3){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Editation");
+            alert.setHeaderText("Editation");
+            alert.setContentText("You can now edit the password.");
+            alert.showAndWait();
+            EditPassword.setEditable(true);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Editation");
+            alert.setHeaderText("Editation");
+            alert.setContentText("You can no longer edit the password.");
+            alert.showAndWait();
+            EditPassword.setEditable(false);
+        }
+
+    }
+
+    @FXML
+    protected void confirm_editation(ActionEvent event ){
+
+        if(EditUsername.isEditable() || EditPassword.isEditable() || EditRole.isEditable()){
+
+            String username = EditUsername.getText();
+            String password = EditPassword.getText();
+            String role = EditRole.getText();
+
+            if(username.isEmpty() || password.isEmpty() || role.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Empty Fields");
+                alert.setContentText("Please fill in all the fields.");
+                alert.showAndWait();
+            }
+            else{
+               boolean hasSpecial = hasSpecialCharacters(password);
+               boolean hasUppercase = HasUpperCase(password);
+
+                if (!hasSpecial) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Special Characters");
+                    alert.setContentText("The password should contain special characters.");
+                    alert.showAndWait();
+                } else {
+
+                    // Check if the password has an uppercase character
+                    if (!hasUppercase) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Uppercase Characters");
+                        alert.setContentText("The password should contain uppercase characters.");
+                        alert.showAndWait();
+                    } else {
+                        if(password.length()<=8){
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("Password Length");
+                            alert.setContentText("The password should be more than 8 characters.");
+                            alert.showAndWait();
+                        }
+                         else{
+                            FirebaseController.getInstance().editUser(username, password, role);
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Editation");
+            alert.setContentText("Please click on the edit button to edit the fields.");
+            alert.showAndWait();
+        }
+
+    }
+
 
     // This will go to Change User
     public void GoToChangeUser( String username, String password, String role) {
 
+        // Go to the change user tab
         UserPane.getSelectionModel().select(ChangeUsertab);
 
+
+        // Set the fields
         EditUsername.setText(username);
+        Userlabel.setText(username);
         EditPassword.setText(password);
         EditRole.setText(role);
 
@@ -523,12 +688,36 @@ public class UserController {
         UsernameText.setText("");
         RoleText.setText("");
 
+        // Clear the buttons
         DashboardButton.setOnAction(null);
         AddProductButton.setOnAction(null);
         SalesButton.setOnAction(null);
         AddUserButton.setOnAction(null);
         ReportButton.setOnAction(null);
         LogoutButton.setOnAction(null);
+        add_user.setOnAction(null);
+        back1.setOnAction(null);
+        back2.setOnAction(null);
+        change.setOnAction(null);
+        edit1.setOnAction(null);
+        edit2.setOnAction(null);
+        edit3.setOnAction(null);
+
+
+        // Clear the fields
+        seepassword1.setOnAction(null);
+        seepassword2.setOnAction(null);
+
+        // Clear the fields
+        UserTable.getItems().clear();
+        UserTable.getColumns().clear();
+        UserTable.refresh();
+        userList.clear();
+        RoleBox.getItems().clear();
+
+        // Clear the tabs
+        UserPane.getTabs().clear();
+
 
     }
 

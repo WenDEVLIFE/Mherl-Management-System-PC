@@ -798,4 +798,7 @@ public class FirebaseController {
 
 
     }
+
+    public void editUser(String username, String password, String role) {
+    }
 }
