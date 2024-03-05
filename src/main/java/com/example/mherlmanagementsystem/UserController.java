@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -48,6 +46,17 @@ public class UserController {
     @FXML
     private Button LogoutButton;
 
+    @FXML
+    private TabPane UserPane;
+
+    @FXML
+    private Tab UserTab;
+
+    @FXML
+    private Tab CreateUserTab;
+
+    @FXML
+    private Tab ChangeUsertab;
 
     public static UserController getController() {
         if (controller == null) {
@@ -78,6 +87,8 @@ public class UserController {
     }
 
     public void initialize() {
+
+        UserPane.getSelectionModel().select(UserTab);
 
         // Set the stage
     }
@@ -147,18 +158,36 @@ public class UserController {
     @FXML
     protected void SalesAction(ActionEvent event) {
 
+        Platform.runLater(() -> {
+            try {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText("Sales");
-        alert.setContentText("You are currently in the Sales");
-        alert.showAndWait();
+                stages.close();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                stages.getIcons().add(icon);
+                stages.setTitle("Mherl Management System");
+                stages.setScene(scene);
+                stages.show();
+
+                SalesController controller = fxmlLoader.getController();
+                controller.setStage(stages);
+                ClearAll();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+
+            }
+        });
+
 
 
     }
 
     @FXML
     protected void AddUserAction(ActionEvent event) {
+        UserPane.getSelectionModel().select(UserTab);
 
     }
 
