@@ -1,6 +1,6 @@
 package com.example.mherlmanagementsystem;
 
-import eu.hansolo.tilesfx.tools.Fire;
+import entities_and_functions.User;
 import firebase.FirebaseController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tables.ButtonCellDeleteUser;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -30,8 +31,6 @@ public class UserController {
     private Text UsernameText;
     @FXML
     private Text RoleText;
-
-    private String username, userRole;
 
     @FXML
     private Button DashboardButton;
@@ -78,6 +77,24 @@ public class UserController {
     @FXML
     private ComboBox <String>  RoleBox;
 
+    @FXML
+    private TextField EditUsername;
+
+    @FXML
+    private TextField EditPassword;
+
+    @FXML
+    private TextField EditRole;
+
+    @FXML
+    private TableView <User> UserTable;
+
+    ObservableList <User> userList;
+
+    String username, userRole;
+
+
+
     public static UserController getController() {
         if (controller == null) {
             controller = new UserController();
@@ -110,11 +127,112 @@ public class UserController {
 
         UserPane.getSelectionModel().select(UserTab);
 
+        EditUsername.setEditable(false);
+        EditPassword.setEditable(false);
+        EditRole.setEditable(false);
+
 
         // Add items to the role combobox
         ObservableList <String > role = RoleBox.getItems();
         role.addAll("Select a role","Admin", "User");
         RoleBox.setItems(role);
+
+        TableColumn <User, String> id = new TableColumn<>("Id");
+        id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        id.prefWidthProperty().bind(UserTable.widthProperty().multiply(0.4)); // 40% width
+        id.setCellFactory(tc -> {
+            TableCell<User, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(item));
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <User, String> username1 = new TableColumn<>("Username");
+        username1.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
+        username1.prefWidthProperty().bind(UserTable.widthProperty().multiply(0.4)); // 40% width
+        username1.setCellFactory(tc -> {
+            TableCell<User, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(item));
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <User, String> rolecolumn = new TableColumn<>("Role");
+        rolecolumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
+        rolecolumn.prefWidthProperty().bind(UserTable.widthProperty().multiply(0.4)); // 40% width
+        rolecolumn.setCellFactory(tc -> {
+            TableCell<User, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(item));
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <User, Void> delete = new TableColumn<>("Delete User");
+        delete.setCellFactory(param -> new ButtonCellDeleteUser("Delete User", UserTable, userList, username));
+        delete.prefWidthProperty().bind(UserTable.widthProperty().multiply(0.4)); // 40% width
+
+        // Set the cell factory for the column
+        delete.setCellFactory(tc -> {
+            TableCell<User, Void> cell = new ButtonCellDeleteUser("Delete User", UserTable, userList, username)   {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <User, Void> userinfo = new TableColumn<>("Show info");
+        userinfo.setCellFactory(param -> new ButtonCellDeleteUser("Show info", UserTable, userList, username));
+        userinfo.prefWidthProperty().bind(UserTable.widthProperty().multiply(0.4)); // 40% width
+
+        // Set the cell factory for the column
+        userinfo.setCellFactory(tc -> {
+            TableCell<User, Void> cell = new ButtonCellDeleteUser("Show info", UserTable, userList, username) {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
+
+        UserTable.getColumns().addAll(id, username1, rolecolumn, delete, userinfo);
+
+
+
+
+
+
     }
 
     @FXML
@@ -277,17 +395,20 @@ public class UserController {
     @FXML
     protected void GoToCreateUser(ActionEvent event) {
 
+        // Go to create user tab
         UserPane.getSelectionModel().select(CreateUserTab);
     }
 
     @FXML
     protected void CreateUser(ActionEvent event){
 
+        // Get the user input
         String username = RegisterUsername.getText();
         String password = RegisterPassword.getText();
         String confirmpassword = Confirmpassword.getText();
         String role = RoleBox.getValue();
 
+        // Check if the fields are empty
         if (username.isEmpty() || password.isEmpty() || confirmpassword.isEmpty() || role.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -295,6 +416,8 @@ public class UserController {
             alert.setContentText("Please fill in all the fields.");
             alert.showAndWait();
         }  else {
+
+            // Check if the password and confirm password match
           if (!password.equals(confirmpassword)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -303,6 +426,8 @@ public class UserController {
                 alert.showAndWait();
             }
            else {
+
+               // Check if the password length is less than 8
               if(password.length()<=8){
                   Alert alert = new Alert(Alert.AlertType.ERROR);
                   alert.setTitle("Error");
@@ -312,9 +437,11 @@ public class UserController {
               }
 
               else {
+                  // Check if the password contains special characters
                   boolean hasSpecial = hasSpecialCharacters(password);
                   boolean hasUppercase = HasUpperCase(password);
 
+                  // Check if has a special character
                   if (!hasSpecial) {
                       Alert alert = new Alert(Alert.AlertType.ERROR);
                       alert.setTitle("Error");
@@ -322,6 +449,8 @@ public class UserController {
                       alert.setContentText("The password should contain special characters.");
                       alert.showAndWait();
                   } else {
+
+                      // Check if the password has an uppercase character
                       if (!hasUppercase) {
                           Alert alert = new Alert(Alert.AlertType.ERROR);
                           alert.setTitle("Error");
@@ -330,6 +459,7 @@ public class UserController {
                           alert.showAndWait();
                       } else {
 
+                          // Create the user and send it to the firebase
                           FirebaseController.getInstance().createUser(username, password, role);
                       }
                   }
@@ -339,18 +469,57 @@ public class UserController {
 
     }
 
+    // For boolean to check if the password has a special character
     public boolean hasSpecialCharacters(String password) {
         Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
         Matcher matcher = pattern.matcher(password);
         return matcher.find();
     }
 
+    // For boolean to check if the password has an uppercase character
     public boolean HasUpperCase(String password){
         Pattern uppercasePattern = Pattern.compile("[A-Z]");
         Matcher uppercaseMatcher = uppercasePattern.matcher(password);
         boolean hasUppercase = uppercaseMatcher.find();
 
         return  hasUppercase;
+    }
+
+    @FXML
+    protected void SeeThePassword(ActionEvent event){
+        if(seepassword1.isSelected()){
+            RegisterPassword.setPromptText(RegisterPassword.getText());
+            RegisterPassword.setText("");
+            Confirmpassword.setPromptText(Confirmpassword.getText());
+            Confirmpassword.setText("");
+        }
+        else{
+            RegisterPassword.setText(RegisterPassword.getPromptText());
+            Confirmpassword.setText(Confirmpassword.getPromptText());
+        }
+    }
+
+
+    // This will go to Change User
+    public void GoToChangeUser( String username, String password, String role) {
+
+        UserPane.getSelectionModel().select(ChangeUsertab);
+
+        EditUsername.setText(username);
+        EditPassword.setText(password);
+        EditRole.setText(role);
+
+
+
+    }
+
+
+    // For the clearing the fields
+    public void ClearData(){
+        RegisterPassword.setText("");
+        RegisterUsername.setText("");
+        Confirmpassword.setText("");
+        RoleBox.setValue("Select a role");
     }
 
     private void ClearAll() {
@@ -366,5 +535,8 @@ public class UserController {
         LogoutButton.setOnAction(null);
 
     }
+
+
+
 
 }

@@ -1,9 +1,11 @@
 package firebase;
 
+import com.example.mherlmanagementsystem.UserController;
 import com.google.firebase.database.*;
 import com.google.firebase.internal.NonNull;
 import entities_and_functions.Products;
 import entities_and_functions.Sales;
+import entities_and_functions.User;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Spinner;
@@ -673,6 +675,10 @@ public class FirebaseController {
                                 alert.setHeaderText("Information");
                                 alert.setContentText("User has been created successfully");
                                 alert.showAndWait();
+
+                                // This will reset the textfield and the textbox
+                                UserController controller = UserController.getController();
+                                controller.ClearData();
                             });
                         }
                     });
@@ -696,4 +702,46 @@ public class FirebaseController {
     }
 
 
+    public void retrieveUser(User userselected) {
+        String username = userselected.getUsername();
+        DatabaseReference usersRef = FireBaseDatabase.child("Users");
+
+        usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        String username = snapshot.child("username").getValue(String.class);
+                        String password = snapshot.child("password").getValue(String.class);
+                        String role = snapshot.child("role").getValue(String.class);
+
+                        Platform.runLater(() -> {
+                           UserController controller = UserController.getController();
+                            controller.GoToChangeUser(username, password, role);
+                        });
+                    }
+                } else{
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Dialog");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("User does not exist");
+                        alert.showAndWait();
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to retrieve user");
+                    alert.showAndWait();
+                });
+            }
+        });
+    }
 }

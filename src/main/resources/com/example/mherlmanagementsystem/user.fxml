@@ -26,7 +26,7 @@
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="102.0" prefHeight="482.0" prefWidth="629.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="102.0">
                            <children>
-                              <TableView fx:id="SalesTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
+                              <TableView fx:id="UserTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="21.0" layoutY="25.0" prefHeight="59.0" prefWidth="690.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="71.0">
@@ -87,7 +87,7 @@
                               <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
                                  <children>
                                     <JFXTextField fx:id="RegisterUsername" layoutX="45.0" layoutY="32.0" prefHeight="41.0" prefWidth="372.0" promptText="Username" />
-                                    <JFXButton fx:id="Editbuttons" layoutX="42.0" layoutY="324.0" onAction="#ConfirmEdit" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Add the user">
+                                    <JFXButton fx:id="Editbuttons" layoutX="42.0" layoutY="324.0" onAction="#CreateUser" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Add the user">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -105,7 +105,7 @@
                                     <JFXPasswordField fx:id="RegisterPassword" layoutX="44.0" layoutY="91.0" prefHeight="34.0" prefWidth="373.0" promptText="Password" />
                                     <JFXPasswordField fx:id="Confirmpassword" layoutX="45.0" layoutY="157.0" prefHeight="34.0" prefWidth="373.0" promptText="Confirm password" />
                                     <ComboBox fx:id="RoleBox" layoutX="31.0" layoutY="256.0" prefHeight="40.0" prefWidth="184.0" promptText="Select a role" />
-                                    <CheckBox fx:id="seepassword1" layoutX="51.0" layoutY="215.0" mnemonicParsing="false" text="CheckBox" />
+                                    <CheckBox fx:id="seepassword1" layoutX="51.0" layoutY="215.0" mnemonicParsing="false" onAction="#SeeThePassword" text="CheckBox" />
                                  </children>
                               </Pane>
                            </children>
@@ -136,12 +136,12 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="49.0" layoutY="136.0" prefHeight="440.0" prefWidth="540.0" styleClass="shadowpanel" stylesheets="@style.css">
+                        <AnchorPane layoutX="49.0" layoutY="136.0" prefHeight="485.0" prefWidth="540.0" styleClass="shadowpanel" stylesheets="@style.css">
                            <children>
                               <Pane layoutX="14.0" layoutY="19.0" prefHeight="404.0" prefWidth="500.0" styleClass="panels" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="19.0">
                                  <children>
-                                    <JFXTextField fx:id="EditProductName1" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" text="Username" />
-                                    <JFXButton fx:id="Editbuttons1" layoutX="42.0" layoutY="324.0" onAction="#ConfirmEdit" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Confirm change info">
+                                    <JFXTextField fx:id="EditUsername" layoutX="42.0" layoutY="28.0" prefHeight="55.0" prefWidth="374.0" promptText="Product name" text="Username" />
+                                    <JFXButton fx:id="Editbuttons1" layoutX="42.0" layoutY="363.0" prefHeight="48.0" prefWidth="189.0" styleClass="buttons" stylesheets="@style.css" text="Confirm change info">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -150,10 +150,10 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="GoBack31" layoutX="299.0" layoutY="324.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="Go back" />
-                                    <JFXTextField fx:id="EditPrice1" layoutX="42.0" layoutY="202.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" text="Role" />
-                                    <JFXTextField fx:id="EditQuantity1" layoutX="42.0" layoutY="115.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Password" />
-                                    <JFXButton fx:id="Edit31" layoutX="422.0" layoutY="221.0" onAction="#EditPrice" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                    <JFXButton fx:id="GoBack31" layoutX="308.0" layoutY="363.0" onAction="#GoBack" prefHeight="48.0" prefWidth="162.0" styleClass="buttons" stylesheets="@style.css" text="Go back" />
+                                    <JFXTextField fx:id="EditRole" layoutX="36.0" layoutY="104.0" prefHeight="55.0" prefWidth="374.0" promptText="Price" text="Role" />
+                                    <JFXTextField fx:id="EditPassword" layoutX="36.0" layoutY="197.0" prefHeight="55.0" prefWidth="375.0" promptText="Product name" text="Password" />
+                                    <JFXButton fx:id="Edit31" layoutX="420.0" layoutY="209.0" prefHeight="48.0" prefWidth="73.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -162,7 +162,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="Edit21" layoutX="422.0" layoutY="131.0" onAction="#edit_quantity" prefHeight="48.0" prefWidth="72.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                    <JFXButton fx:id="Edit21" layoutX="422.0" layoutY="131.0" prefHeight="48.0" prefWidth="72.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -171,7 +171,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="Edit11" layoutX="422.0" layoutY="44.0" onAction="#edit_productname" prefHeight="48.0" prefWidth="69.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
+                                    <JFXButton fx:id="Edit11" layoutX="422.0" layoutY="44.0" prefHeight="48.0" prefWidth="69.0" styleClass="buttons" stylesheets="@style.css" text="Edit">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
