@@ -421,6 +421,28 @@ public class ProductController {
 
         Platform.runLater(  () ->{
 
+          try {
+
+              Stage.close();
+
+              FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
+              Scene scene = new Scene(fxmlLoader.load());
+              Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+              Stage.getIcons().add(icon);
+              Stage.setTitle("Mherl Management System");
+              Stage.setScene(scene);
+              Stage.show();
+
+              UserController controller = fxmlLoader.getController();
+              controller.setStage(Stage);
+              controller.setController(controller);
+              controller.setUsernameInfo(username, userRole);
+
+              ClearAll();
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+
         });
     }
 

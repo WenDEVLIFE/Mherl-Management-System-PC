@@ -287,6 +287,33 @@ public class SalesController {
     @FXML
     protected void AddUserAction(ActionEvent event) {
 
+        Platform.runLater(() -> {
+            try {
+
+                // Close the current stage
+                stages.close();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                stages.getIcons().add(icon);
+                stages.setTitle("Mherl Management System");
+                stages.setScene(scene);
+                stages.show();
+
+                UserController controller = fxmlLoader.getController();
+                controller.setStage(stages);
+                controller.setController(controller);
+                controller.setUsernameInfo(username, userRole);
+
+                ClearAll();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+
+            }
+        });
+
     }
 
     @FXML
