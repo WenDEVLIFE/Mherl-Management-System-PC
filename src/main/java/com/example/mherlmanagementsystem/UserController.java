@@ -2,6 +2,7 @@ package com.example.mherlmanagementsystem;
 
 import entities_and_functions.User;
 import firebase.FirebaseController;
+import firebase.RetrieveFirebaseController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -137,24 +138,6 @@ public class UserController {
         role.addAll("Select a role","Admin", "User");
         RoleBox.setItems(role);
 
-        TableColumn <User, String> id = new TableColumn<>("Id");
-        id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        id.prefWidthProperty().bind(UserTable.widthProperty().multiply(0.4)); // 40% width
-        id.setCellFactory(tc -> {
-            TableCell<User, String> cell = new TableCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
-                    } else {
-                        setText(String.valueOf(item));
-                        setMinHeight(60); // Set minimum height of the row
-                    }
-                }
-            };
-            return cell;
-        });
 
         TableColumn <User, String> username1 = new TableColumn<>("Username");
         username1.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
@@ -226,10 +209,9 @@ public class UserController {
             return cell;
         });
 
-        UserTable.getColumns().addAll(id, username1, rolecolumn, delete, userinfo);
+        UserTable.getColumns().addAll(username1, rolecolumn, delete, userinfo);
 
-
-
+        LoadUser();
 
 
 
@@ -534,6 +516,18 @@ public class UserController {
         ReportButton.setOnAction(null);
         LogoutButton.setOnAction(null);
 
+    }
+
+    public void LoadUser(){
+        UserTable.getItems().clear();
+
+        try{
+            userList = RetrieveFirebaseController.getInstance().RetrieveUser();
+            UserTable.setItems(userList);
+            UserTable.refresh();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

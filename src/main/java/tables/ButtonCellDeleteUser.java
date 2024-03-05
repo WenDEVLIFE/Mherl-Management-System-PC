@@ -47,6 +47,10 @@ public class ButtonCellDeleteUser extends TableCell<User, Void> {
 
                             Platform.runLater(() -> {
 
+                                FirebaseController.getInstance().deleteUser(userselected);
+                                userList.remove(userselected);
+                                UserTable.refresh();
+
 
                             });
 
