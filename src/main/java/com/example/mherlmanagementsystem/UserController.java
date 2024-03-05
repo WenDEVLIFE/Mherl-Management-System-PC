@@ -76,6 +76,9 @@ public class UserController {
     private CheckBox seepassword1;
 
     @FXML
+    private CheckBox seepassword2;
+
+    @FXML
     private ComboBox <String>  RoleBox;
 
     @FXML
@@ -478,6 +481,17 @@ public class UserController {
         else{
             RegisterPassword.setText(RegisterPassword.getPromptText());
             Confirmpassword.setText(Confirmpassword.getPromptText());
+        }
+    }
+
+    @FXML
+    protected void seeThePassword1(ActionEvent event){
+        if(seepassword2.isSelected()){
+            EditPassword.setPromptText(EditPassword.getText());
+            EditPassword.setText("");
+        }
+        else{
+            EditPassword.setText(EditPassword.getPromptText());
         }
     }
 
