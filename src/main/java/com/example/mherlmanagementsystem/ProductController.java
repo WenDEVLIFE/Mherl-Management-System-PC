@@ -419,31 +419,35 @@ public class ProductController {
     @FXML
     protected void AddUserAction(ActionEvent event) {
 
-        Platform.runLater(  () ->{
+      if(userRole.equals("Admin")) {
+          Platform.runLater(  () ->{
 
-          try {
+              try {
 
-              Stage.close();
+                  Stage.close();
 
-              FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
-              Scene scene = new Scene(fxmlLoader.load());
-              Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-              Stage.getIcons().add(icon);
-              Stage.setTitle("Mherl Management System");
-              Stage.setScene(scene);
-              Stage.show();
+                  FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
+                  Scene scene = new Scene(fxmlLoader.load());
+                  Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                  Stage.getIcons().add(icon);
+                  Stage.setTitle("Mherl Management System");
+                  Stage.setScene(scene);
+                  Stage.show();
 
-              UserController controller = fxmlLoader.getController();
-              controller.setStage(Stage);
-              controller.setController(controller);
-              controller.setUsernameInfo(username, userRole);
+                  UserController controller = fxmlLoader.getController();
+                  controller.setStage(Stage);
+                  controller.setController(controller);
+                  controller.setUsernameInfo(username, userRole);
 
-              ClearAll();
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
+                  ClearAll();
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
 
-        });
+          });
+      } else{
+
+      }
     }
 
     @FXML

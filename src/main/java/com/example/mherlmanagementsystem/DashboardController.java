@@ -196,31 +196,40 @@ public class DashboardController {
 
     @FXML
     protected void AddUserAction(ActionEvent event){
-        Platform.runLater(  () ->{
+      if (userRole.equals("Admin")) {
+          Platform.runLater(  () ->{
 
-            try {
+              try {
 
-                stagedash.close();
+                  stagedash.close();
 
-                FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                stagedash.getIcons().add(icon);
-                stagedash.setTitle("Mherl Management System");
-                stagedash.setScene(scene);
-                stagedash.show();
+                  FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
+                  Scene scene = new Scene(fxmlLoader.load());
+                  Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                  stagedash.getIcons().add(icon);
+                  stagedash.setTitle("Mherl Management System");
+                  stagedash.setScene(scene);
+                  stagedash.show();
 
-                UserController controller = fxmlLoader.getController();
-                controller.setStage(stagedash);
-                controller.setController(controller);
-                controller.setUsernameInfo(username, userRole);
+                  UserController controller = fxmlLoader.getController();
+                  controller.setStage(stagedash);
+                  controller.setController(controller);
+                  controller.setUsernameInfo(username, userRole);
 
-                Clear();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                  Clear();
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
 
-        });
+          });
+      }
+       else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Unauthorized Access");
+            alert.setContentText("You are not authorized to access this page");
+            alert.showAndWait();
+      }
 
     }
 
