@@ -246,7 +246,7 @@ public class FirebaseController {
                         }
                     });
 
-                    closeFirebase();
+
 
 
                 }
@@ -320,7 +320,7 @@ public class FirebaseController {
                                     }
                                 });
 
-                                closeFirebase();
+
 
                             }
                         });
@@ -392,7 +392,6 @@ public class FirebaseController {
                                         System.out.println("Data saved successfully.");
                                     }
                                 });
-                                closeFirebase();
 
                             }
                         });
@@ -484,7 +483,7 @@ public class FirebaseController {
                                     }
                                 });
 
-                                closeFirebase();
+
 
                             }
                         });
@@ -590,10 +589,6 @@ public class FirebaseController {
                                         }
                                     });
 
-
-
-
-                                    closeFirebase();
                                 }
                             });
                         } else{
@@ -633,8 +628,72 @@ public class FirebaseController {
         });
 
     }
-    public void closeFirebase() {
-        database.goOffline();
+
+
+    // This method will create a user
+    public void createUser(String username, String password, String role) {
+
+        DatabaseReference usersRef = FireBaseDatabase.child("Users");
+
+        usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    // User already exists
+                    // You can handle this case as you see fit, for example, show a message to the user
+                    // This is for the failure
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Dialog");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("User already exists");
+                        alert.showAndWait();
+                    });
+                } else{
+                    // User does not exist, create new user
+                    // id
+                    String userId = UUID.randomUUID().toString();
+
+                    // This is for hashmap
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("username", username);
+                    user.put("password", password);
+                    user.put("role", role);
+
+                    // This is for the completion listener
+                    usersRef.child(userId).updateChildren(user, (databaseError, databaseReference) -> {
+                        if (databaseError != null) {
+                            System.out.println("Data could not be saved " + databaseError.getMessage());
+                        } else {
+                            System.out.println("Data saved successfully.");
+
+                            Platform.runLater(() -> {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Information Dialog");
+                                alert.setHeaderText("Information");
+                                alert.setContentText("User has been created successfully");
+                                alert.showAndWait();
+                            });
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to create user");
+                    alert.showAndWait();
+                });
+            }
+        });
+
+
     }
+
 
 }

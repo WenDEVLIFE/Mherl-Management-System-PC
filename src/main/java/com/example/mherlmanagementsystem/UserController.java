@@ -1,6 +1,9 @@
 package com.example.mherlmanagementsystem;
 
+import eu.hansolo.tilesfx.tools.Fire;
+import firebase.FirebaseController;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserController {
 
@@ -58,6 +63,21 @@ public class UserController {
     @FXML
     private Tab ChangeUsertab;
 
+    @FXML
+    private TextField RegisterUsername;
+
+    @FXML
+    private PasswordField RegisterPassword;
+
+    @FXML
+    private PasswordField Confirmpassword;
+
+    @FXML
+    private CheckBox seepassword1;
+
+    @FXML
+    private ComboBox <String>  RoleBox;
+
     public static UserController getController() {
         if (controller == null) {
             controller = new UserController();
@@ -90,7 +110,11 @@ public class UserController {
 
         UserPane.getSelectionModel().select(UserTab);
 
-        // Set the stage
+
+        // Add items to the role combobox
+        ObservableList <String > role = RoleBox.getItems();
+        role.addAll("Select a role","Admin", "User");
+        RoleBox.setItems(role);
     }
 
     @FXML
@@ -248,6 +272,85 @@ public class UserController {
         }
 
 
+    }
+
+    @FXML
+    protected void GoToCreateUser(ActionEvent event) {
+
+        UserPane.getSelectionModel().select(CreateUserTab);
+    }
+
+    @FXML
+    protected void CreateUser(ActionEvent event){
+
+        String username = RegisterUsername.getText();
+        String password = RegisterPassword.getText();
+        String confirmpassword = Confirmpassword.getText();
+        String role = RoleBox.getValue();
+
+        if (username.isEmpty() || password.isEmpty() || confirmpassword.isEmpty() || role.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Empty Fields");
+            alert.setContentText("Please fill in all the fields.");
+            alert.showAndWait();
+        }  else {
+          if (!password.equals(confirmpassword)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Password Mismatch");
+                alert.setContentText("The passwords do not match.");
+                alert.showAndWait();
+            }
+           else {
+              if(password.length()<=8){
+                  Alert alert = new Alert(Alert.AlertType.ERROR);
+                  alert.setTitle("Error");
+                  alert.setHeaderText("Password Length");
+                  alert.setContentText("The password should be more than 8 characters.");
+                  alert.showAndWait();
+              }
+
+              else {
+                  boolean hasSpecial = hasSpecialCharacters(password);
+                  boolean hasUppercase = HasUpperCase(password);
+
+                  if (!hasSpecial) {
+                      Alert alert = new Alert(Alert.AlertType.ERROR);
+                      alert.setTitle("Error");
+                      alert.setHeaderText("Special Characters");
+                      alert.setContentText("The password should contain special characters.");
+                      alert.showAndWait();
+                  } else {
+                      if (!hasUppercase) {
+                          Alert alert = new Alert(Alert.AlertType.ERROR);
+                          alert.setTitle("Error");
+                          alert.setHeaderText("Uppercase Characters");
+                          alert.setContentText("The password should contain uppercase characters.");
+                          alert.showAndWait();
+                      } else {
+
+                          FirebaseController.getInstance().createUser(username, password, role);
+                      }
+                  }
+              }
+          }
+        }
+
+    }
+
+    public boolean hasSpecialCharacters(String password) {
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher matcher = pattern.matcher(password);
+        return matcher.find();
+    }
+
+    public boolean HasUpperCase(String password){
+        Pattern uppercasePattern = Pattern.compile("[A-Z]");
+        Matcher uppercaseMatcher = uppercasePattern.matcher(password);
+        boolean hasUppercase = uppercaseMatcher.find();
+
+        return  hasUppercase;
     }
 
     private void ClearAll() {
