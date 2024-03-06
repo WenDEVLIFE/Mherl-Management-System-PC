@@ -1,7 +1,9 @@
 package com.example.mherlmanagementsystem;
 
 import entities_and_functions.Report;
+import entities_and_functions.Sales;
 import firebase.FirebaseConfig;
+import firebase.RetrieveFirebaseController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tables.ButtonCellDeleteReport;
+import tables.ButtonCellDeleteSales;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -89,6 +93,106 @@ public class ReportsController {
 
         // This will go to report tab, and open it by default
         ReportPane.getSelectionModel().select(ReportTab);
+
+        TableColumn <Report, String> usernameColumn = new TableColumn<>("Username");
+        usernameColumn.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
+        usernameColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        usernameColumn.setCellFactory(tc -> {
+            TableCell<Report, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <Report, String> AcivityColumn = new TableColumn<>("Activity");
+        AcivityColumn.setCellValueFactory(cellData -> cellData.getValue().activityProperty());
+        AcivityColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        AcivityColumn.setCellFactory(tc -> {
+            TableCell<Report, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <Report, String> DateColumn = new TableColumn<>("Date");
+        DateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        DateColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        DateColumn.setCellFactory(tc -> {
+            TableCell<Report, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <Report, String> TimeColumn = new TableColumn<>("Time");
+        TimeColumn.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
+        TimeColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        TimeColumn.setCellFactory(tc -> {
+            TableCell<Report, String> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(item);
+                        setMinHeight(60); // Set minimum height of the row
+                    }
+                }
+            };
+            return cell;
+        });
+
+        TableColumn <Report, Void> ActionColumn = new TableColumn<>("Action");
+        ActionColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
+        // Set the cell factory for the column
+        ActionColumn.setCellFactory(param -> new ButtonCellDeleteReport("Delete Report", ReportTable, reportList, username));
+        ActionColumn.setCellFactory(tc -> {
+            TableCell<Report, Void> cell = new ButtonCellDeleteReport("Delete Report", ReportTable, reportList, username) {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setMinHeight(60); // Set minimum height of the row
+                }
+            };
+            return cell;
+        });
+
+        // Add the columns to the table
+        ReportTable.getColumns().addAll(usernameColumn, AcivityColumn, DateColumn, TimeColumn, ActionColumn);
+        LoadReport();
+
     }
 
 
@@ -119,6 +223,8 @@ public class ReportsController {
             }
         });
 
+
+
     }
 
 
@@ -145,7 +251,7 @@ public class ReportsController {
                 controller.setController(controller);
                 controller.setUsernameInfo(username, userRole);
 
-                ClearAll();
+
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -175,7 +281,7 @@ public class ReportsController {
                 SalesController controller = fxmlLoader.getController();
                 controller.setUsernameInfo(username, userRole);
                 controller.setStage(stages);
-                ClearAll();
+
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -209,7 +315,7 @@ public class ReportsController {
                     controller.setController(controller);
                     controller.setUsernameInfo(username, userRole);
 
-                    ClearAll();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -303,6 +409,16 @@ public class ReportsController {
 
 
     public void LoadReport(){
+        ReportTable.getItems().clear();
+        try{
+           Platform.runLater(() -> {
+               RetrieveFirebaseController retrieveFirebaseController = new RetrieveFirebaseController();
+               reportList = retrieveFirebaseController.getReports();
+               ReportTable.setItems(reportList);
+           });
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
     private void ClearAll() {
@@ -317,6 +433,10 @@ public class ReportsController {
         AddUserButton.setOnAction(null);
         ReportButton.setOnAction(null);
         LogoutButton.setOnAction(null);
+
+        // Clear the table
+        ReportTable.getItems().clear();
+        ReportTable.getColumns().clear();
 
 
 

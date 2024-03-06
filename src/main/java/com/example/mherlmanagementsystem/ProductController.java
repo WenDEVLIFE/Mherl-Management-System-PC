@@ -362,7 +362,7 @@ public class ProductController {
                 controller.setUsernameInfo(username, userRole);
 
 
-                ClearAll();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -405,7 +405,7 @@ public class ProductController {
                 controller.setUsernameInfo(username, userRole);
 
 
-                ClearAll();
+
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -439,7 +439,7 @@ public class ProductController {
                   controller.setController(controller);
                   controller.setUsernameInfo(username, userRole);
 
-                  ClearAll();
+
               } catch (Exception e) {
                   e.printStackTrace();
               }
@@ -471,7 +471,6 @@ public class ProductController {
                     controller.setStage(Stage);
                     controller.setUsernameInfo(username, userRole);
 
-                    ClearAll();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

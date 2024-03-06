@@ -2,6 +2,7 @@ package firebase;
 
 import com.google.firebase.database.*;
 import entities_and_functions.Products;
+import entities_and_functions.Report;
 import entities_and_functions.Sales;
 import entities_and_functions.User;
 import javafx.application.Platform;
@@ -26,6 +27,8 @@ public class RetrieveFirebaseController {
 
     private  final Map<String, User> userMap;
 
+    private final Map<String ,Report> reportMap;
+
 
     public static RetrieveFirebaseController getInstance() {
         if (instance == null) {
@@ -41,6 +44,7 @@ public class RetrieveFirebaseController {
         productsMap = new HashMap<>();
         salesMap = new HashMap<>();
         userMap = new HashMap<>();
+        reportMap = new HashMap<>();
         PopulateData();
 
     }
@@ -50,10 +54,13 @@ public class RetrieveFirebaseController {
         populateProducts();
         populateSales();
         populateUser();
+        populateReports();
 
   }
 
-  // return products
+
+
+    // return products
 
     public ObservableList<Products> retrieveProducts() {
         return FXCollections.observableArrayList(productsMap.values());
@@ -150,4 +157,37 @@ public class RetrieveFirebaseController {
             }
         });
     }
+
+    public ObservableList<Report> getReports() {
+        return FXCollections.observableArrayList(reportMap.values());
+    }
+    private void populateReports() {
+        myRef = database.getReference("Reports");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ReportSnapshot : dataSnapshot.getChildren()) {
+                    String username = ReportSnapshot.child("username").getValue(String.class);
+                    String report = ReportSnapshot.child("Activity").getValue(String.class);
+                    String date = ReportSnapshot.child("Date").getValue(String.class);
+                    String time = ReportSnapshot.child("Time").getValue(String.class);
+
+                    Report report1 = new Report(username, report, date, time);
+                    reportMap.put(username, report1);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+             Platform.runLater(() -> {
+                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                 alert.setTitle("Error");
+                 alert.setHeaderText("Error");
+                 alert.setContentText("Failed to retrieve data from the database");
+                 alert.showAndWait();
+             });
+            }
+        });
+    }
+
 }

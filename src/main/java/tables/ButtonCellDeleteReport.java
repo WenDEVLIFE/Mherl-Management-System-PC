@@ -36,7 +36,7 @@ public class ButtonCellDeleteReport extends TableCell<Report, Void> {
         this.button.setOnAction(event -> {
             Report selected = getTableRow().getItem();
             if (selected  != null) {
-                if (buttonText.equals("Delete User")) {
+                if (buttonText.equals("Delete Report")) {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
@@ -65,9 +65,7 @@ public class ButtonCellDeleteReport extends TableCell<Report, Void> {
                 // Rent Car function
                 else if (buttonText.equals("Show info")) {
 
-                    System.out.println("Rent Car");
 
-                    FirebaseController.getInstance().retrieveUser(userselected);
 
 
 
@@ -91,7 +89,7 @@ public class ButtonCellDeleteReport extends TableCell<Report, Void> {
         } else {
             // Set style class for the button based on buttonText
             String buttonText = button.getText();
-            if ("Delete User".equals(buttonText)) {
+            if ("Delete Report".equals(buttonText)) {
                 button.getStyleClass().add("buttons");
             } else if ("Show info".equals(buttonText)) {
                 button.getStyleClass().add("buttons");

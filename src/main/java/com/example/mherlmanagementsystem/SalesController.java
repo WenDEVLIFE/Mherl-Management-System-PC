@@ -228,7 +228,7 @@ public class SalesController {
            controller.setUsernameInfo(username, userRole);
 
 
-           ClearAll();
+
        } catch (Exception e) {
            e.printStackTrace();
        }
@@ -259,7 +259,7 @@ public class SalesController {
            controller.setController(controller);
            controller.setUsernameInfo(username, userRole);
 
-           ClearAll();
+
        } catch (IOException e) {
            e.printStackTrace();
 
@@ -306,7 +306,6 @@ public class SalesController {
                    controller.setController(controller);
                    controller.setUsernameInfo(username, userRole);
 
-                   ClearAll();
                } catch (IOException e) {
                    e.printStackTrace();
 
@@ -346,7 +345,6 @@ public class SalesController {
                     controller.setController(controller);
                     controller.setUsernameInfo(username, userRole);
 
-                    ClearAll();
                 } catch (IOException e) {
                     e.printStackTrace();
 
