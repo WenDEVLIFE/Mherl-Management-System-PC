@@ -251,7 +251,7 @@ public class ReportsController {
                 controller.setController(controller);
                 controller.setUsernameInfo(username, userRole);
 
-
+                ClearAll();
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -280,7 +280,7 @@ public class ReportsController {
                 SalesController controller = fxmlLoader.getController();
                 controller.setUsernameInfo(username, userRole);
                 controller.setStage(stage_application);
-
+                ClearAll();
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -313,7 +313,7 @@ public class ReportsController {
                     controller.setController(controller);
                     controller.setUsernameInfo(username, userRole);
 
-
+                    ClearAll();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

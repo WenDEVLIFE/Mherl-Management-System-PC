@@ -152,7 +152,7 @@ public class DashboardController {
               controller.setFXMLLoader(fxmlLoader);
               controller.setController(controller);
               controller.setUsernameInfo(username, userRole);
-
+              Clear();
           } catch (IOException e) {
               e.printStackTrace();
 
@@ -180,7 +180,7 @@ public class DashboardController {
                 SalesController controller = fxmlLoader.getController();
                 controller.setStage(stagedash);
                 controller.setUsernameInfo(username, userRole);
-
+                Clear();
 
 
             } catch (IOException e) {
@@ -213,7 +213,7 @@ public class DashboardController {
                   controller.setStage(stagedash);
                   controller.setController(controller);
                   controller.setUsernameInfo(username, userRole);
-
+                  Clear();
 
               } catch (Exception e) {
                   e.printStackTrace();
@@ -251,7 +251,7 @@ public class DashboardController {
                     ReportsController controller = fxmlLoader.getController();
                     controller.setStage(stagedash);
                     controller.setUsernameInfo(username, userRole);
-
+                    Clear();
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -162,7 +162,10 @@ public class RetrieveFirebaseController {
         return FXCollections.observableArrayList(reportMap.values());
     }
     private void populateReports() {
+        // Get the report Child reference
         myRef = database.getReference("Reports");
+
+        // Add a value event listener to the report reference
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

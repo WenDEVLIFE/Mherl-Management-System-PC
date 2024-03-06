@@ -225,7 +225,7 @@ public class SalesController {
            DashboardController controller = fxmlLoader.getController();
            controller.setStage(stages);
            controller.setUsernameInfo(username, userRole);
-
+           ClearAll();
 
 
        } catch (Exception e) {
@@ -257,7 +257,7 @@ public class SalesController {
            controller.setFXMLLoader(fxmlLoader);
            controller.setController(controller);
            controller.setUsernameInfo(username, userRole);
-
+           ClearAll();
 
        } catch (IOException e) {
            e.printStackTrace();
@@ -304,7 +304,7 @@ public class SalesController {
                    controller.setStage(stages);
                    controller.setController(controller);
                    controller.setUsernameInfo(username, userRole);
-
+                   ClearAll();
                } catch (IOException e) {
                    e.printStackTrace();
 
@@ -343,7 +343,7 @@ public class SalesController {
                     controller.setStage(stages);
                     controller.setController(controller);
                     controller.setUsernameInfo(username, userRole);
-
+                    ClearAll();
                 } catch (IOException e) {
                     e.printStackTrace();
 
