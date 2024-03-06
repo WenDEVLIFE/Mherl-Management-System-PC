@@ -92,7 +92,6 @@ public class SalesController {
     public void initialize() {
         Platform.runLater(() -> {
         // TODO
-        FirebaseConfig.getInstance().initFirebase();
 
         ObservableList<String> month = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
         monthlist.setItems(month);
