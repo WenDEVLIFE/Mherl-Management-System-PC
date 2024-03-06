@@ -1,7 +1,9 @@
 package com.example.mherlmanagementsystem;
 
+import entities_and_functions.Report;
 import firebase.FirebaseConfig;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,10 @@ public class ReportsController {
     @FXML
     private Tab ReportStats;
 
+    @FXML
+    private TableView<Report> ReportTable;
+
+    ObservableList <Report> reportList;
 
 
     String username,userRole;
@@ -296,6 +302,9 @@ public class ReportsController {
     }
 
 
+    public void LoadReport(){
+
+    }
     private void ClearAll() {
         // Clear all the fields
         UsernameText.setText("");
@@ -314,5 +323,6 @@ public class ReportsController {
 
 
     }
+
 
 }

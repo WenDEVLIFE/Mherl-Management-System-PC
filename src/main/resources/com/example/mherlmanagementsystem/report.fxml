@@ -22,7 +22,7 @@
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="102.0" prefHeight="482.0" prefWidth="629.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="102.0">
                            <children>
-                              <TableView fx:id="UserTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
+                              <TableView fx:id="ReportTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="21.0" layoutY="25.0" prefHeight="59.0" prefWidth="690.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="71.0">
