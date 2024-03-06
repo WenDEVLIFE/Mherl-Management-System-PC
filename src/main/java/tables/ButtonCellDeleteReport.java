@@ -48,6 +48,10 @@ public class ButtonCellDeleteReport extends TableCell<Report, Void> {
                             // Delete car from database
 
                             Platform.runLater(() -> {
+                                String activity =selected.getActivity();
+                                FirebaseController.getInstance().deleteReport(activity);
+                                reportList.remove(selected);
+                                ReportTable.refresh();
 
 
 

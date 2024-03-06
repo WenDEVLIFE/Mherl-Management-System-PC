@@ -201,7 +201,6 @@ public class ReportsController {
 
     @FXML
     protected void DashActions(ActionEvent event) throws IOException {
-R
 
             try  {
                 // Close the current stage
@@ -413,19 +412,22 @@ R
     }
 
 
-    public void LoadReport(){
-        ReportTable.getItems().clear();
-        try{
-           Platform.runLater(() -> {
-               reportList = RetrieveFirebaseController.getInstance().getReports();
-               ReportTable.setItems(reportList);
-               ReportTable.refresh();
-           });
-        } catch (Exception e){
+    public void LoadReport() {
+        try {
+            Platform.runLater(() -> {
+                if (reportList == null) {
+                    reportList = RetrieveFirebaseController.getInstance().getReports();
+                } else {
+                    reportList.addAll(RetrieveFirebaseController.getInstance().getReports());
+                }
+                ReportTable.setItems(reportList);
+                ReportTable.refresh();
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
     private void ClearAll() {
         // Clear all the fields
         UsernameText.setText("");

@@ -167,25 +167,26 @@ public class RetrieveFirebaseController {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ReportSnapshot : dataSnapshot.getChildren()) {
+                    String reportId = ReportSnapshot.getKey(); // Assuming reportId is the unique identifier
                     String username = ReportSnapshot.child("username").getValue(String.class);
                     String report = ReportSnapshot.child("Activity").getValue(String.class);
                     String date = ReportSnapshot.child("Date").getValue(String.class);
                     String time = ReportSnapshot.child("Time").getValue(String.class);
 
                     Report report1 = new Report(username, report, date, time);
-                    reportMap.put(username, report1);
+                    reportMap.put(reportId, report1); // Using reportId as the key
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-             Platform.runLater(() -> {
-                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                 alert.setTitle("Error");
-                 alert.setHeaderText("Error");
-                 alert.setContentText("Failed to retrieve data from the database");
-                 alert.showAndWait();
-             });
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to retrieve data from the database");
+                    alert.showAndWait();
+                });
             }
         });
     }

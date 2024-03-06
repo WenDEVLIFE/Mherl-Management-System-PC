@@ -890,4 +890,53 @@ public class FirebaseController {
 
 
     }
+
+    public void deleteReport(String activity) {
+        DatabaseReference reportsRef = FireBaseDatabase.child("Reports");
+
+        reportsRef.orderByChild("Activity").equalTo(activity).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        snapshot.getRef().removeValue((databaseError, databaseReference) -> {
+                            if (databaseError != null) {
+                                System.out.println("Data could not be saved " + databaseError.getMessage());
+                            } else {
+                                System.out.println("Data saved successfully.");
+
+                                Platform.runLater(() -> {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information Dialog");
+                                    alert.setHeaderText("Information");
+                                    alert.setContentText("Report has been deleted successfully");
+                                    alert.showAndWait();
+                                });
+                            }
+                        });
+                    }
+                } else{
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Dialog");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Report does not exist");
+                        alert.showAndWait();
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors.
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("Failed to delete report");
+                    alert.showAndWait();
+                });
+            }
+        });
+    }
 }
