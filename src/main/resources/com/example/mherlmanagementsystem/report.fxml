@@ -43,7 +43,7 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <JFXButton fx:id="RefreshButton" layoutX="221.0" layoutY="605.0" onAction="#SeeReportStats" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="See the report stats" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="231.0">
+                        <JFXButton fx:id="RefreshButton" layoutX="91.0" layoutY="593.0" onAction="#SeeReportStats" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="See the report stats" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="361.0">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -52,6 +52,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton fx:id="RefreshButton1" layoutX="374.0" layoutY="593.0" onAction="#refresh" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="Refresh" />
                      </children>
                   </AnchorPane>
                </content>

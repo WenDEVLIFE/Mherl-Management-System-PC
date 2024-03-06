@@ -1,10 +1,11 @@
 package com.example.mherlmanagementsystem;
 
 import entities_and_functions.Report;
-import entities_and_functions.Sales;
+import entities_and_functions.User;
 import firebase.FirebaseConfig;
 import firebase.RetrieveFirebaseController;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tables.ButtonCellDeleteReport;
-import tables.ButtonCellDeleteSales;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public class ReportsController {
 
-    private Stage stages;
+    private Stage stage_application;
 
     @FXML
     private Text UsernameText;
@@ -69,7 +69,7 @@ public class ReportsController {
     public void setStage(Stage stageSales) {
 
         // Set the stage
-        this.stages = stageSales;
+        this.stage_application = stageSales;
     }
 
     public void setUsernameInfo(String username, String userRole) {
@@ -106,7 +106,7 @@ public class ReportsController {
                     if (empty) {
                         setText(null);
                     } else {
-                        setText(item);
+                        setText(String.valueOf(item));
                         setMinHeight(60); // Set minimum height of the row
                     }
                 }
@@ -126,13 +126,14 @@ public class ReportsController {
                     if (empty) {
                         setText(null);
                     } else {
-                        setText(item);
+                        setText(String.valueOf(item));
                         setMinHeight(60); // Set minimum height of the row
                     }
                 }
             };
             return cell;
         });
+
 
         TableColumn <Report, String> DateColumn = new TableColumn<>("Date");
         DateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
@@ -158,7 +159,7 @@ public class ReportsController {
         TimeColumn.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
         TimeColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
         // Set the cell factory for the column
-        TimeColumn.setCellFactory(tc -> {
+        TimeColumn.setCellFactory(tc ->{
             TableCell<Report, String> cell = new TableCell<>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -175,9 +176,9 @@ public class ReportsController {
         });
 
         TableColumn <Report, Void> ActionColumn = new TableColumn<>("Action");
-        ActionColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
         // Set the cell factory for the column
         ActionColumn.setCellFactory(param -> new ButtonCellDeleteReport("Delete Report", ReportTable, reportList, username));
+        ActionColumn.prefWidthProperty().bind(ReportTable.widthProperty().multiply(0.2)); // 20% width
         ActionColumn.setCellFactory(tc -> {
             TableCell<Report, Void> cell = new ButtonCellDeleteReport("Delete Report", ReportTable, reportList, username) {
                 @Override
@@ -191,6 +192,7 @@ public class ReportsController {
 
         // Add the columns to the table
         ReportTable.getColumns().addAll(usernameColumn, AcivityColumn, DateColumn, TimeColumn, ActionColumn);
+
         LoadReport();
 
     }
@@ -199,21 +201,21 @@ public class ReportsController {
 
     @FXML
     protected void DashActions(ActionEvent event) throws IOException {
+R
 
-        Platform.runLater(() -> {
             try  {
                 // Close the current stage
-                stages.close();
+                stage_application.close();
                 FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("dashboard.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                stages.getIcons().add(icon);
-                stages.setTitle("Mherl Management System");
-                stages.setScene(scene);
-                stages.show();
+                stage_application.getIcons().add(icon);
+                stage_application.setTitle("Mherl Management System");
+                stage_application.setScene(scene);
+                stage_application.show();
 
                 DashboardController controller = fxmlLoader.getController();
-                controller.setStage(stages);
+                controller.setStage(stage_application);
                 controller.setUsernameInfo(username, userRole);
 
 
@@ -221,7 +223,6 @@ public class ReportsController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
 
 
 
@@ -231,22 +232,22 @@ public class ReportsController {
     @FXML
     protected void ProoductActions(ActionEvent event) {
 
-        Platform.runLater(() -> {
+
             try {
 
                 // Close the current stage
-                stages.close();
+                stage_application.close();
 
                 FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("product.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                stages.getIcons().add(icon);
-                stages.setTitle("Mherl Management System");
-                stages.setScene(scene);
-                stages.show();
+                stage_application.getIcons().add(icon);
+                stage_application.setTitle("Mherl Management System");
+                stage_application.setScene(scene);
+                stage_application.show();
 
                 ProductController controller = fxmlLoader.getController();
-                controller.setStage(stages);
+                controller.setStage(stage_application);
                 controller.setFXMLLoader(fxmlLoader);
                 controller.setController(controller);
                 controller.setUsernameInfo(username, userRole);
@@ -257,7 +258,6 @@ public class ReportsController {
 
 
             }
-        });
 
 
     }
@@ -265,29 +265,28 @@ public class ReportsController {
     @FXML
     protected void SalesAction(ActionEvent event) {
 
-        Platform.runLater(() -> {
+
             try {
 
-                stages.close();
+                stage_application.close();
 
                 FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                stages.getIcons().add(icon);
-                stages.setTitle("Mherl Management System");
-                stages.setScene(scene);
-                stages.show();
+                stage_application.getIcons().add(icon);
+                stage_application.setTitle("Mherl Management System");
+                stage_application.setScene(scene);
+                stage_application.show();
 
                 SalesController controller = fxmlLoader.getController();
                 controller.setUsernameInfo(username, userRole);
-                controller.setStage(stages);
+                controller.setStage(stage_application);
 
             } catch (IOException e) {
                 e.printStackTrace();
 
 
             }
-        });
 
 
 
@@ -296,22 +295,22 @@ public class ReportsController {
     @FXML
     protected void AddUserAction(ActionEvent event){
         if (userRole.equals("Admin")) {
-            Platform.runLater(  () ->{
+
 
                 try {
 
-                    stages.close();
+                    stage_application.close();
 
                     FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                    stages.getIcons().add(icon);
-                    stages.setTitle("Mherl Management System");
-                    stages.setScene(scene);
-                    stages.show();
+                    stage_application.getIcons().add(icon);
+                    stage_application.setTitle("Mherl Management System");
+                    stage_application.setScene(scene);
+                    stage_application.show();
 
                     UserController controller = fxmlLoader.getController();
-                    controller.setStage(stages);
+                    controller.setStage(stage_application);
                     controller.setController(controller);
                     controller.setUsernameInfo(username, userRole);
 
@@ -320,7 +319,7 @@ public class ReportsController {
                     e.printStackTrace();
                 }
 
-            });
+
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -365,26 +364,26 @@ public class ReportsController {
             // User chose Yes, perform logout
             System.out.println("Logging out...");
 
-            Platform.runLater(() -> {
+
                 try{
 
-                    stages.close();
+                    stage_application.close();
 
 
                     FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("hello-view.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
-                    stages.getIcons().add(icon);
-                    stages.setTitle("Mherl Management System");
-                    stages.setScene(scene);
-                    stages.show();
+                    stage_application.getIcons().add(icon);
+                    stage_application.setTitle("Mherl Management System");
+                    stage_application.setScene(scene);
+                    stage_application.show();
 
                     LoginController controller = fxmlLoader.getController();
-                    controller.setStage(stages);
+                    controller.setStage(stage_application);
                     ClearAll();
                 } catch (Exception e) {
                     e.printStackTrace();}
-            });
+
 
 
         } else {
@@ -407,14 +406,20 @@ public class ReportsController {
 
     }
 
+    @FXML
+    protected void refresh(ActionEvent event){
+        LoadReport();
+
+    }
+
 
     public void LoadReport(){
         ReportTable.getItems().clear();
         try{
            Platform.runLater(() -> {
-               RetrieveFirebaseController retrieveFirebaseController = new RetrieveFirebaseController();
-               reportList = retrieveFirebaseController.getReports();
+               reportList = RetrieveFirebaseController.getInstance().getReports();
                ReportTable.setItems(reportList);
+               ReportTable.refresh();
            });
         } catch (Exception e){
             e.printStackTrace();
@@ -436,7 +441,6 @@ public class ReportsController {
 
         // Clear the table
         ReportTable.getItems().clear();
-        ReportTable.getColumns().clear();
 
 
 

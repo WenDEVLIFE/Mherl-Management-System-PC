@@ -134,8 +134,6 @@ public class DashboardController {
     protected void ProoductActions(ActionEvent event) {
 
 
-      Platform.runLater(() -> {
-
           try {
 
 
@@ -160,13 +158,13 @@ public class DashboardController {
 
 
           }
-      });
+
     }
 
     @FXML
     protected void SalesAction(ActionEvent event){
 
-        Platform.runLater(() -> {
+
             try {
 
                 stagedash.close();
@@ -190,14 +188,14 @@ public class DashboardController {
 
 
             }
-        });
+
 
     }
 
     @FXML
     protected void AddUserAction(ActionEvent event){
       if (userRole.equals("Admin")) {
-          Platform.runLater(  () ->{
+
 
               try {
 
@@ -221,7 +219,7 @@ public class DashboardController {
                   e.printStackTrace();
               }
 
-          });
+
       }
        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -236,7 +234,7 @@ public class DashboardController {
     @FXML
     protected void ReportAction(ActionEvent event){
         if (userRole.equals("Admin")) {
-            Platform.runLater(  () ->{
+
 
                 try {
 
@@ -259,7 +257,6 @@ public class DashboardController {
                     e.printStackTrace();
                 }
 
-            });
         }
 
     }

@@ -345,7 +345,7 @@ public class ProductController {
     @FXML
     protected void DashActions(ActionEvent event) throws IOException {
 
-        Platform.runLater(  () ->{
+
             try {
                 Stage.close();
 
@@ -366,7 +366,7 @@ public class ProductController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+
 
 
     }
@@ -388,7 +388,7 @@ public class ProductController {
     @FXML
     protected void SalesAction(ActionEvent event) {
 
-        Platform.runLater(  () ->{
+
             try {
                 Stage.close();
 
@@ -411,7 +411,7 @@ public class ProductController {
 
 
             }
-        });
+
 
 
     }
@@ -420,7 +420,7 @@ public class ProductController {
     protected void AddUserAction(ActionEvent event) {
 
       if(userRole.equals("Admin")) {
-          Platform.runLater(  () ->{
+
 
               try {
 
@@ -444,7 +444,7 @@ public class ProductController {
                   e.printStackTrace();
               }
 
-          });
+
       } else{
 
       }
@@ -453,7 +453,6 @@ public class ProductController {
     @FXML
     protected void ReportAction(ActionEvent event) {
         if(userRole.equals("Admin")) {
-            Platform.runLater(  () ->{
 
                 try {
 
@@ -475,7 +474,7 @@ public class ProductController {
                     e.printStackTrace();
                 }
 
-            });
+
         } else{
 
         }
@@ -498,7 +497,6 @@ public class ProductController {
 
         // Handle user's choice
         if (result.isPresent() && result.get() == buttonTypeYes) {
-            Platform.runLater(  () ->{
 
                 try{
                     // User chose Yes, perform logout
@@ -519,7 +517,7 @@ public class ProductController {
                 }  catch (Exception e) {
                     e.printStackTrace();
                 }
-            });
+
 
 
         } else {

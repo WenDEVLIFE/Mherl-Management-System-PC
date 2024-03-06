@@ -211,7 +211,6 @@ public class SalesController {
     @FXML
     protected void DashActions(ActionEvent event) throws IOException {
 
-      Platform.runLater(() -> {
        try  {
            // Close the current stage
            stages.close();
@@ -232,14 +231,14 @@ public class SalesController {
        } catch (Exception e) {
            e.printStackTrace();
        }
-      });
+
 
     }
 
     @FXML
     protected void ProoductActions(ActionEvent event) {
 
-   Platform.runLater(() -> {
+
        try {
 
            // Close the current stage
@@ -265,7 +264,7 @@ public class SalesController {
 
 
        }
-   });
+
 
 
     }
@@ -287,7 +286,7 @@ public class SalesController {
     protected void AddUserAction(ActionEvent event) {
 
        if(userRole.equals("Admin")){
-           Platform.runLater(() -> {
+
                try {
 
                    // Close the current stage
@@ -311,7 +310,7 @@ public class SalesController {
 
 
                }
-           });
+
        } else {
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Information Dialog");
@@ -326,7 +325,7 @@ public class SalesController {
     @FXML
     protected void ReportAction(ActionEvent event) {
         if(userRole.equals("Admin")){
-            Platform.runLater(() -> {
+
                 try {
 
                     // Close the current stage
@@ -350,7 +349,7 @@ public class SalesController {
 
 
                 }
-            });
+
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -381,7 +380,7 @@ public class SalesController {
             // User chose Yes, perform logout
             System.out.println("Logging out...");
 
-            Platform.runLater(() -> {
+
            try{
 
                stages.close();
@@ -400,7 +399,7 @@ public class SalesController {
                ClearAll();
            } catch (Exception e) {
                e.printStackTrace();}
-            });
+
 
 
         } else {
