@@ -1,8 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.ReportsController">
-
+<AnchorPane fx:id="ReportPane" prefHeight="657.0" prefWidth="834.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mherlmanagementsystem.ReportsController">
+   <children>
+      <TabPane fx:id="UserPane" layoutX="175.0" layoutY="-33.0" prefHeight="693.0" prefWidth="782.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-33.0">
+         <tabs>
+            <Tab fx:id="ReportTab" text="Untitled Tab 1">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="664.0" prefWidth="718.0">
+                     <children>
+                        <AnchorPane layoutX="14.0" layoutY="102.0" prefHeight="482.0" prefWidth="629.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="102.0">
+                           <children>
+                              <TableView fx:id="UserTable" layoutX="20.0" layoutY="14.0" prefHeight="433.0" prefWidth="558.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="14.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="21.0" layoutY="25.0" prefHeight="59.0" prefWidth="690.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="71.0">
+                           <children>
+                              <Pane layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="427.0" styleClass="panels" stylesheets="@style.css" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0">
+                                 <children>
+                                    <Text fx:id="GreetingText" layoutX="80.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="293.13671875">
+                                       <font>
+                                          <Font name="Gill Sans MT Condensed" size="28.0" />
+                                       </font>
+                                    </Text>
+                                    <ImageView fx:id="ImageViews" fitHeight="35.0" fitWidth="39.0" layoutX="20.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/report_7973563.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <JFXButton fx:id="RefreshButton" layoutX="221.0" layoutY="605.0" onAction="#GoToCreateUser" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="See the report stats" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="231.0">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/add-user.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="ReportStats" text="Untitled Tab 2">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="27.0" layoutY="23.0" prefHeight="59.0" prefWidth="605.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
+                           <children>
+                              <Pane layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="427.0" styleClass="panels" stylesheets="@style.css" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0">
+                                 <children>
+                                    <Text layoutX="84.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports Stats" wrappingWidth="293.13671875">
+                                       <font>
+                                          <Font name="Gill Sans MT Condensed" size="28.0" />
+                                       </font>
+                                    </Text>
+                                    <ImageView fitHeight="40.0" fitWidth="43.0" layoutX="20.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/project-management.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <AnchorPane prefHeight="577.0" prefWidth="175.0" styleClass="shadowpanel" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutX="5.0" layoutY="7.0" prefHeight="563.0" prefWidth="162.0" styleClass="navbar" stylesheets="@style.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="7.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/profile.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="UsernameText" fill="#ebdede" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="150.13671875">
+                     <font>
+                        <Font name="Gill Sans MT Condensed" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="RoleText" fill="#ebdede" strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" wrappingWidth="154.13671875">
+                     <font>
+                        <Font name="Gill Sans MT Condensed" size="19.0" />
+                     </font>
+                  </Text>
+                  <JFXButton fx:id="DashboardButton" onAction="#DashActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Dashboard" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/home.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="AddProductButton" onAction="#ProoductActions" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add Products" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="SalesButton" onAction="#SalesAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Sales     " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/philippines-peso-currency-symbol.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="AddUserButton" onAction="#AddUserAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Add User" textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/add-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="ReportButton" onAction="#ReportAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Reports  " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/report_7973563.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="LogoutButton" onAction="#LogoutAction" prefHeight="48.0" prefWidth="158.0" styleClass="buttons1" text="Logout    " textFill="#fff9f9">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="white-image">
+                           <image>
+                              <Image url="@icons/power.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

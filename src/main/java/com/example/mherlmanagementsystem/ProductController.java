@@ -452,9 +452,34 @@ public class ProductController {
 
     @FXML
     protected void ReportAction(ActionEvent event) {
-        Platform.runLater(  () ->{
+        if(userRole.equals("Admin")) {
+            Platform.runLater(  () ->{
 
-        });
+                try {
+
+                    Stage.close();
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("report.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                    Stage.getIcons().add(icon);
+                    Stage.setTitle("Mherl Management System");
+                    Stage.setScene(scene);
+                    Stage.show();
+
+                    ReportsController controller = fxmlLoader.getController();
+                    controller.setStage(Stage);
+                    controller.setUsernameInfo(username, userRole);
+
+                    ClearAll();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            });
+        } else{
+
+        }
     }
 
     @FXML

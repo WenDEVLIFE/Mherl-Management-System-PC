@@ -235,6 +235,32 @@ public class DashboardController {
 
     @FXML
     protected void ReportAction(ActionEvent event){
+        if (userRole.equals("Admin")) {
+            Platform.runLater(  () ->{
+
+                try {
+
+                    stagedash.close();
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("report.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
+                    stagedash.getIcons().add(icon);
+                    stagedash.setTitle("Mherl Management System");
+                    stagedash.setScene(scene);
+                    stagedash.show();
+
+                    ReportsController controller = fxmlLoader.getController();
+                    controller.setStage(stagedash);
+                    controller.setUsernameInfo(username, userRole);
+
+                    Clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
 
     }
 
