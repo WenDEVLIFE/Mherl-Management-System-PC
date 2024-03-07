@@ -28,7 +28,10 @@ public class SalesController {
 
    private Stage stages;
 
-   private String username, userRole;
+   private FXMLLoader fxmlLoader;
+
+    String username ;
+    String userRole;
 
     @FXML
     private Text UsernameText;
@@ -90,7 +93,9 @@ public class SalesController {
     }
 
     public void initialize() {
-        Platform.runLater(() -> {
+
+        System.out.println("Sales Controller");
+
         // TODO
 
         ObservableList<String> month = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
@@ -202,7 +207,6 @@ public class SalesController {
         LoadSalesData();
 
 
-        });
 
 
     }
@@ -214,7 +218,7 @@ public class SalesController {
        try  {
            // Close the current stage
            stages.close();
-           FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("dashboard.fxml"));
+           fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("dashboard.fxml"));
            Scene scene = new Scene(fxmlLoader.load());
            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
            stages.getIcons().add(icon);
@@ -244,7 +248,7 @@ public class SalesController {
            // Close the current stage
            stages.close();
 
-           FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("product.fxml"));
+           fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("product.fxml"));
            Scene scene = new Scene(fxmlLoader.load());
            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
            stages.getIcons().add(icon);
@@ -292,7 +296,7 @@ public class SalesController {
                    // Close the current stage
                    stages.close();
 
-                   FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
+                   fxmlLoader= new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
                    Scene scene = new Scene(fxmlLoader.load());
                    Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
                    stages.getIcons().add(icon);
@@ -325,13 +329,11 @@ public class SalesController {
     @FXML
     protected void ReportAction(ActionEvent event) {
         if(userRole.equals("Admin")){
-
                 try {
-
                     // Close the current stage
                     stages.close();
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("report.fxml"));
+                    fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("report.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
                     stages.getIcons().add(icon);
@@ -342,6 +344,7 @@ public class SalesController {
                     UserController controller = fxmlLoader.getController();
                     controller.setStage(stages);
                     controller.setController(controller);
+                    controller.setFXMLLoader(fxmlLoader);
                     controller.setUsernameInfo(username, userRole);
                     ClearAll();
                 } catch (IOException e) {
@@ -386,7 +389,7 @@ public class SalesController {
                stages.close();
 
 
-               FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("hello-view.fxml"));
+               fxmlLoader= new FXMLLoader(MherlLogin.class.getResource("hello-view.fxml"));
                Scene scene = new Scene(fxmlLoader.load());
                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
                stages.getIcons().add(icon);

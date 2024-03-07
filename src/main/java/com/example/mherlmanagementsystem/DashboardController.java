@@ -27,6 +27,8 @@ public class DashboardController {
 
     private Stage stagedash;
 
+    private FXMLLoader fxmlLoader;
+
     @FXML
     private Text UsernameText;
     @FXML
@@ -68,7 +70,8 @@ public class DashboardController {
     @FXML
     private Button LogoutButton;
 
-    String username, userRole;
+    String username;
+    String  userRole;
 
     public void setStage(Stage stagedash) {
         this.stagedash = stagedash;
@@ -139,7 +142,7 @@ public class DashboardController {
 
               stagedash.close();
 
-              FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("product.fxml"));
+              fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("product.fxml"));
               Scene scene = new Scene(fxmlLoader.load());
               Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
               stagedash.getIcons().add(icon);
@@ -169,7 +172,7 @@ public class DashboardController {
 
                 stagedash.close();
 
-                FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
+                fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("sales.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
                 stagedash.getIcons().add(icon);
@@ -201,7 +204,7 @@ public class DashboardController {
 
                   stagedash.close();
 
-                  FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
+                  fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("user.fxml"));
                   Scene scene = new Scene(fxmlLoader.load());
                   Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
                   stagedash.getIcons().add(icon);
@@ -240,7 +243,7 @@ public class DashboardController {
 
                     stagedash.close();
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("report.fxml"));
+                    fxmlLoader = new FXMLLoader(MherlLogin.class.getResource("report.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
                     stagedash.getIcons().add(icon);
@@ -282,7 +285,7 @@ public class DashboardController {
             System.out.println("Logging out...");
             stagedash.close();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(MherlLogin .class.getResource("hello-view.fxml"));
+            fxmlLoader = new FXMLLoader(MherlLogin .class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/store-removebg-preview.png")));
             stagedash.getIcons().add(icon);

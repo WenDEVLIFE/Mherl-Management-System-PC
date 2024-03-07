@@ -253,7 +253,13 @@ public class RetrieveFirebaseController {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     // Handle error
-                    System.out.println("The read failed: " + databaseError.getCode());
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Failed to retrieve data from the database");
+                        alert.showAndWait();
+                    });
                 }
             });
         } catch (Exception e) {
@@ -261,6 +267,7 @@ public class RetrieveFirebaseController {
             System.err.println("Error processing data.");
         }
     }
+
 
 
 
