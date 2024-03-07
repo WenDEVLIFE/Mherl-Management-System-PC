@@ -154,6 +154,28 @@
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
+.chart {
+    -fx-padding: 10px;
+}
+
+.chart-plot-background {
+    -fx-background-color:  #f3622d;
+}
+
+.chart-series-line {
+    -fx-stroke: #f3622d;
+    -fx-stroke-width: 2px;
+}
+
+.axis {
+    -fx-tick-label-fill: #4672b4;
+    -fx-tick-length: 10;
+}
+
+.axis-label {
+    -fx-text-fill: #4672b4;
+}
+
 
 
 

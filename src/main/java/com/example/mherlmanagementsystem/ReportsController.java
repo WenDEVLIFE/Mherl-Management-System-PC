@@ -89,15 +89,13 @@ public class ReportsController {
 
 
     }
-
     public void initialize(){
 
-
-        RetrieveFirebaseController.getInstance().displayreportsstats(reportLineChart);
 
         // Initialize Firebase
         FirebaseConfig.getInstance().initFirebase();
 
+        LoadReportStats();
 
         // This will go to report tab, and open it by default
         ReportPane.getSelectionModel().select(ReportTab);
@@ -419,6 +417,10 @@ public class ReportsController {
 
     }
 
+    @FXML
+    protected void refreshLineChart(ActionEvent event){
+        LoadReportStats();
+    }
 
     public void LoadReport() {
         try {
@@ -458,5 +460,16 @@ public class ReportsController {
 
     }
 
+    public void LoadReportStats() {
+        reportLineChart.getData().clear();
+        Platform.runLater(() -> {
+            try {
+
+                RetrieveFirebaseController.getInstance().displayreportsstats(reportLineChart);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
 }

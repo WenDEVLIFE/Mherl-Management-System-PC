@@ -82,7 +82,7 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <LineChart fx:id="reportLineChart" layoutX="35.0" layoutY="92.0" prefHeight="341.0" prefWidth="590.0">
+                        <LineChart fx:id="reportLineChart" layoutX="35.0" layoutY="106.0" prefHeight="450.0" prefWidth="590.0" stylesheets="@style.css">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -90,6 +90,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
+                        <JFXButton fx:id="RefreshButton11" layoutX="215.0" layoutY="595.0" onAction="#refreshLineChart" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="Refresh" />
                      </children>
                   </AnchorPane>
                </content>

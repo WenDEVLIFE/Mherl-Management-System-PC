@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Alert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -196,41 +198,70 @@ public class RetrieveFirebaseController {
         });
     }
 
-    public void displayreportsstats(LineChart <String, Number>  reportLineChart) {
-        DatabaseReference salesRef = myRef.child("Report");
-        salesRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+    public void displayreportsstats(LineChart<String, Number> reportLineChart) {
+        try {
+            DatabaseReference reportsRef = myRef.child("Reports");
+            reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Create an empty map to store the activity count for each hour
+                        Map<String, Integer> activityCounts = new HashMap<>();
 
-                if (dataSnapshot.exists()) {
-                    // i want to count the total price
+                        // Iterate over data
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String activityDate = snapshot.child("Date").getValue(String.class);
+                            String activityTime = snapshot.child("Time").getValue(String.class);
+                            String activity = snapshot.child("Activity").getValue(String.class);
 
-                    // For data snapshot
-                    long total_Createdproducts = 0;
-                    long total_DeleteUser = 0;
-                    long totalBuyProducts = 0;
-                    long totalEditProducts = 0;
-                    long totalAddUser = 0;
+                            // Ensure date, time, and activity are not null
+                            if (activityDate != null && activityTime != null && activity != null) {
+                                // Extract hour from time
+                                if (activityTime.length() >= 5) {
+                                    activityTime = activityTime.substring(0, 5);
+                                }
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                // Concatenate date and time to match the format in your database
+                                String dateTime = activityDate + "-" + activityTime;
 
-                        // Get the total price
+                                // Increment count for the corresponding date-time combination
+                                activityCounts.put(dateTime, activityCounts.getOrDefault(dateTime, 0) + 1);
+                            }
+                        }
 
+                        // Create a new series
+                        LineChart.Series<String, Number> series = new LineChart.Series<>();
 
+                        // Add data to the series
+                        for (Map.Entry<String, Integer> entry : activityCounts.entrySet()) {
+                            series.getData().add(new LineChart.Data<>(entry.getKey(), entry.getValue()));
+                        }
 
+                        // Set a name for the series
+                        series.setName("Activity Peaks");
 
+                        // Add the series to the chart
+                        reportLineChart.getData().add(series);
+
+                        // Set chart labels
+                        reportLineChart.setTitle("Activity Statistics");
+                        reportLineChart.getXAxis().setLabel("Date-Time");
+                        reportLineChart.getYAxis().setLabel("Number of Activities");
                     }
-
-
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle error
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error processing data.");
         }
-        );
     }
+
+
+
 }
