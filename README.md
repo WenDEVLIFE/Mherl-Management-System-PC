@@ -29,3 +29,12 @@ Add User
 
 
 ![image](https://github.com/WenDEVLIFE/Mherl-Management-System-PC/assets/117834496/12c05027-e073-4f58-aeaa-aab33d5bb919)
+
+Reports 
+
+
+![image](https://github.com/WenDEVLIFE/Mherl-Management-System-PC/assets/117834496/706494a6-a75c-4d4a-8e51-8f7e6dcfcdb7)
+
+Stats
+
+![image](https://github.com/WenDEVLIFE/Mherl-Management-System-PC/assets/117834496/6f9349aa-7a48-424b-9918-d0a8770c5f0f)
