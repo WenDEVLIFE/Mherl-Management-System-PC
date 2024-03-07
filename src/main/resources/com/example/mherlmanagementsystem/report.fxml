@@ -82,15 +82,23 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <LineChart fx:id="reportLineChart" layoutX="35.0" layoutY="106.0" prefHeight="450.0" prefWidth="590.0" stylesheets="@style.css">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
-                        <JFXButton fx:id="RefreshButton11" layoutX="215.0" layoutY="595.0" onAction="#refreshLineChart" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="Refresh" />
+                        <JFXButton fx:id="RefreshButton11" layoutX="215.0" layoutY="612.0" onAction="#refreshLineChart" prefHeight="35.0" prefWidth="207.0" styleClass="buttons" text="Refresh" />
+                        <AnchorPane layoutX="27.0" layoutY="91.0" prefHeight="505.0" prefWidth="605.0" styleClass="shadowpanel" stylesheets="@style.css">
+                           <children>
+                              <Pane layoutX="8.0" layoutY="5.0" prefHeight="482.0" prefWidth="588.0" styleClass="panels" stylesheets="@style.css" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0">
+                                 <children>
+                                    <LineChart fx:id="reportLineChart" layoutX="-1.0" layoutY="14.0" prefHeight="439.0" prefWidth="579.0" stylesheets="@style.css">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>

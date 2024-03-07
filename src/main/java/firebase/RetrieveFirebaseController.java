@@ -200,8 +200,8 @@ public class RetrieveFirebaseController {
 
     public void displayreportsstats(LineChart<String, Number> reportLineChart) {
         try {
-            DatabaseReference reportsRef = myRef.child("Reports");
-            reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef = database.getReference("Reports");
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
