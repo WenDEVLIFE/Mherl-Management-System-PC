@@ -532,16 +532,20 @@ public class ProductController {
     }
 
 
+    // This method will go to add products
     @FXML
     private void GoToAddProducts(ActionEvent event) {
         ProductionPane.getSelectionModel().select(CreateProductsTab);
     }
 
+
+    // Method used to refresh the product table
     @FXML
     protected void RefreshProducts(ActionEvent event) {
         LoadProducts();
     }
 
+    // Method used to create products
     @FXML
     protected void CreateProducts(ActionEvent event) {
 
@@ -556,6 +560,8 @@ public class ProductController {
             alert.setContentText("Please fill in all the fields");
             alert.showAndWait();
         } else {
+
+            // send the data from the database
             String[] details = {productName, username, price};
             Platform.runLater(() -> {
                 FirebaseController.getInstance().addProduct(details, quantity, Productname, Price, quantityspiner);
@@ -564,6 +570,8 @@ public class ProductController {
 
     }
 
+
+    // This will go Back
     @FXML
     protected void GoBack(ActionEvent event) {
         ProductionPane.getSelectionModel().select(ProductsTab);
@@ -571,6 +579,7 @@ public class ProductController {
 
     }
 
+    // Load the products of the Product Table
     public void LoadProducts() {
         ProductTable.getItems().clear();
         try {
@@ -610,6 +619,7 @@ public class ProductController {
 
     }
 
+    // Method used to edit the quantity.
     @FXML
     protected void edit_quantity(ActionEvent event){
 
@@ -633,6 +643,7 @@ public class ProductController {
 
     }
 
+    // Method used to edit the price
     @FXML
     protected void EditPrice(ActionEvent event){
 
@@ -658,6 +669,7 @@ public class ProductController {
 
     }
 
+    // Method to confirm the edit of a product
     @FXML
     protected void ConfirmEdit(ActionEvent event){
 
@@ -686,6 +698,8 @@ public class ProductController {
         }
 
     }
+
+    // Method to delete a product
     public void GoToEditProduct(Products selectedproducts) {
         if (EditProductTabNigga == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);

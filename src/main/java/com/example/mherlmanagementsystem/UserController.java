@@ -531,6 +531,7 @@ public class UserController {
         return  hasUppercase;
     }
 
+    // Method used to see the password
     @FXML
     protected void SeeThePassword(ActionEvent event){
         if(seepassword1.isSelected()){
@@ -545,6 +546,8 @@ public class UserController {
         }
     }
 
+
+    // Method used to see the password
     @FXML
     protected void seeThePassword1(ActionEvent event){
         if(seepassword2.isSelected()){
@@ -556,6 +559,7 @@ public class UserController {
         }
     }
 
+    // for edit name
     @FXML
     protected void edit_username(ActionEvent event ){
 
@@ -581,6 +585,7 @@ public class UserController {
 
     }
 
+    // for edit roles
     @FXML
     protected void edit_role(ActionEvent event ){
         push_attempt2 =  ! push_attempt2;
@@ -603,6 +608,7 @@ public class UserController {
         }
     }
 
+    // for editing the password
     @FXML
     protected void edit_password(ActionEvent event ){
         push_attempt3 =  ! push_attempt3;
@@ -626,6 +632,7 @@ public class UserController {
 
     }
 
+    // confirmation
     @FXML
     protected void confirm_editation(ActionEvent event ){
 
@@ -787,6 +794,7 @@ public class UserController {
 
     }
 
+    // This will load the user
     public void LoadUser(){
         UserTable.getItems().clear();
 
@@ -799,7 +807,7 @@ public class UserController {
         }
     }
 
-
+// set the fxmlloader
     public void setFXMLLoader(FXMLLoader fxmlLoader) {
         this.fxmlLoader = fxmlLoader;
 

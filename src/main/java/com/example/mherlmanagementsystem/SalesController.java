@@ -414,10 +414,12 @@ public class SalesController {
     }
 
     @FXML
+    // This method is called when the user presses the refresh button
     protected void RefreshData(ActionEvent event){
         LoadSalesData();
     }
 
+    // This method is called when the user presses the search button
     @FXML
     protected void PressSearch(ActionEvent event){
 
@@ -439,6 +441,7 @@ public class SalesController {
 
     }
 
+    // This method uses the FilteredList and SortedList to filter the sales data based on the selected month and year
     private void FilterValue(String selectedMonth, String selectedYear) {
 
         // This method filters the sales data based on the selected month and year
@@ -473,6 +476,7 @@ public class SalesController {
         });
     }
 
+    // Load the sales data
     public void LoadSalesData(){
         SalesList.clear();
         try {
@@ -487,6 +491,7 @@ public class SalesController {
         }
     }
 
+    // clear all the buttons and etc
     public void ClearAll(){
         SalesList.clear();
         SalesTable.refresh();

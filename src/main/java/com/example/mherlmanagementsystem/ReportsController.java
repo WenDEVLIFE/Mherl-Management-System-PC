@@ -460,6 +460,8 @@ public class ReportsController {
 
     }
 
+
+    // This will load the reportline chart
     public void LoadReportStats() {
         reportLineChart.getData().clear();
         Platform.runLater(() -> {
