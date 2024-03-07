@@ -1,6 +1,7 @@
 package firebase;
 
 import com.google.firebase.database.*;
+import com.google.firebase.internal.NonNull;
 import entities_and_functions.Products;
 import entities_and_functions.Report;
 import entities_and_functions.Sales;
@@ -8,6 +9,7 @@ import entities_and_functions.User;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Alert;
 
 import java.util.HashMap;
@@ -194,4 +196,41 @@ public class RetrieveFirebaseController {
         });
     }
 
+    public void displayreportsstats(LineChart <String, Number>  reportLineChart) {
+        DatabaseReference salesRef = myRef.child("Report");
+        salesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    // i want to count the total price
+
+                    // For data snapshot
+                    long total_Createdproducts = 0;
+                    long total_DeleteUser = 0;
+                    long totalBuyProducts = 0;
+                    long totalEditProducts = 0;
+                    long totalAddUser = 0;
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                        // Get the total price
+
+
+
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        }
+        );
+    }
 }

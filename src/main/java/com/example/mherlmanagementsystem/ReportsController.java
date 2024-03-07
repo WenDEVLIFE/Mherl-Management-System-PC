@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
@@ -59,9 +60,14 @@ public class ReportsController {
     private Tab ReportStats;
 
     @FXML
+
+    private LineChart <String, Number> reportLineChart;
+
+    @FXML
     private TableView<Report> ReportTable;
 
     ObservableList <Report> reportList;
+
 
 
     String username,userRole;
@@ -86,6 +92,8 @@ public class ReportsController {
 
     public void initialize(){
 
+
+        RetrieveFirebaseController.getInstance().displayreportsstats(reportLineChart);
 
         // Initialize Firebase
         FirebaseConfig.getInstance().initFirebase();
