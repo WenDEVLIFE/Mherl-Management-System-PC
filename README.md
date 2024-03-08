@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------
-This is management system withc is based on android and pc togethert by the use of firebase.
+This is management system withc is based on android and pc togethert by the use of firebase. This is used for our businesses only and you can use this for educational purposes only, like how to connect your current project from Firebase in Javafx.
 ------------------------------------------------------------------------------------
 
 
